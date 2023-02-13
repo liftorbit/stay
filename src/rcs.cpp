@@ -6,19 +6,19 @@
 
 BluetoothSerial bt;
 
-void RLC::begin() {
+void RCS::begin() {
     bt.begin("STAY B Rocket");
 };
 
-void RLC::send(String text) {
+void RCS::send(String text) {
     bt.println(text);
 };
 
-bool hasConnected() {
+bool RCS::hasConnected() {
     return bt.connected();
 }
 
-String RLC::receive() {
+String RCS::receive() {
     while (!bt.available());
     String data = bt.readString();
     data.replace("\r\n", "");

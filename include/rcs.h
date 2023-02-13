@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-class RLC {
+class RCS {
     public:
         void begin();
         void send(String text);
