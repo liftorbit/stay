@@ -7,6 +7,7 @@ class RLC {
     public:
         void begin();
         void send(String text);
+        bool hasConnected();
         String receive();
 };
 

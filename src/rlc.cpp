@@ -12,6 +12,10 @@ void RLC::send(String text) {
 
 };
 
+bool hasConnected() {
+    return bt.connected();
+}
+
 String RLC::receive() {
 
 };
