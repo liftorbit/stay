@@ -10,6 +10,7 @@
             "includePath": [
                 "/home/pysproxy/Documentos/firlast/stay-b-project/stay-b-computer/include",
                 "/home/pysproxy/Documentos/firlast/stay-b-project/stay-b-computer/src",
+                "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/BluetoothSerial/src",
                 "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                 "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -204,7 +205,6 @@
                 "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/ArduinoOTA/src",
                 "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/AsyncUDP/src",
                 "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/BLE/src",
-                "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/BluetoothSerial/src",
                 "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/DNSServer/src",
                 "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/EEPROM/src",
                 "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/ESP32/src",
@@ -241,6 +241,7 @@
                 "path": [
                     "/home/pysproxy/Documentos/firlast/stay-b-project/stay-b-computer/include",
                     "/home/pysproxy/Documentos/firlast/stay-b-project/stay-b-computer/src",
+                    "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/BluetoothSerial/src",
                     "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                     "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                     "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -435,7 +436,6 @@
                     "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/ArduinoOTA/src",
                     "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/AsyncUDP/src",
                     "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/BLE/src",
-                    "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/BluetoothSerial/src",
                     "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/DNSServer/src",
                     "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/EEPROM/src",
                     "/home/pysproxy/.platformio/packages/framework-arduinoespressif32/libraries/ESP32/src",
