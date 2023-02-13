@@ -1,5 +1,5 @@
-#ifndef RLC_h
-#define RLC_h
+#ifndef RCS_h
+#define RCS_h
 
 #include <Arduino.h>
 

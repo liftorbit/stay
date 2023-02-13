@@ -1,6 +1,8 @@
+// RCS - Rocket Communication System
+
 #include <Arduino.h>
 #include <BluetoothSerial.h>
-#include "rlc.h"
+#include "rcs.h"
 
 BluetoothSerial bt;
 
