@@ -59,9 +59,9 @@ bool Pressure::begin() {
 }
 
 float Pressure::getAltitude() {
-    return bmp.readAltitude();
+    return bmp.readAltitude(1013.25);
 };
 
 float Pressure::getTemperature() {
     return bmp.readTemperature();
-}
+};
