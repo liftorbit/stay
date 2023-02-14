@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "logging.h"
 #include "rcs.h"
-#include "bmi.h"
+#include "sensors.h"
 
 #define BUILTIN_LED 13
 
