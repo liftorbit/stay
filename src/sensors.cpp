@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <BMI160Gen.h>
+#include <SPI.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BMP280.h>
 
@@ -15,13 +16,7 @@ const int BMP_CSB = 27;
 Adafruit_BMP280 bmp(BMP_CSB, BMP_SDA, BMP_SDO, BMP_SCL);
 
 void Acelerometer::begin() {
-    BMI160.begin(BMI160GenClass::I2C_MODE, BMI160Address);
-    while(true) {
-        this->updatePosition();
-        if(this->getAcelerometerX() != 0) {
-            break;
-        }
-    }
+    return BMI160.begin(BMI160GenClass::I2C_MODE, BMI160Address);
 };
 
 void Acelerometer::updatePosition() {
