@@ -16,7 +16,14 @@ const int BMP_CSB = 27;
 Adafruit_BMP280 bmp280(BMP_CSB, BMP_SDA, BMP_SDO, BMP_SCL);
 
 bool Acelerometer::begin() {
-    return BMI160.begin(BMI160GenClass::I2C_MODE, BMI160Address);
+    Wire.begin();
+    Wire.beginTransmission(BMI160Address);
+
+    if (Wire.endTransmission () == 0) {
+        return BMI160.begin(BMI160GenClass::I2C_MODE, BMI160Address);
+    } else {
+        return false;
+    }
 };
 
 void Acelerometer::updatePosition() {
