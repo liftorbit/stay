@@ -2,7 +2,7 @@
 #include "logging.h"
 #include "rcs.h"
 
-#define BUILTIN_LED 2
+#define BUILTIN_LED 13
 
 RCS rcs;
 
@@ -25,9 +25,12 @@ void setup() {
             digitalWrite(BUILTIN_LED, LOW);
             delay(80);
         }
+
+        delay(500);
     }
 
     rcs.send("connected");
+    log("info", "RCS connected");
 };
 
 void loop() {
