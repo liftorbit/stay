@@ -1,10 +1,12 @@
 #include <Arduino.h>
 #include "logging.h"
 #include "rcs.h"
+#include "bmi.h"
 
 #define BUILTIN_LED 13
 
 RCS rcs;
+Acelerometer bmi;
 
 
 void setup() {
@@ -30,6 +32,10 @@ void setup() {
     }
 
     rcs.send(log("info", "RCS connected"));
+
+    // starting sensors
+    rcs.send(log("wait", "Starting sensors..."));
+    bmi.begin();
 };
 
 void loop() {
