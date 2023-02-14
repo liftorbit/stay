@@ -13,7 +13,7 @@ const int BMP_SDO = 12;
 const int BMP_SDA = 14;
 const int BMP_CSB = 27;
 
-Adafruit_BMP280 bmp(BMP_CSB, BMP_SDA, BMP_SDO, BMP_SCL);
+Adafruit_BMP280 bmp280(BMP_CSB, BMP_SDA, BMP_SDO, BMP_SCL);
 
 bool Acelerometer::begin() {
     return BMI160.begin(BMI160GenClass::I2C_MODE, BMI160Address);
@@ -50,15 +50,15 @@ float Acelerometer::getAcelerometerY() {
 // BMP280
 
 bool Pressure::begin() {
-    return bmp.begin();
+    return bmp280.begin();
 }
 
 float Pressure::getAltitude() {
-    return bmp.readAltitude(1013.25);
+    return bmp280.readAltitude(1013.25);
 };
 
 float Pressure::getTemperature() {
-    return bmp.readTemperature();
+    return bmp280.readTemperature();
 };
 
 float Pressure::getGroundDistance() {
