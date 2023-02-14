@@ -7,6 +7,7 @@
 
 RCS rcs;
 Acelerometer bmi;
+Pressure bmp;
 
 
 void setup() {
@@ -35,7 +36,23 @@ void setup() {
 
     // starting sensors
     rcs.send(log("wait", "Starting sensors..."));
-    bmi.begin();
+    bool sensorStartupFailed = false;
+
+    if(!bmi.begin()) {
+        rcs.send(log("eror", "Failed to start BMI160"));
+        sensorStartupFailed = true;
+    }
+
+    if(!bmp.begin()) {
+        rcs.send(log("error", "Failed to start BMP280"));
+        sensorStartupFailed = true;
+    }
+
+    if(!sensorStartupFailed) {
+        rcs.send(log("success", "All sensors started"));
+    } else {
+        rcs.send(log("error", "Sensor startup failure"));
+    }
 };
 
 void loop() {
