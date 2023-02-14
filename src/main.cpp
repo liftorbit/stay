@@ -10,9 +10,6 @@ Pressure bmp;
 
 void setup() {
     Serial.begin(9600);
-
-    pinMode(BUILTIN_LED, OUTPUT);
-
     log("info", "STAY B Startup");
 
     rcs.begin();
