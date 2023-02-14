@@ -29,8 +29,7 @@ void setup() {
         delay(500);
     }
 
-    rcs.send("connected");
-    log("info", "RCS connected");
+    rcs.send(log("info", "RCS connected"));
 };
 
 void loop() {
