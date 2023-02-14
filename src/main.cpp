@@ -3,8 +3,6 @@
 #include "rcs.h"
 #include "sensors.h"
 
-#define BUILTIN_LED 13
-
 RCS rcs;
 Acelerometer bmi;
 Pressure bmp;
@@ -22,14 +20,7 @@ void setup() {
     log("wait", "Wait RCS connection...");
 
     while (!rcs.hasConnected()) {
-        for(int i = 0; i < 4; i++) {
-            digitalWrite(BUILTIN_LED, HIGH);
-            delay(80);
-            digitalWrite(BUILTIN_LED, LOW);
-            delay(80);
-        }
-
-        delay(500);
+        delay(50);
     }
 
     rcs.send(log("info", "RCS connected"));
