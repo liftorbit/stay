@@ -2,10 +2,10 @@
 #include <BMI160Gen.h>
 #include <sensors.h>
 
-const int I2CAddress = 0x69;
+const int BMI160Address = 0x69;
 
 void Acelerometer::begin() {
-    BMI160.begin(BMI160GenClass::I2C_MODE, I2CAddress);
+    BMI160.begin(BMI160GenClass::I2C_MODE, BMI160Address);
     while(true) {
         this->updatePosition();
         if(this->getAcelerometerX() != 0) {
