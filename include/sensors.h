@@ -8,9 +8,11 @@ class Acelerometer {
     public:
         bool begin();
         void updatePosition();
+
         float getAcelerometerX();
         float getAcelerometerY();
         float convertRaw(int rawData);
+
         int convertAxesToServoTuning(float axis);
 };
 
@@ -20,9 +22,11 @@ class Pressure {
 
     public:
         bool begin();
+
         float getAltitude();
         float getGroundDistance();
         float getTemperature();
+        float getAverageSpeed(int time);
 
         void saveGroundAltitude();
 };

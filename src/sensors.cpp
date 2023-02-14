@@ -78,3 +78,12 @@ float Pressure::getGroundDistance() {
 void Pressure::saveGroundAltitude() {
     this->groundAltitude = this->getAltitude();
 };
+
+float Pressure::getAverageSpeed(int time) {
+    float timeInSeconds = time / 1000;
+    float initialAltitude = this->getAltitude();
+    delay(time);
+    float finalAltitude = this->getAltitude();
+    float averageSpeed = (finalAltitude - initialAltitude) / timeInSeconds;
+    return averageSpeed;
+};
