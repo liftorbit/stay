@@ -65,3 +65,12 @@ float Pressure::getAltitude() {
 float Pressure::getTemperature() {
     return bmp.readTemperature();
 };
+
+float Pressure::getGroundDistance() {
+    float currentAltitude = this->getAltitude();
+    return currentAltitude -  this->groundDistance;
+};
+
+void Pressure::saveGroundAltitude() {
+    this->groundAltitude = this->getAltitude();
+};
