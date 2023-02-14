@@ -63,7 +63,7 @@ float Pressure::getTemperature() {
 
 float Pressure::getGroundDistance() {
     float currentAltitude = this->getAltitude();
-    return currentAltitude -  this->groundDistance;
+    return currentAltitude - this->groundAltitude;
 };
 
 void Pressure::saveGroundAltitude() {
