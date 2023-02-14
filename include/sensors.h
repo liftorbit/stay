@@ -6,7 +6,7 @@ class Acelerometer {
         float ax, ay, az;
 
     public:
-        void begin();
+        bool begin();
         void updatePosition();
         float getAcelerometerX();
         float getAcelerometerY();
