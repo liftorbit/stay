@@ -3,6 +3,6 @@
 
 #include <Arduino.h>
 
-void log(String type, String message);
+String log(String type, String message);
 
 #endif
