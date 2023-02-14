@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <BMI160Gen.h>
-#include <bmi.h>
+#include <sensors.h>
 
 const int I2CAddress = 0x69;
 
