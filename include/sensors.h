@@ -26,7 +26,7 @@ class Pressure {
         float getAltitude();
         float getGroundDistance();
         float getTemperature();
-        float getAverageSpeed(int time);
+        float getAverageSpeed(int periodOfTime);
 
         void saveGroundAltitude();
 };
