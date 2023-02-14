@@ -1,5 +1,5 @@
-#ifndef BMI_h
-#define BMI_h
+#ifndef SENSORS_h
+#define SENSORS_h
 
 class Acelerometer {
     private:
@@ -12,6 +12,19 @@ class Acelerometer {
         float getAcelerometerY();
         float convertRaw(int rawData);
         int convertAxesToServoTuning(float axis);
+};
+
+class Pressure {
+    private:
+        float groundAltitude;
+
+    public:
+        bool begin();
+        float getAltitude();
+        float getGroundDistance();
+        float getTemperature();
+
+        void saveGroundAltitude();
 };
 
 #endif

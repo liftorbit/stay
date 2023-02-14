@@ -1,8 +1,18 @@
 #include <Arduino.h>
 #include <BMI160Gen.h>
-#include <sensors.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BMP280.h>
+
+#include "sensors.h"
 
 const int BMI160Address = 0x69;
+
+const int BMP_SCL = 13;
+const int BMP_SDO = 12;
+const int BMP_SDA = 14;
+const int BMP_CSB = 27;
+
+Adafruit_BMP280 bmp(BMP_CSB, BMP_SDA, BMP_SDO, BMP_SCL);
 
 void Acelerometer::begin() {
     BMI160.begin(BMI160GenClass::I2C_MODE, BMI160Address);
@@ -41,3 +51,17 @@ float Acelerometer::getAcelerometerX() {
 float Acelerometer::getAcelerometerY() {
     return this->ay;
 };
+
+// BMP280
+
+bool Pressure::begin() {
+    return bmp.begin();
+}
+
+float Pressure::getAltitude() {
+    return bmp.readAltitude();
+};
+
+float Pressure::getTemperature() {
+    return bmp.readTemperature();
+}
