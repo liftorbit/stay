@@ -2,7 +2,12 @@
 #define LOGGING_h
 
 #include <Arduino.h>
+#include <SD.h>
 
-String log(String type, String message);
+class Logging {
+    public:
+        bool begin();
+        String log(int status, String type, String message);
+};
 
 #endif
