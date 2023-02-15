@@ -1,12 +1,12 @@
 #include <Arduino.h>
 #include "logging.h"
-#include "rcs.h"
 #include "sensors.h"
+#include "rcs.h"
 
 RCS rcs;
-Acelerometer bmi;
+GPS gps;
 Pressure bmp;
-
+Acelerometer bmi;
 
 void setup() {
     Serial.begin(9600);
@@ -36,11 +36,18 @@ void setup() {
         sensorStartupFailed = true;
     }
 
-    if(!sensorStartupFailed) {
-        rcs.send(log("success", "All sensors started"));
-    } else {
+    if(sensorStartupFailed) {
         rcs.send(log("error", "Sensor startup failure"));
+        while(true);
     }
+
+    rcs.send(log("success", "All sensors started"));
+
+    // starting GPS
+    rcs.send(log("wait", "Wait satellites..."));
+    gps.begin();
+
+    rcs.send(log("success", "GPS started"));
 };
 
 void loop() {
