@@ -3,8 +3,8 @@
 #include <SPI.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BMP280.h>
+#include <HardwareSerial.h>
 #include <TinyGPS.h>
-#include <SoftwareSerial.h>
 
 #include "sensors.h"
 
@@ -15,9 +15,12 @@ const int BMP_SDO = 12;
 const int BMP_SDA = 14;
 const int BMP_CSB = 27;
 
+const int gpsRX = 16;
+const int gpsTX = 17;
+
 Adafruit_BMP280 bmp280(BMP_CSB, BMP_SDA, BMP_SDO, BMP_SCL);
-SoftwareSerial serialGPS(34, 35);
-TinyGPS gps;
+HardwareSerial SerialGPS(1);
+TinyGPS tinyGPS;
 
 bool Acelerometer::begin() {
     Wire.begin();
@@ -95,20 +98,18 @@ float Pressure::getAverageSpeed(int periodOfTime) {
 // gps
 
 void GPS::begin() {
-    serialGPS.begin(9600);
-    while(!serialGPS.available()) {
+    SerialGPS.begin(9600, SERIAL_8N1, gpsRX, gpsTX);
+    while(!SerialGPS.available()) {
         delay(100);
     }
 };
 
 void GPS::updateLocation() {
-    while(!serialGPS.available()) {
-        delay(100);
-    }
-
-    if(gps.encode(serialGPS.read())) {
-        gps.f_get_position(&this->latitude, &this->longitude);
-        this->altitude = gps.altitude() / 100;
+    while(SerialGPS.available()) {
+        if(tinyGPS.encode(SerialGPS.read())) {
+            tinyGPS.f_get_position(&this->latitude, &this->longitude);
+            this->altitude = tinyGPS.altitude() / 100;
+        }
     }
 };
 
