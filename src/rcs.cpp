@@ -2,26 +2,60 @@
 
 #include <Arduino.h>
 #include <BluetoothSerial.h>
+#include "logging.h"
 #include "rcs.h"
 
+#include "sensors.h"
+
 BluetoothSerial bt;
+Logging logging;
+
+GPS gps;
+Logging logging;
+Pressure bmp;
+Acelerometer bmi;
 
 void RCS::begin() {
     bt.begin("STAY B Rocket");
 };
 
-void RCS::send(String text) {
-    bt.println(text);
+void RCS::parseCommand(String command) {
+    int partIndex = 0;
+    int maxParts = 2;
+
+    String cmdParts[maxParts];
+    String part = "";
+    
+    for(int i = 0; i < command.length(); i++) {
+        if(command[i] != ',') {
+            part.concat(command[i]);
+        } else {
+            cmdParts[partIndex] = part;
+            partIndex += maxParts;
+            part.clear();
+        }
+    }
+
+    if(cmdParts[0] == "test") {
+        this->testSystem(cmdParts[1]);
+    } else if(cmdParts[0] == "get" && cmdParts[1] == "log") {
+        bt.println(logging.getLog());
+    }
 };
 
-bool RCS::hasConnected() {
-    return bt.connected();
+void RCS::testSystem(String system) {
+    if(system == "accelerometer") {
+        if(!bmi.begin()) {
+            bt.println("error,BMI160 failed startup");
+        } else {
+            bmi.updatePosition();
+            float x = bmi.getAcelerometerX();
+            float y = bmi.getAcelerometerY();
+            float fixAngleX = bmi.convertAxesToServoTuning(x);
+            float fixAngleY = bmi.convertAxesToServoTuning(y);
+
+            String result = "angleX(" + String(fixAngleX) + ") angleY(" + String(fixAngleY) + ")";
+            bt.println("success," + result);
+        }
+    }
 }
-
-String RCS::receive() {
-    while (!bt.available());
-    String data = bt.readString();
-    data.replace("\r\n", "");
-
-    return data;
-};

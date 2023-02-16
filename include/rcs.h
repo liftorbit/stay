@@ -6,9 +6,8 @@
 class RCS {
     public:
         void begin();
-        void send(String text);
-        bool hasConnected();
-        String receive();
+        void testSystem(String system);
+        void parseCommand(String command);
 };
 
 #endif
