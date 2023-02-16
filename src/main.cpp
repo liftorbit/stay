@@ -58,8 +58,11 @@ void setup() {
     rcs.sendLogs();
     bool hasReady = rcs.readyForLaunch();
 
-    // restarting if rocket not ready for launch
-    if(!hasReady) {
+    if(hasReady) {
+        // preparing for launch
+        logging.log(readyForLaunchStatus, LOG_INFO, "Rocket ready for launch");
+    } else {
+        // restarting if rocket not ready for launch
         ESP.restart();
     }
 };
