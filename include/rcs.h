@@ -6,8 +6,7 @@
 class RCS {
     public:
         void begin();
-        bool parseCommands();
-        void testSystem(String system);
+        bool readyForLaunch();
 };
 
 #endif
