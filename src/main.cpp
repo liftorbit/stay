@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include "logging.h"
 #include "sensors.h"
-#include "rcs.h"
 
 const int setupStatus = 1;
 const int readyForLaunchStatus = 2;
@@ -11,7 +10,6 @@ const int waitAltitudeStatus = 5;
 const int landingStatus = 6;
 const int landedStatus = 7;
 
-RCS rcs;
 GPS gps;
 Logging logging;
 Pressure bmp;
@@ -26,16 +24,6 @@ void setup() {
     }
 
     logging.log(setupStatus, LOG_INFO, "STAY B Startup");
-
-    rcs.begin();
-    logging.log(setupStatus, LOG_INFO, "RCS started");
-    logging.log(setupStatus, LOG_WAIT, "Wait RCS connection...");
-
-    while (!rcs.hasConnected()) {
-        delay(50);
-    }
-
-    logging.log(setupStatus, LOG_INFO, "RCS connected");
 
     // starting sensors
     logging.log(setupStatus, LOG_WAIT, "Starting sensors...");
