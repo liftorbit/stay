@@ -63,6 +63,8 @@ void setup() {
     if(!rcsStatus) {
         ESP.restart();
     }
+
+    logging.log(setupStatus, LOG_SUCCESS, "Close test mode");
 };
 
 void loop() {
