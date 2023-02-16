@@ -18,13 +18,17 @@ bool Logging::begin() {
     return true;
 }
 
-String Logging::log(int status, int type, String message) {
+void Logging::log(int status, int type, String message) {
     File log = SD.open("/computer.log", FILE_APPEND);
 
     String rawLogMsg = String(status) + "," + type + "," + message;
     Serial.println(rawLogMsg);
     log.println(rawLogMsg);
     log.close();
-
-    return rawLogMsg;
 };
+
+String Logging::getLog() {
+    File log = SD.open("/computer.log", FILE_READ);
+    String logs = log.readString();
+    return logs;
+}

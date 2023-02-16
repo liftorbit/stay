@@ -13,7 +13,9 @@
 class Logging {
     public:
         bool begin();
-        String log(int status, int type, String message);
+        void log(int status, int type, String message);
+
+        String getLog();
 };
 
 #endif
