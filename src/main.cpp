@@ -11,7 +11,6 @@ const int waitAltitudeStatus = 5;
 const int landingStatus = 6;
 const int landedStatus = 7;
 
-GPS gps;
 RCS rcs;
 Logging logging;
 Pressure bmp;
@@ -49,11 +48,6 @@ void setup() {
     }
 
     logging.log(setupStatus, LOG_SUCCESS, "All sensors started");
-
-    // starting GPS
-    logging.log(setupStatus, LOG_WAIT, "Wait GPS satellites...");
-    gps.begin();
-    logging.log(setupStatus, LOG_SUCCESS, "GPS started");
 
     rcs.sendLogs();
     bool hasReady = rcs.readyForLaunch();

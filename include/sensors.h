@@ -31,17 +31,4 @@ class Pressure {
         void saveGroundAltitude();
 };
 
-class GPS {
-    private:
-        float latitude, longitude, altitude;
-
-    public:
-        void begin();
-        void updateLocation();
-
-        float getLatitude();
-        float getLongitude();
-        float getAltitude();
-};
-
 #endif
