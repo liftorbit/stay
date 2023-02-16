@@ -47,11 +47,22 @@ void RCS::testSystem(String system) {
             testBmi.updatePosition();
             float x = testBmi.getAcelerometerX();
             float y = testBmi.getAcelerometerY();
-            float fixAngleX = testBmi.convertAxesToServoTuning(x);
-            float fixAngleY = testBmi.convertAxesToServoTuning(y);
+            String fixAngleX = String(testBmi.convertAxesToServoTuning(x));
+            String fixAngleY = String(testBmi.convertAxesToServoTuning(y));
 
-            String result = "angleX(" + String(fixAngleX) + ") angleY(" + String(fixAngleY) + ")";
+            String result = "angleX(" + fixAngleX + ") angleY(" + fixAngleY + ")";
             bt.println("success," + result);
+        }
+    } else if(system == "test:pressure") {
+        if(!testBmp.begin()) {
+            bt.println("error,BMP280 failed startup");
+        } else {
+            String alt = String(testBmp.getAltitude());
+            String temp = String(testBmp.getTemperature());
+            String avs = String(testBmp.getAverageSpeed(500));
+
+            String result = "alt(" + alt + ") temp(" + temp + ") speed(" + avs + ")";
+            bt.println(result);
         }
     }
 }
