@@ -23,7 +23,7 @@ void RCS::begin() {
     }
 };
 
-bool RCS::parseCommand() {
+bool RCS::parseCommands() {
     while(bt.connected()) {
         String command = bt.readString();
         command.replace("\r\n", "");
