@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "logging.h"
 #include "sensors.h"
+#include "rcs.h"
 
 const int setupStatus = 1;
 const int readyForLaunchStatus = 2;
@@ -11,6 +12,7 @@ const int landingStatus = 6;
 const int landedStatus = 7;
 
 GPS gps;
+RCS rcs;
 Logging logging;
 Pressure bmp;
 Acelerometer bmi;
@@ -50,6 +52,17 @@ void setup() {
     logging.log(setupStatus, LOG_WAIT, "Wait GPS satellites...");
     gps.begin();
     logging.log(setupStatus, LOG_SUCCESS, "GPS started");
+
+    // RCS startup (test and get logs)
+    rcs.begin();
+    logging.log(setupStatus, LOG_WAIT, "RCS startup");
+
+    bool rcsStatus = rcs.parseCommands();
+
+    // restarting ESP if communication has closed
+    if(!rcsStatus) {
+        ESP.restart();
+    }
 };
 
 void loop() {
