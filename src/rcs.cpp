@@ -19,28 +19,37 @@ void RCS::begin() {
     bt.begin("STAY B Rocket");
 };
 
-void RCS::parseCommand(String command) {
-    int partIndex = 0;
-    int maxParts = 2;
+bool RCS::parseCommand() {
+    while(bt.connected()) {
+        String command = bt.readString();
+        command.replace("\r\n", "");
 
-    String cmdParts[maxParts];
-    String part = "";
-    
-    for(int i = 0; i < command.length(); i++) {
-        if(command[i] != ',') {
-            part.concat(command[i]);
-        } else {
-            cmdParts[partIndex] = part;
-            partIndex += maxParts;
-            part.clear();
+        int partIndex = 0;
+        int maxParts = 2;
+
+        String cmdParts[maxParts];
+        String part = "";
+        
+        for(int i = 0; i < command.length(); i++) {
+            if(command[i] != ',') {
+                part.concat(command[i]);
+            } else {
+                cmdParts[partIndex] = part;
+                partIndex += maxParts;
+                part.clear();
+            }
+        }
+
+        if(cmdParts[0] == "test") {
+            this->testSystem(cmdParts[1]);
+        } else if (cmdParts[0] == "close" && cmdParts[1] == "test") {
+            return true;
+        } else if(cmdParts[0] == "get" && cmdParts[1] == "log") {
+            bt.println(logging.getLog());
         }
     }
 
-    if(cmdParts[0] == "test") {
-        this->testSystem(cmdParts[1]);
-    } else if(cmdParts[0] == "get" && cmdParts[1] == "log") {
-        bt.println(logging.getLog());
-    }
+    return false;
 };
 
 void RCS::testSystem(String system) {
