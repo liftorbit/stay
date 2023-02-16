@@ -8,12 +8,11 @@
 #include "sensors.h"
 
 BluetoothSerial bt;
-Logging logging;
 
-GPS gps;
-Logging logging;
-Pressure bmp;
-Acelerometer bmi;
+GPS testGps;
+Logging testLogging;
+Pressure testBmp;
+Acelerometer testBmi;
 
 void RCS::begin() {
     bt.begin("STAY B Rocket");
@@ -28,28 +27,12 @@ bool RCS::parseCommands() {
         String command = bt.readString();
         command.replace("\r\n", "");
 
-        int partIndex = 0;
-        int maxParts = 2;
-
-        String cmdParts[maxParts];
-        String part = "";
-        
-        for(int i = 0; i < command.length(); i++) {
-            if(command[i] != ',') {
-                part.concat(command[i]);
-            } else {
-                cmdParts[partIndex] = part;
-                partIndex += maxParts;
-                part.clear();
-            }
-        }
-
-        if(cmdParts[0] == "test") {
-            this->testSystem(cmdParts[1]);
-        } else if (cmdParts[0] == "close" && cmdParts[1] == "test") {
+        if(command.startsWith("test:")) {
+            this->testSystem(command);
+        } else if (command == "close:test") {
             return true;
-        } else if(cmdParts[0] == "get" && cmdParts[1] == "log") {
-            bt.println(logging.getLog());
+        } else if(command == "get:log") {
+            bt.println(testLogging.getLog());
         }
     }
 
@@ -57,15 +40,15 @@ bool RCS::parseCommands() {
 };
 
 void RCS::testSystem(String system) {
-    if(system == "accelerometer") {
-        if(!bmi.begin()) {
+    if(system == "test:accelerometer") {
+        if(!testBmi.begin()) {
             bt.println("error,BMI160 failed startup");
         } else {
-            bmi.updatePosition();
-            float x = bmi.getAcelerometerX();
-            float y = bmi.getAcelerometerY();
-            float fixAngleX = bmi.convertAxesToServoTuning(x);
-            float fixAngleY = bmi.convertAxesToServoTuning(y);
+            testBmi.updatePosition();
+            float x = testBmi.getAcelerometerX();
+            float y = testBmi.getAcelerometerY();
+            float fixAngleX = testBmi.convertAxesToServoTuning(x);
+            float fixAngleY = testBmi.convertAxesToServoTuning(y);
 
             String result = "angleX(" + String(fixAngleX) + ") angleY(" + String(fixAngleY) + ")";
             bt.println("success," + result);
