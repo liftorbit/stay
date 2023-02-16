@@ -3,51 +3,65 @@
 #include "sensors.h"
 #include "rcs.h"
 
+const int setupStatus = 1;
+const int readyForLaunchStatus = 2;
+const int launchStatus = 3;
+const int tankChangeStatus = 4;
+const int waitAltitudeStatus = 5;
+const int landingStatus = 6;
+const int landedStatus = 7;
+
 RCS rcs;
 GPS gps;
 Pressure bmp;
 Acelerometer bmi;
+Logging logging;
 
 void setup() {
     Serial.begin(9600);
-    log("info", "STAY B Startup");
+    
+    if(!logging.begin()) {
+        Serial.println("Logging not started");
+        while(true);
+    }
+
+    logging.log(setupStatus, "info", "STAY B Startup");
 
     rcs.begin();
-    log("info", "RCS started");
-    log("wait", "Wait RCS connection...");
+    logging.log(setupStatus, "info", "RCS started");
+    logging.log(setupStatus, "wait", "Wait RCS connection...");
 
     while (!rcs.hasConnected()) {
         delay(50);
     }
 
-    rcs.send(log("info", "RCS connected"));
+    rcs.send(logging.log(setupStatus, "info", "RCS connected"));
 
     // starting sensors
-    rcs.send(log("wait", "Starting sensors..."));
+    rcs.send(logging.log(setupStatus, "wait", "Starting sensors..."));
     bool sensorStartupFailed = false;
 
     if(!bmi.begin()) {
-        rcs.send(log("eror", "Failed to start BMI160"));
+        rcs.send(logging.log(setupStatus, "error", "Failed to start BMI160"));
         sensorStartupFailed = true;
     }
 
     if(!bmp.begin()) {
-        rcs.send(log("error", "Failed to start BMP280"));
+        rcs.send(logging.log(setupStatus, "error", "Failed to start BMP280"));
         sensorStartupFailed = true;
     }
 
     if(sensorStartupFailed) {
-        rcs.send(log("error", "Sensor startup failure"));
+        rcs.send(logging.log(setupStatus, "error", "Sensor startup failure"));
         while(true);
     }
 
-    rcs.send(log("success", "All sensors started"));
+    rcs.send(logging.log(setupStatus, "success", "All sensors started"));
 
     // starting GPS
-    rcs.send(log("wait", "Wait satellites..."));
+    rcs.send(logging.log(setupStatus, "wait", "Wait satellites..."));
     gps.begin();
-
-    rcs.send(log("success", "GPS started"));
+    rcs.send(logging.log(setupStatus, "success", "GPS started"));
 };
 
 void loop() {
