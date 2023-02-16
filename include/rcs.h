@@ -6,6 +6,7 @@
 class RCS {
     public:
         void begin();
+        void sendLogs();
         bool readyForLaunch();
 };
 

@@ -25,6 +25,7 @@ void setup() {
         while(true);
     }
 
+    rcs.begin();
     logging.log(setupStatus, LOG_INFO, "STAY B Startup");
 
     // starting sensors
@@ -43,6 +44,7 @@ void setup() {
 
     if(sensorStartupFailed) {
         logging.log(setupStatus, LOG_ERROR, "Sensor startup failure");
+        rcs.sendLogs();
         while(true);
     }
 
@@ -53,18 +55,13 @@ void setup() {
     gps.begin();
     logging.log(setupStatus, LOG_SUCCESS, "GPS started");
 
-    // RCS startup (test and get logs)
-    rcs.begin();
-    logging.log(setupStatus, LOG_WAIT, "RCS startup");
+    rcs.sendLogs();
+    bool hasReady = rcs.readyForLaunch();
 
-    bool rcsStatus = rcs.parseCommands();
-
-    // restarting ESP if communication has closed
-    if(!rcsStatus) {
+    // restarting if rocket not ready for launch
+    if(!hasReady) {
         ESP.restart();
     }
-
-    logging.log(setupStatus, LOG_SUCCESS, "Close test mode");
 };
 
 void loop() {

@@ -14,8 +14,6 @@ void RCS::begin() {
     while(!bt.connected()) {
         delay(100);
     }
-
-    bt.print(testLogging.getLog());
 };
 
 bool RCS::readyForLaunch() {
@@ -27,4 +25,8 @@ bool RCS::readyForLaunch() {
     }
 
     return false;
+}
+
+void RCS::sendLogs() {
+    bt.print(testLogging.getLog());
 }
