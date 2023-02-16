@@ -24,8 +24,9 @@ void setup() {
         while(true);
     }
 
-    rcs.begin();
     logging.log(setupStatus, LOG_INFO, "STAY B Startup");
+    logging.log(setupStatus, LOG_WAIT, "Wait RCS connection...");
+    rcs.begin();
 
     // starting sensors
     logging.log(setupStatus, LOG_WAIT, "Starting sensors...");
