@@ -25,43 +25,43 @@ void setup() {
         while(true);
     }
 
-    logging.log(setupStatus, "info", "STAY B Startup");
+    logging.log(setupStatus, LOG_INFO, "STAY B Startup");
 
     rcs.begin();
-    logging.log(setupStatus, "info", "RCS started");
-    logging.log(setupStatus, "wait", "Wait RCS connection...");
+    logging.log(setupStatus, LOG_INFO, "RCS started");
+    logging.log(setupStatus, LOG_WAIT, "Wait RCS connection...");
 
     while (!rcs.hasConnected()) {
         delay(50);
     }
 
-    rcs.send(logging.log(setupStatus, "info", "RCS connected"));
+    rcs.send(logging.log(setupStatus, LOG_INFO, "RCS connected"));
 
     // starting sensors
-    rcs.send(logging.log(setupStatus, "wait", "Starting sensors..."));
+    rcs.send(logging.log(setupStatus, LOG_WAIT, "Starting sensors..."));
     bool sensorStartupFailed = false;
 
     if(!bmi.begin()) {
-        rcs.send(logging.log(setupStatus, "error", "Failed to start BMI160"));
+        rcs.send(logging.log(setupStatus, LOG_ERROR, "Failed to start BMI160"));
         sensorStartupFailed = true;
     }
 
     if(!bmp.begin()) {
-        rcs.send(logging.log(setupStatus, "error", "Failed to start BMP280"));
+        rcs.send(logging.log(setupStatus, LOG_ERROR, "Failed to start BMP280"));
         sensorStartupFailed = true;
     }
 
     if(sensorStartupFailed) {
-        rcs.send(logging.log(setupStatus, "error", "Sensor startup failure"));
+        rcs.send(logging.log(setupStatus, LOG_ERROR, "Sensor startup failure"));
         while(true);
     }
 
-    rcs.send(logging.log(setupStatus, "success", "All sensors started"));
+    rcs.send(logging.log(setupStatus, LOG_SUCCESS, "All sensors started"));
 
     // starting GPS
-    rcs.send(logging.log(setupStatus, "wait", "Wait satellites..."));
+    rcs.send(logging.log(setupStatus, LOG_WAIT, "Wait satellites..."));
     gps.begin();
-    rcs.send(logging.log(setupStatus, "success", "GPS started"));
+    rcs.send(logging.log(setupStatus, LOG_SUCCESS, "GPS started"));
 };
 
 void loop() {

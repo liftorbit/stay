@@ -18,7 +18,7 @@ bool Logging::begin() {
     return true;
 }
 
-String Logging::log(int status, String type, String message) {
+String Logging::log(int status, int type, String message) {
     File log = SD.open("/computer.log", FILE_APPEND);
 
     String rawLogMsg = String(status) + "," + type + "," + message;
