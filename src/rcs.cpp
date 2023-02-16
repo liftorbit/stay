@@ -17,6 +17,10 @@ Acelerometer bmi;
 
 void RCS::begin() {
     bt.begin("STAY B Rocket");
+
+    while(!bt.connected()) {
+        delay(100);
+    }
 };
 
 bool RCS::parseCommand() {
