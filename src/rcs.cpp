@@ -27,6 +27,17 @@ bool RCS::readyForLaunch() {
     return false;
 }
 
+bool RCS::authorizedLaunch() {
+    while(bt.connected()) {
+        if(bt.available()) {
+            String confirm = bt.readString();
+            return confirm == "launchAuthorized";
+        }
+    }
+
+    return false;
+}
+
 void RCS::sendLogs() {
     bt.print(testLogging.getLog());
 }

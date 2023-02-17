@@ -8,6 +8,7 @@ class RCS {
         void begin();
         void sendLogs();
         bool readyForLaunch();
+        bool authorizedLaunch();
 };
 
 #endif
