@@ -13,30 +13,28 @@ const int landedStatus = 7;
 
 const int statusLedPin = 25;
 const int flameSensorPin = 32;
+const int mainEngineIgnitionPin = 26;
 
 RCS rcs;
 Logging logging;
 Pressure bmp;
 Acelerometer bmi;
 
-void readyForLaunchLedStatus() {
-    digitalWrite(statusLedPin, HIGH);
-    delay(100);
-    digitalWrite(statusLedPin, LOW);
-    delay(100);
-    digitalWrite(statusLedPin, HIGH);
-    delay(100);
-    digitalWrite(statusLedPin, LOW);
-    delay(500);
-}
-
 bool engineIsOn() {
     return !digitalRead(flameSensorPin);
+}
+
+void mainEngineIgnition() {
+    // waits for ignition and then disconnects the ignition pin
+    digitalWrite(mainEngineIgnitionPin, HIGH);
+    while(!engineIsOn());
+    digitalWrite(mainEngineIgnitionPin, LOW);
 }
 
 void setup() {
     Serial.begin(9600);
     pinMode(statusLedPin, OUTPUT);
+    pinMode(mainEngineIgnitionPin, OUTPUT);
     pinMode(flameSensorPin, INPUT);
 
     if(!logging.begin()) {
@@ -76,9 +74,14 @@ void setup() {
     if(hasReady) {
         // preparing for launch
         logging.log(readyForLaunchStatus, LOG_INFO, "Rocket ready for launch");
-        while (true) {
-            readyForLaunchLedStatus();
-        }
+        digitalWrite(statusLedPin, HIGH);
+        delay(100);
+        digitalWrite(statusLedPin, LOW);
+        delay(100);
+        digitalWrite(statusLedPin, HIGH);
+        delay(100);
+        digitalWrite(statusLedPin, LOW);
+        delay(500);
     } else {
         // restarting if rocket not ready for launch
         logging.log(setupStatus, LOG_INFO, "Not ready for launch, restarting");
