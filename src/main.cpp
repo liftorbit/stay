@@ -12,7 +12,7 @@ const int landingStatus = 6;
 const int landedStatus = 7;
 
 const int statusLedPin = 25;
-const int flameSensorPin = 32;
+const int flameSensorPin = 35;
 const int mainEngineIgnitionPin = 26;
 
 RCS rcs;
