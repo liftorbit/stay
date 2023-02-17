@@ -12,6 +12,7 @@ const int landingStatus = 6;
 const int landedStatus = 7;
 
 const int statusLedPin = 25;
+const int flameSensorPin = 32;
 
 RCS rcs;
 Logging logging;
@@ -29,10 +30,15 @@ void readyForLaunchLedStatus() {
     delay(500);
 }
 
+bool engineIsOn() {
+    return !digitalRead(flameSensorPin);
+}
+
 void setup() {
     Serial.begin(9600);
     pinMode(statusLedPin, OUTPUT);
-    
+    pinMode(flameSensorPin, INPUT);
+
     if(!logging.begin()) {
         Serial.println("Logging not started");
         while(true);
