@@ -41,6 +41,16 @@ void mainEngineIgnition() {
     digitalWrite(mainEngineIgnitionPin, LOW);
 }
 
+void launch() {
+    logging.log(launchStatus, LOG_INFO, "Main engine ignite");
+    mainEngineIgnition();
+
+    // wait engine cut off
+    while(engineIsOn) {
+        delay(50);
+    }
+}
+
 void setup() {
     Serial.begin(9600);
     pinMode(statusLedPin, OUTPUT);
@@ -96,7 +106,11 @@ void setup() {
         bool authorizedLaunch = rcs.authorizedLaunch();
 
         if(authorizedLaunch) {
+            logging.log(readyForLaunchStatus, LOG_INFO, "Authorized launch");
             launchCountdown();
+
+            // rocket action sequence
+            launch();
         }
     } else {
         // restarting if rocket not ready for launch
