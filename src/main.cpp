@@ -20,6 +20,16 @@ Logging logging;
 Pressure bmp;
 Acelerometer bmi;
 
+void launchCountdown() {
+    // 10 seconds countdown
+    for(int i = 0; i < 10; i++) {
+        digitalWrite(statusLedPin, HIGH);
+        delay(700);
+        digitalWrite(statusLedPin, LOW);
+        delay(300);
+    }
+}
+
 bool engineIsOn() {
     return !digitalRead(flameSensorPin);
 }
@@ -82,6 +92,12 @@ void setup() {
         delay(100);
         digitalWrite(statusLedPin, LOW);
         delay(500);
+
+        bool authorizedLaunch = rcs.authorizedLaunch();
+
+        if(authorizedLaunch) {
+            launchCountdown();
+        }
     } else {
         // restarting if rocket not ready for launch
         logging.log(setupStatus, LOG_INFO, "Not ready for launch, restarting");
