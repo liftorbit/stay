@@ -58,6 +58,8 @@ void setup() {
         logging.log(readyForLaunchStatus, LOG_INFO, "Rocket ready for launch");
     } else {
         // restarting if rocket not ready for launch
+        logging.log(setupStatus, LOG_INFO, "Not ready for launch, restarting");
+        delay(1000);
         ESP.restart();
     }
 };
