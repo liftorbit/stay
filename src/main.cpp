@@ -24,9 +24,9 @@ void launchCountdown() {
     // 10 seconds countdown
     for(int i = 0; i < 10; i++) {
         digitalWrite(statusLedPin, HIGH);
-        delay(700);
+        delay(500);
         digitalWrite(statusLedPin, LOW);
-        delay(300);
+        delay(500);
     }
 }
 
