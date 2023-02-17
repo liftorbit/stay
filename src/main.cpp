@@ -11,13 +11,27 @@ const int waitAltitudeStatus = 5;
 const int landingStatus = 6;
 const int landedStatus = 7;
 
+const int statusLedPin = 25;
+
 RCS rcs;
 Logging logging;
 Pressure bmp;
 Acelerometer bmi;
 
+void readyForLaunchLedStatus() {
+    digitalWrite(statusLedPin, HIGH);
+    delay(100);
+    digitalWrite(statusLedPin, LOW);
+    delay(100);
+    digitalWrite(statusLedPin, HIGH);
+    delay(100);
+    digitalWrite(statusLedPin, LOW);
+    delay(500);
+}
+
 void setup() {
     Serial.begin(9600);
+    pinMode(statusLedPin, OUTPUT);
     
     if(!logging.begin()) {
         Serial.println("Logging not started");
@@ -56,6 +70,9 @@ void setup() {
     if(hasReady) {
         // preparing for launch
         logging.log(readyForLaunchStatus, LOG_INFO, "Rocket ready for launch");
+        while (true) {
+            readyForLaunchLedStatus();
+        }
     } else {
         // restarting if rocket not ready for launch
         logging.log(setupStatus, LOG_INFO, "Not ready for launch, restarting");
