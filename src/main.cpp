@@ -46,6 +46,7 @@ void launch() {
     mainEngineIgnition();
 
     // wait engine cut off
+    logging.log(launchStatus, LOG_WAIT, "Wait Main Engine Cut Off");
     while(engineIsOn) {
         delay(50);
     }
