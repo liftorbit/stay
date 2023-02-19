@@ -20,7 +20,8 @@ bool RCS::readyForLaunch() {
     while(bt.connected()) {
         if(bt.available()) {
             String confirm = bt.readString();
-            return confirm == "readyForLaunch";
+            bt.print(confirm);
+            return confirm == "rfl"; // rfl = ready for launch
         }
     }
 
@@ -31,7 +32,8 @@ bool RCS::authorizedLaunch() {
     while(bt.connected()) {
         if(bt.available()) {
             String confirm = bt.readString();
-            return confirm == "launchAuthorized";
+            bt.print(confirm);
+            return confirm == "la"; // la = launch authorized
         }
     }
 
