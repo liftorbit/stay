@@ -17,8 +17,8 @@ const int mainEngineIgnitionPin = 26;
 
 RCS rcs;
 Logging logging;
-Pressure bmp;
-Acelerometer bmi;
+Barometer barometer;
+IMU imu;
 
 void launchCountdown() {
     // 10 seconds countdown
@@ -71,13 +71,13 @@ void setup() {
     logging.log(setupStatus, LOG_WAIT, "Starting sensors...");
     bool sensorStartupFailed = false;
 
-    if(!bmi.begin()) {
-        logging.log(setupStatus, LOG_ERROR, "Failed to start BMI160");
+    if(!imu.begin()) {
+        logging.log(setupStatus, LOG_ERROR, "Failed to start IMU");
         sensorStartupFailed = true;
     }
 
-    if(!bmp.begin()) {
-        logging.log(setupStatus, LOG_ERROR, "Failed to start BMP280");
+    if(!barometer.begin()) {
+        logging.log(setupStatus, LOG_ERROR, "Failed to start Barometer");
         sensorStartupFailed = true;
     }
 
