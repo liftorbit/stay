@@ -1,7 +1,7 @@
 #ifndef SENSORS_h
 #define SENSORS_h
 
-class Acelerometer {
+class IMU {
     private:
         float ax, ay, az;
 
@@ -16,7 +16,7 @@ class Acelerometer {
         int convertAxesToServoTuning(float axis);
 };
 
-class Pressure {
+class Barometer {
     private:
         float groundAltitude;
 

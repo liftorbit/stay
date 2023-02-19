@@ -15,7 +15,7 @@ const int BMP_CSB = 27;
 
 Adafruit_BMP280 bmp280(BMP_CSB, BMP_SDA, BMP_SDO, BMP_SCL);
 
-bool Acelerometer::begin() {
+bool IMU::begin() {
     Wire.begin();
     Wire.beginTransmission(BMI160Address);
 
@@ -26,7 +26,7 @@ bool Acelerometer::begin() {
     }
 };
 
-void Acelerometer::updatePosition() {
+void IMU::updatePosition() {
     int rawAx, rawAy, rawAz;
     BMI160.readAccelerometer(rawAx, rawAy, rawAz);
 
@@ -34,52 +34,52 @@ void Acelerometer::updatePosition() {
     this->ay = this->convertRaw(rawAy);
 };
 
-float Acelerometer::convertRaw(int rawData) {
+float IMU::convertRaw(int rawData) {
     // -45 and 45 = 90°
     float g = (rawData * 45.0) / 32768.0;
     return g;
 };
 
-int Acelerometer::convertAxesToServoTuning(float axis) {
+int IMU::convertAxesToServoTuning(float axis) {
     float angle = map(axis, -23, 22, 0, 90);
     int servoAngle = map(angle, 0, 90, 45, 135);
     return servoAngle;
 };
 
-float Acelerometer::getAcelerometerX() {
+float IMU::getAcelerometerX() {
     return this->ax;
 };
 
-float Acelerometer::getAcelerometerY() {
+float IMU::getAcelerometerY() {
     return this->ay;
 };
 
 // BMP280
 
-bool Pressure::begin() {
+bool Barometer::begin() {
     return bmp280.begin();
 }
 
-float Pressure::getAltitude() {
+float Barometer::getAltitude() {
     return bmp280.readAltitude(1013.25);
 };
 
-float Pressure::getTemperature() {
+float Barometer::getTemperature() {
     return bmp280.readTemperature();
 };
 
-float Pressure::getGroundDistance() {
+float Barometer::getGroundDistance() {
     float currentAltitude = this->getAltitude();
     float distance = currentAltitude - this->groundAltitude;
     distance = (distance < 0) ? 0 : distance;
     return distance;
 };
 
-void Pressure::saveGroundAltitude() {
+void Barometer::saveGroundAltitude() {
     this->groundAltitude = this->getAltitude();
 };
 
-float Pressure::getAverageSpeed(int periodOfTime) {
+float Barometer::getAverageSpeed(int periodOfTime) {
     float timeInSeconds = periodOfTime / 1000;
     float initialAltitude = this->getAltitude();
     delay(periodOfTime);
