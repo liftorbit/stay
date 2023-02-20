@@ -88,6 +88,15 @@ void setup() {
         while(true);
     }
 
+    imu.updatePosition();
+    String x = String(imu.getAcelerometerX());
+    String y = String(imu.getAcelerometerY());
+    logging.log(setupStatus, LOG_INFO, "IMU x(" + x + ") y(" + y + ")");
+
+    String alt = String(barometer.getAltitude());
+    String temp = String(barometer.getTemperature());
+    logging.log(setupStatus, LOG_INFO, "BAROMETER alt(" + alt + ") temp(" + temp + ")");
+
     logging.log(setupStatus, LOG_SUCCESS, "All sensors started");
 
     rcs.sendLogs();
