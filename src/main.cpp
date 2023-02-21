@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "logging.h"
-#include "sensors.h"
+#include "barometer.h"
+#include "imu.h"
 #include "rcs.h"
 
 const int setupStatus = 1;
@@ -16,9 +17,9 @@ const int flameSensorPin = 35;
 const int mainEngineIgnitionPin = 26;
 
 RCS rcs;
+IMU imu;
 Logging logging;
 Barometer barometer;
-IMU imu;
 
 void launchCountdown() {
     // 10 seconds countdown
