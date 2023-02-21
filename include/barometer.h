@@ -1,5 +1,5 @@
-#ifndef SENSORS_h
-#define SENSORS_h
+#ifndef BAROMETER_h
+#define BAROMETER_h
 
 class Barometer {
     private:

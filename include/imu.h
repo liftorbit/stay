@@ -1,5 +1,5 @@
-#ifndef SENSORS_h
-#define SENSORS_h
+#ifndef IMU_h
+#define IMU_h
 
 class IMU {
     private:
