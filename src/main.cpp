@@ -168,6 +168,9 @@ void launch() {
         }
     }
 
+    float temperature = barometer.getTemperature();
+
+    logging.log(launchStatus, LOG_INFO, "Temperature: " + String(temperature) + " °C");
     logging.log(launchStatus, LOG_INFO, "Max altitude: " + String(maxAltitude) + " m");
 }
 
