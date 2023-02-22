@@ -15,7 +15,7 @@ class Logging {
         String fileLog;
 
     public:
-        bool begin(String date);
+        bool begin();
         void log(int status, int type, String message);
 
         String getLog();
