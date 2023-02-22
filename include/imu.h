@@ -9,9 +9,9 @@ class IMU {
         bool begin();
         void updatePosition();
 
-        float getAcelerometerX();
-        float getAcelerometerY();
-        float getAcelerometerZ();
+        float getAccelerometerX();
+        float getAccelerometerY();
+        float getAccelerometerZ();
         float convertRaw(int rawData);
 
         int convertAxesToServoTuning(float axis);

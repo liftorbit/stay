@@ -38,14 +38,14 @@ int IMU::convertAxesToServoTuning(float axis) {
     return servoAngle;
 };
 
-float IMU::getAcelerometerX() {
+float IMU::getAccelerometerX() {
     return this->ax;
 };
 
-float IMU::getAcelerometerY() {
+float IMU::getAccelerometerY() {
     return this->ay;
 };
 
-float IMU::getAcelerometerZ() {
+float IMU::getAccelerometerZ() {
     return this->az;
 };
