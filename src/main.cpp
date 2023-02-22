@@ -102,35 +102,45 @@ void setup() {
     String alt = String(barometer.getAltitude());
     String temp = String(barometer.getTemperature());
     logging.log(setupStatus, LOG_INFO, "BAROMETER alt(" + alt + ") temp(" + temp + ")");
-
     logging.log(setupStatus, LOG_SUCCESS, "All sensors started");
-
     rcs.sendLogs();
-    bool hasReady = rcs.readyForLaunch();
 
-    if(hasReady) {
-        // preparing for launch
+    int readyForLaunchAuth = rcs.waitAuthorization();
+
+    while(readyForLaunchAuth == RCS_WITHOUT_DATA) {
+        delay(100);
+        readyForLaunchAuth = rcs.waitAuthorization();
+    }
+
+    if(readyForLaunchAuth == READY_FOR_LAUNCH) {
         logging.log(readyForLaunchStatus, LOG_INFO, "Rocket ready for launch");
-        digitalWrite(statusLedPin, HIGH);
-        delay(100);
-        digitalWrite(statusLedPin, LOW);
-        delay(100);
-        digitalWrite(statusLedPin, HIGH);
-        delay(100);
-        digitalWrite(statusLedPin, LOW);
-        delay(500);
 
-        bool authorizedLaunch = rcs.authorizedLaunch();
+        int launchAuth = rcs.waitAuthorization();
 
-        if(authorizedLaunch) {
+        while(launchAuth == RCS_WITHOUT_DATA) {
+            digitalWrite(statusLedPin, HIGH);
+            delay(100);
+            digitalWrite(statusLedPin, LOW);
+            delay(100);
+            digitalWrite(statusLedPin, HIGH);
+            delay(100);
+            digitalWrite(statusLedPin, LOW);
+            delay(500);
+            launchAuth = rcs.waitAuthorization();
+        }
+
+        if(launchAuth == LAUNCH_AUTHORIZED) {
             logging.log(readyForLaunchStatus, LOG_INFO, "Authorized launch");
             launchCountdown();
 
             // rocket action sequence
             launch();
+        } else if(launchAuth == RCS_DISCONNECTED || launchAuth == NO_AUTHORIZED) {
+            logging.log(setupStatus, LOG_INFO, "Launch not authorized, restarting");
+            delay(1000);
+            ESP.restart();
         }
-    } else {
-        // restarting if rocket not ready for launch
+    } else if(readyForLaunchAuth == RCS_DISCONNECTED || readyForLaunchAuth == NO_AUTHORIZED) {
         logging.log(setupStatus, LOG_INFO, "Not ready for launch, restarting");
         delay(1000);
         ESP.restart();

@@ -16,28 +16,24 @@ void RCS::begin() {
     }
 };
 
-bool RCS::readyForLaunch() {
-    while(bt.connected()) {
+int RCS::waitAuthorization() {
+    if(bt.connected()) {
         if(bt.available()) {
             String confirm = bt.readString();
             bt.print(confirm);
-            return confirm == "rfl"; // rfl = ready for launch
+            if(confirm == "rfl") {
+                return READY_FOR_LAUNCH;
+            } else if(confirm == "la") {
+                return LAUNCH_AUTHORIZED;
+            } else if(confirm == "na") {
+                return NO_AUTHORIZED;
+            }
+        } else {
+            return RCS_WITHOUT_DATA;
         }
+    } else {
+        return RCS_DISCONNECTED;
     }
-
-    return false;
-}
-
-bool RCS::authorizedLaunch() {
-    while(bt.connected()) {
-        if(bt.available()) {
-            String confirm = bt.readString();
-            bt.print(confirm);
-            return confirm == "la"; // la = launch authorized
-        }
-    }
-
-    return false;
 }
 
 void RCS::sendLogs() {
