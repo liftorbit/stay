@@ -21,53 +21,10 @@ IMU imu;
 Logging logging;
 Barometer barometer;
 
-void launchCountdown() {
-    // 10 seconds countdown
-    for(int i = 0; i < 10; i++) {
-        digitalWrite(statusLedPin, HIGH);
-        delay(500);
-        digitalWrite(statusLedPin, LOW);
-        delay(500);
-    }
-}
-
-bool engineIsOn() {
-    return !digitalRead(flameSensorPin);
-}
-
-void mainEngineIgnition() {
-    // waits for ignition and then disconnects the ignition pin
-    digitalWrite(mainEngineIgnitionPin, HIGH);
-    while(!engineIsOn());
-    digitalWrite(mainEngineIgnitionPin, LOW);
-}
-
-void launch() {
-    int maxAltitude = 0;
-    barometer.saveGroundAltitude();
-
-    logging.log(launchStatus, LOG_INFO, "Main engine ignite");
-    mainEngineIgnition();
-    logging.log(launchStatus, LOG_INFO, "Liftoff");
-
-    // wait engine cut off
-    while(engineIsOn()) {
-        delay(50);
-    }
-
-    logging.log(launchStatus, LOG_INFO, "Main engine cut off");
-
-    while(true) {
-        int currentAltitude = static_cast<int>(barometer.getGroundDistance());
-        if(currentAltitude >= maxAltitude) {
-            maxAltitude = currentAltitude;
-        } else {
-            break;
-        }
-    }
-
-    logging.log(launchStatus, LOG_INFO, "Max altitude: " + String(maxAltitude) + " m");
-}
+void launchCountdown();
+bool engineIsOn();
+void mainEngineIgnition();
+void launch();
 
 void setup() {
     Serial.begin(9600);
@@ -165,6 +122,54 @@ void setup() {
         ESP.restart();
     }
 };
+
+void launchCountdown() {
+    // 10 seconds countdown
+    for(int i = 0; i < 10; i++) {
+        digitalWrite(statusLedPin, HIGH);
+        delay(500);
+        digitalWrite(statusLedPin, LOW);
+        delay(500);
+    }
+}
+
+bool engineIsOn() {
+    return !digitalRead(flameSensorPin);
+}
+
+void mainEngineIgnition() {
+    // waits for ignition and then disconnects the ignition pin
+    digitalWrite(mainEngineIgnitionPin, HIGH);
+    while(!engineIsOn());
+    digitalWrite(mainEngineIgnitionPin, LOW);
+}
+
+void launch() {
+    int maxAltitude = 0;
+    barometer.saveGroundAltitude();
+
+    logging.log(launchStatus, LOG_INFO, "Main engine ignite");
+    mainEngineIgnition();
+    logging.log(launchStatus, LOG_INFO, "Liftoff");
+
+    // wait engine cut off
+    while(engineIsOn()) {
+        delay(50);
+    }
+
+    logging.log(launchStatus, LOG_INFO, "Main engine cut off");
+
+    while(true) {
+        int currentAltitude = static_cast<int>(barometer.getGroundDistance());
+        if(currentAltitude >= maxAltitude) {
+            maxAltitude = currentAltitude;
+        } else {
+            break;
+        }
+    }
+
+    logging.log(launchStatus, LOG_INFO, "Max altitude: " + String(maxAltitude) + " m");
+}
 
 void loop() {
 
