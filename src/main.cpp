@@ -43,6 +43,8 @@ void mainEngineIgnition() {
 }
 
 void launch() {
+    barometer.saveGroundAltitude();
+
     logging.log(launchStatus, LOG_INFO, "Main engine ignite");
     mainEngineIgnition();
 
