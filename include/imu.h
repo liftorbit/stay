@@ -11,6 +11,7 @@ class IMU {
 
         float getAcelerometerX();
         float getAcelerometerY();
+        float getAcelerometerZ();
         float convertRaw(int rawData);
 
         int convertAxesToServoTuning(float axis);

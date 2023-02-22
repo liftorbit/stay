@@ -23,6 +23,7 @@ void IMU::updatePosition() {
 
     this->ax = this->convertRaw(rawAx);
     this->ay = this->convertRaw(rawAy);
+    this->az = this->convertRaw(rawAz);
 };
 
 float IMU::convertRaw(int rawData) {
@@ -43,4 +44,8 @@ float IMU::getAcelerometerX() {
 
 float IMU::getAcelerometerY() {
     return this->ay;
+};
+
+float IMU::getAcelerometerZ() {
+    return this->az;
 };
