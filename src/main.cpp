@@ -43,17 +43,30 @@ void mainEngineIgnition() {
 }
 
 void launch() {
+    int maxAltitude = 0;
     barometer.saveGroundAltitude();
 
     logging.log(launchStatus, LOG_INFO, "Main engine ignite");
     mainEngineIgnition();
+    logging.log(launchStatus, LOG_INFO, "Liftoff");
 
     // wait engine cut off
-    logging.log(launchStatus, LOG_WAIT, "Wait Main Engine Cut Off");
     while(engineIsOn()) {
         delay(50);
     }
-    logging.log(launchStatus, LOG_INFO, "Main Engine Cut Off");
+
+    logging.log(launchStatus, LOG_INFO, "Main engine cut off");
+
+    while(true) {
+        int currentAltitude = static_cast<int>(barometer.getGroundDistance());
+        if(currentAltitude >= maxAltitude) {
+            maxAltitude = currentAltitude;
+        } else {
+            break;
+        }
+    }
+
+    logging.log(launchStatus, LOG_INFO, "Max altitude: " + String(maxAltitude) + " m");
 }
 
 void setup() {
@@ -98,8 +111,8 @@ void setup() {
     }
 
     imu.updatePosition();
-    String x = String(imu.getAcelerometerX());
-    String y = String(imu.getAcelerometerY());
+    String x = String(imu.getAccelerometerX());
+    String y = String(imu.getAccelerometerY());
     logging.log(setupStatus, LOG_INFO, "IMU x(" + x + ") y(" + y + ")");
 
     String alt = String(barometer.getAltitude());
