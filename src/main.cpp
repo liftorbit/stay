@@ -60,14 +60,15 @@ void setup() {
     pinMode(mainEngineIgnitionPin, OUTPUT);
     pinMode(flameSensorPin, INPUT);
 
-    if(!logging.begin()) {
+    Serial.println("Wait RCS connection");
+    String logDate = rcs.begin();
+
+    if(!logging.begin(logDate)) {
         Serial.println("Logging not started");
         while(true);
     }
 
     logging.log(setupStatus, LOG_INFO, "STAY B Startup");
-    logging.log(setupStatus, LOG_WAIT, "Wait RCS connection...");
-    rcs.begin();
 
     // starting sensors
     logging.log(setupStatus, LOG_WAIT, "Starting sensors...");

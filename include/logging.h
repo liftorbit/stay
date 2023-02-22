@@ -11,8 +11,11 @@
 
 
 class Logging {
+    private:
+        String fileLog;
+
     public:
-        bool begin();
+        bool begin(String date);
         void log(int status, int type, String message);
 
         String getLog();

@@ -4,22 +4,19 @@
 #include <FS.h>
 #include "logging.h"
 
-bool Logging::begin() {
+bool Logging::begin(String date) {
     if(!SD.begin(5)) {
         return false;
     } else if(SD.cardType() == CARD_NONE) {
         return false;
     }
 
-    if(SD.exists("/computer.log")) {
-        SD.remove("/computer.log");
-    }
-
+    this->fileLog = "/" + date + ".log";
     return true;
-}
+};
 
 void Logging::log(int status, int type, String message) {
-    File log = SD.open("/computer.log", FILE_APPEND);
+    File log = SD.open(this->fileLog, FILE_APPEND);
 
     String rawLogMsg = String(status) + "," + type + "," + message;
     Serial.println(rawLogMsg);
@@ -28,7 +25,7 @@ void Logging::log(int status, int type, String message) {
 };
 
 String Logging::getLog() {
-    File log = SD.open("/computer.log", FILE_READ);
+    File log = SD.open(this->fileLog, FILE_READ);
     String logs = log.readString();
     return logs;
-}
+};
