@@ -2,7 +2,7 @@
 
 Este arquivo indica em quais pinos cada módulo é conectado, incluido os pinos de alimentação.
 
-# Ignição motor principal
+## Ignição motor principal
 
 - VCC: G26
 
