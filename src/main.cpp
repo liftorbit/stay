@@ -108,7 +108,10 @@ void setup() {
     int readyForLaunchAuth = rcs.waitAuthorization();
 
     while(readyForLaunchAuth == RCS_WITHOUT_DATA) {
-        delay(100);
+        digitalWrite(statusLedPin, HIGH);
+        delay(500);
+        digitalWrite(statusLedPin, LOW);
+        delay(500);
         readyForLaunchAuth = rcs.waitAuthorization();
     }
 
