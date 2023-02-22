@@ -11,7 +11,7 @@
 
 class RCS {
     public:
-        void begin();
+        String begin();
         void sendLogs();
         int waitAuthorization();
 };

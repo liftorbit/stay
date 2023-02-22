@@ -8,12 +8,14 @@
 BluetoothSerial bt;
 Logging testLogging;
 
-void RCS::begin() {
+String RCS::begin() {
     bt.begin("STAY B Rocket");
 
     while(!bt.connected()) {
         delay(100);
     }
+
+    return bt.readString();
 };
 
 int RCS::waitAuthorization() {
