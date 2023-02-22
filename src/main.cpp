@@ -83,6 +83,11 @@ void setup() {
         sensorStartupFailed = true;
     }
 
+    if(engineIsOn()) {
+        logging.log(setupStatus, LOG_ERROR, "Flame detected before launch");
+        sensorStartupFailed = true;
+    }
+
     if(sensorStartupFailed) {
         logging.log(setupStatus, LOG_ERROR, "Sensor startup failure");
         rcs.sendLogs();
