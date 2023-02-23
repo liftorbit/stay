@@ -18,6 +18,7 @@ Toda essas bibliotecas foram utilizadas para o ESP32.
 - [Adafruit BMP280](https://github.com/adafruit/Adafruit_BMP280_Library)
 - [Adafruit Sensors](https://github.com/adafruit/Adafruit_Sensor)
 - [SD card](https://github.com/espressif/arduino-esp32/tree/master/libraries/SD)
+- [ESP32Servo](https://www.arduinolibraries.info/libraries/esp32-servo)
 
 ## Informações adicionais
 
