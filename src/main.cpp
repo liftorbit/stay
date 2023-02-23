@@ -25,36 +25,36 @@ void setup() {
     pinMode(flameSensorPin, INPUT);
 
     if(!logging.begin()) {
-        Serial.println("Logging not started");
+        Serial.println(F("Logging not started"));
         while(true);
     }
 
-    logging.log(S_SETUP, LOG_INFO, "STAY B Startup");
-    logging.log(S_SETUP, LOG_WAIT, "Wait RCS connection...");
+    logging.log(S_SETUP, LOG_INFO, F("STAY B Startup"));
+    logging.log(S_SETUP, LOG_WAIT, F("Wait RCS connection..."));
     String logDate = rcs.begin();
     logging.log(S_SETUP, LOG_INFO, "Computer startup in " + logDate);
 
     // starting sensors
-    logging.log(S_SETUP, LOG_WAIT, "Starting sensors...");
+    logging.log(S_SETUP, LOG_WAIT, F("Starting sensors..."));
     bool sensorStartupFailed = false;
 
     if(!imu.begin()) {
-        logging.log(S_SETUP, LOG_ERROR, "Failed to start IMU");
+        logging.log(S_SETUP, LOG_ERROR, F("Failed to start IMU"));
         sensorStartupFailed = true;
     }
 
     if(!barometer.begin()) {
-        logging.log(S_SETUP, LOG_ERROR, "Failed to start Barometer");
+        logging.log(S_SETUP, LOG_ERROR, F("Failed to start Barometer"));
         sensorStartupFailed = true;
     }
 
     if(engineIsOn()) {
-        logging.log(S_SETUP, LOG_ERROR, "Flame detected before launch");
+        logging.log(S_SETUP, LOG_ERROR, F("Flame detected before launch"));
         sensorStartupFailed = true;
     }
 
     if(sensorStartupFailed) {
-        logging.log(S_SETUP, LOG_ERROR, "Sensor startup failure");
+        logging.log(S_SETUP, LOG_ERROR, F("Sensor startup failure"));
         rcs.sendLogs();
         while(true);
     }
@@ -67,7 +67,7 @@ void setup() {
     String alt = String(barometer.getAltitude());
     String temp = String(barometer.getTemperature());
     logging.log(S_SETUP, LOG_INFO, "BAROMETER alt(" + alt + ") temp(" + temp + ")");
-    logging.log(S_SETUP, LOG_SUCCESS, "All sensors started");
+    logging.log(S_SETUP, LOG_SUCCESS, F("All sensors started"));
     rcs.sendLogs();
 
     int readyForLaunchAuth = rcs.waitAuthorization();
@@ -81,7 +81,7 @@ void setup() {
     }
 
     if(readyForLaunchAuth == READY_FOR_LAUNCH) {
-        logging.log(S_READY, LOG_INFO, "Rocket ready for launch");
+        logging.log(S_READY, LOG_INFO, F("Rocket ready for launch"));
 
         int launchAuth = rcs.waitAuthorization();
 
@@ -98,18 +98,18 @@ void setup() {
         }
 
         if(launchAuth == LAUNCH_AUTHORIZED) {
-            logging.log(S_READY, LOG_INFO, "Authorized launch");
+            logging.log(S_READY, LOG_INFO, F("Authorized launch"));
             launchCountdown();
 
             // rocket action sequence
             launch();
         } else if(launchAuth == RCS_DISCONNECTED || launchAuth == NO_AUTHORIZED) {
-            logging.log(S_SETUP, LOG_INFO, "Launch not authorized, restarting");
+            logging.log(S_SETUP, LOG_INFO, F("Launch not authorized, restarting"));
             delay(1000);
             ESP.restart();
         }
     } else if(readyForLaunchAuth == RCS_DISCONNECTED || readyForLaunchAuth == NO_AUTHORIZED) {
-        logging.log(S_SETUP, LOG_INFO, "Not ready for launch, restarting");
+        logging.log(S_SETUP, LOG_INFO, F("Not ready for launch, restarting"));
         delay(1000);
         ESP.restart();
     }
@@ -140,16 +140,16 @@ void launch() {
     int maxAltitude = 0;
     barometer.saveGroundAltitude();
 
-    logging.log(S_LAUNCH, LOG_INFO, "Main engine ignite");
+    logging.log(S_LAUNCH, LOG_INFO, F("Main engine ignite"));
     mainEngineIgnition();
-    logging.log(S_LAUNCH, LOG_INFO, "Liftoff");
+    logging.log(S_LAUNCH, LOG_INFO, F("Liftoff"));
 
     // wait engine cut off
     while(engineIsOn()) {
         delay(50);
     }
 
-    logging.log(S_LAUNCH, LOG_INFO, "Main engine cut off");
+    logging.log(S_LAUNCH, LOG_INFO, F("Main engine cut off"));
 
     while(true) {
         int currentAltitude = static_cast<int>(barometer.getGroundDistance());

@@ -9,7 +9,7 @@ BluetoothSerial bt;
 Logging testLogging;
 
 String RCS::begin() {
-    bt.begin("STAY B Rocket");
+    bt.begin(F("STAY B Rocket"));
 
     while(!bt.connected()) {
         delay(100);
@@ -23,11 +23,11 @@ int RCS::waitAuthorization() {
         if(bt.available()) {
             String confirm = bt.readString();
             bt.print(confirm);
-            if(confirm == "rfl") {
+            if(confirm == F("rfl")) {
                 return READY_FOR_LAUNCH;
-            } else if(confirm == "la") {
+            } else if(confirm == F("la")) {
                 return LAUNCH_AUTHORIZED;
-            } else if(confirm == "na") {
+            } else if(confirm == F("na")) {
                 return NO_AUTHORIZED;
             }
         } else {
