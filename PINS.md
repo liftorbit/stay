@@ -6,6 +6,13 @@ Este arquivo indica em quais pinos cada módulo é conectado, incluido os pinos 
 
 - VCC: G26
 
+## TVC
+
+- VCC: 5v (fonte externa)
+- GND: fonte externa e GND ESP32
+- Sinal X: 2
+- Sinal Y: 32
+
 ## LED status
 
 - VCC: G25
