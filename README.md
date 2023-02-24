@@ -24,3 +24,12 @@ Toda essas bibliotecas foram utilizadas para o ESP32.
 
 - Endereço MAC do computador de bordo: `24:D7:EB:11:C8:76`
 - Placa utilizada: ESP32
+
+## Licença
+
+```
+GNU Affero General Public License
+Copyright (c) 2023  Firlast
+```
+
+Este projeto utiliza a [licença GNU Affero General Public License](https://github.com/firlast/stay-b/blob/master/LICENSE), visite o link para mais informações sobre a licença.
