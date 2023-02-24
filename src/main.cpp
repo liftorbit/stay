@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <Servo.h>
 #include "logging.h"
 #include "barometer.h"
 #include "imu.h"
@@ -8,10 +9,16 @@ const int statusLedPin = 25;
 const int flameSensorPin = 35;
 const int mainEngineIgnitionPin = 26;
 
+const int servoXPin = 2;
+const int servoYPin = 32;
+
 RCS rcs;
 IMU imu;
 Logging logging;
 Barometer barometer;
+
+Servo servoX;
+Servo servoY;
 
 void launchCountdown();
 bool engineIsOn();
@@ -20,6 +27,7 @@ void launch();
 
 void setup() {
     Serial.begin(9600);
+
     pinMode(statusLedPin, OUTPUT);
     pinMode(mainEngineIgnitionPin, OUTPUT);
     pinMode(flameSensorPin, INPUT);
@@ -68,6 +76,16 @@ void setup() {
     String temp = String(barometer.getTemperature());
     logging.log(S_SETUP, LOG_INFO, "BAROMETER alt(" + alt + ") temp(" + temp + ")");
     logging.log(S_SETUP, LOG_SUCCESS, F("All sensors started"));
+
+    servoX.attach(servoXPin);
+    servoY.attach(servoYPin);
+
+    // default position
+    servoX.write(90);
+    servoY.write(90);
+
+    logging.log(S_SETUP, LOG_INFO, "Servos attached");
+
     rcs.sendLogs();
 
     int readyForLaunchAuth = rcs.waitAuthorization();
@@ -144,9 +162,16 @@ void launch() {
     mainEngineIgnition();
     logging.log(S_LAUNCH, LOG_INFO, F("Liftoff"));
 
+    float rawX, rawY;
+
     // wait engine cut off
     while(engineIsOn()) {
-        delay(50);
+        // control TVC
+        imu.updatePosition();
+        rawX = imu.getAccelerometerX();
+        rawY = imu.getAccelerometerY();
+        servoX.write(imu.convertAxesToServoTuning(rawX));
+        servoY.write(imu.convertAxesToServoTuning(rawY));
     }
 
     logging.log(S_LAUNCH, LOG_INFO, F("Main engine cut off"));
