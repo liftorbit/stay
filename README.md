@@ -1,13 +1,8 @@
 # Computador de bordo STAY B
 
-O computador de bordo é responsável por **controlar** o Controle Vetorial de Empuxo, o Troca de Tanques Rápida (QTC, ou Quick Tank Change) e ler alguns sensores, como acelerômetro, barômetro e sensor de chama.
+O computador de bordo é responsável por **controlar** o Controle Vetorial de Empuxo, a Troca de Tanques Rápida (QTC, ou Quick Tank Change) e ler alguns sensores, como acelerômetro, barômetro e sensor de chama.
 
-Agradecimentos especiais a estes contribuidores:
-
-- Meu irmão João, minha mãe e meu avô me **ajudaram financeiramente** na compra dos componentes eletrônicos para o desenvolvimento do computador de bordo;
-- Meu irmão @joandersonsilva, que me introduziu no mundo da programação.
-
-> Isto é apenas um pequeno passo para o desenvolvimento aeroespacial no Brasil.
+> Um pequeno passo para o desenvolvimento aeroespacial no Brasil.
 
 ## Bibliotecas necessárias
 
