@@ -49,12 +49,15 @@ void setup() {
         while(true);
     }
 
+    logging.log(S_SETUP, LOG_INFO, F("STAY B Startup"));
+
     pinMode(statusLedPin, OUTPUT);
     pinMode(mainEngineIgnitionPin, OUTPUT);
     pinMode(flameSensorPin, INPUT);
 
-    logging.log(S_SETUP, LOG_INFO, F("STAY B Startup"));
+    logging.log(S_SETUP, LOG_INFO, F("Pin mode defined"));
     logging.log(S_SETUP, LOG_WAIT, F("Wait RCS connection..."));
+
     String logDate = rcs.begin();
     logging.log(S_SETUP, LOG_INFO, "Computer startup in " + logDate);
 
