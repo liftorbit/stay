@@ -105,46 +105,28 @@ void setup() {
 
     rcs.sendLogs();
 
-    int readyForLaunchAuth = rcs.waitAuthorization();
+    int launchAuth = rcs.waitAuthorization();
 
-    while(readyForLaunchAuth == RCS_WITHOUT_DATA) {
+    while(launchAuth == RCS_WITHOUT_DATA) {
         digitalWrite(statusLedPin, HIGH);
-        delay(500);
+        delay(100);
+        digitalWrite(statusLedPin, LOW);
+        delay(100);
+        digitalWrite(statusLedPin, HIGH);
+        delay(100);
         digitalWrite(statusLedPin, LOW);
         delay(500);
-        readyForLaunchAuth = rcs.waitAuthorization();
+        launchAuth = rcs.waitAuthorization();
     }
 
-    if(readyForLaunchAuth == READY_FOR_LAUNCH) {
-        logging.log(S_READY, LOG_INFO, F("Rocket ready for launch"));
+    if(launchAuth == LAUNCH_AUTHORIZED) {
+        logging.log(S_READY, LOG_INFO, F("Authorized launch"));
+        launchCountdown();
 
-        int launchAuth = rcs.waitAuthorization();
-
-        while(launchAuth == RCS_WITHOUT_DATA) {
-            digitalWrite(statusLedPin, HIGH);
-            delay(100);
-            digitalWrite(statusLedPin, LOW);
-            delay(100);
-            digitalWrite(statusLedPin, HIGH);
-            delay(100);
-            digitalWrite(statusLedPin, LOW);
-            delay(500);
-            launchAuth = rcs.waitAuthorization();
-        }
-
-        if(launchAuth == LAUNCH_AUTHORIZED) {
-            logging.log(S_READY, LOG_INFO, F("Authorized launch"));
-            launchCountdown();
-
-            // rocket action sequence
-            launch();
-        } else if(launchAuth == RCS_DISCONNECTED || launchAuth == NO_AUTHORIZED) {
-            logging.log(S_SETUP, LOG_INFO, F("Launch not authorized, restarting"));
-            delay(1000);
-            ESP.restart();
-        }
-    } else if(readyForLaunchAuth == RCS_DISCONNECTED || readyForLaunchAuth == NO_AUTHORIZED) {
-        logging.log(S_SETUP, LOG_INFO, F("Not ready for launch, restarting"));
+        // rocket action sequence
+        launch();
+    } else if(launchAuth == RCS_DISCONNECTED || launchAuth == NO_AUTHORIZED) {
+        logging.log(S_SETUP, LOG_INFO, F("Launch not authorized, restarting"));
         delay(1000);
         ESP.restart();
     }
