@@ -23,12 +23,11 @@
 #define LOG_ERROR 4
 
 #define S_SETUP 1
-#define S_READY 2
-#define S_LAUNCH 3
-#define S_TANK_CHANGE 4
-#define S_WAIT_ALT 5
-#define S_LANDING 6
-#define S_LANDED 7
+#define S_CHECKOUT 2
+#define S_AUTH 3
+#define S_COUNTDOWN 4
+#define S_LAUNCH 5
+#define S_MECO 6
 
 #include <Arduino.h>
 
