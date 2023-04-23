@@ -49,6 +49,7 @@ void setup() {
         while(true);
     }
 
+    // setup status
     logging.log(S_SETUP, LOG_INFO, F("STAY B Startup"));
 
     pinMode(statusLedPin, OUTPUT);
@@ -61,30 +62,27 @@ void setup() {
     String logDate = rcs.begin();
     logging.log(S_SETUP, LOG_INFO, "Computer startup in " + logDate);
 
-    // starting sensors
     logging.log(S_SETUP, LOG_WAIT, F("Starting sensors..."));
-    bool sensorStartupFailed = false;
 
-    if(!imu.begin()) {
+    if(imu.begin()) {
+        logging.log(S_SETUP, LOG_SUCCESS, F("IMU Started"));
+    } else {
         logging.log(S_SETUP, LOG_ERROR, F("Failed to start IMU"));
-        sensorStartupFailed = true;
     }
 
-    if(!barometer.begin()) {
+    if(barometer.begin()) {
+        logging.log(S_SETUP, LOG_SUCCESS, F("Barometer Started"));
+    } else {
         logging.log(S_SETUP, LOG_ERROR, F("Failed to start Barometer"));
-        sensorStartupFailed = true;
     }
 
     if(engineIsOn()) {
         logging.log(S_SETUP, LOG_ERROR, F("Flame detected before launch"));
-        sensorStartupFailed = true;
+    } else {
+        logging.log(S_SETUP, LOG_SUCCESS, F("Flame sensor in operation"));
     }
 
-    if(sensorStartupFailed) {
-        logging.log(S_SETUP, LOG_ERROR, F("Sensor startup failure"));
-        rcs.sendLogs();
-        while(true);
-    }
+    logging.log(S_SETUP, LOG_INFO, F("Sensors started"));
 
     imu.updatePosition();
     String x = String(imu.getAccelerometerX());
