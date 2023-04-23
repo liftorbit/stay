@@ -21,9 +21,8 @@
 
 #define RCS_WITHOUT_DATA 0
 #define RCS_DISCONNECTED 1
-#define READY_FOR_LAUNCH 2
-#define LAUNCH_AUTHORIZED 3
-#define NO_AUTHORIZED 4
+#define LAUNCH_AUTHORIZED 2
+#define NO_AUTHORIZED 3
 
 class RCS {
     public:

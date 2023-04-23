@@ -39,9 +39,7 @@ int RCS::waitAuthorization() {
         if(bt.available()) {
             String confirm = bt.readString();
             bt.print(confirm);
-            if(confirm == F("rfl")) {
-                return READY_FOR_LAUNCH;
-            } else if(confirm == F("la")) {
+            if(confirm == F("la")) {
                 return LAUNCH_AUTHORIZED;
             } else if(confirm == F("na")) {
                 return NO_AUTHORIZED;
