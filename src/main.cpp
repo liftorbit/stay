@@ -44,14 +44,14 @@ void launch();
 void setup() {
     Serial.begin(9600);
 
-    pinMode(statusLedPin, OUTPUT);
-    pinMode(mainEngineIgnitionPin, OUTPUT);
-    pinMode(flameSensorPin, INPUT);
-
     if(!logging.begin()) {
         Serial.println(F("Logging not started"));
         while(true);
     }
+
+    pinMode(statusLedPin, OUTPUT);
+    pinMode(mainEngineIgnitionPin, OUTPUT);
+    pinMode(flameSensorPin, INPUT);
 
     logging.log(S_SETUP, LOG_INFO, F("STAY B Startup"));
     logging.log(S_SETUP, LOG_WAIT, F("Wait RCS connection..."));
