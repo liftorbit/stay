@@ -102,6 +102,7 @@ void setup() {
     servoY.write(90);
 
     logging.log(S_SETUP, LOG_INFO, "Servos attached");
+    logging.log(S_AUTH, LOG_WAIT, "Wait launch authorization...");
 
     rcs.sendLogs();
 
@@ -120,10 +121,10 @@ void setup() {
     }
 
     if(launchAuth == LAUNCH_AUTHORIZED) {
-        logging.log(S_READY, LOG_INFO, F("Authorized launch"));
-        launchCountdown();
+        logging.log(S_AUTH, LOG_INFO, "Launch authorized. Countdown.");
 
         // rocket action sequence
+        launchCountdown();
         launch();
     } else if(launchAuth == RCS_DISCONNECTED || launchAuth == NO_AUTHORIZED) {
         logging.log(S_SETUP, LOG_INFO, F("Launch not authorized, restarting"));
