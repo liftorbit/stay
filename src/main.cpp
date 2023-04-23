@@ -101,8 +101,8 @@ void setup() {
     servoX.write(90);
     servoY.write(90);
 
-    logging.log(S_SETUP, LOG_INFO, "Servos attached");
-    logging.log(S_AUTH, LOG_WAIT, "Wait launch authorization...");
+    logging.log(S_SETUP, LOG_INFO, F("Servos attached"));
+    logging.log(S_AUTH, LOG_WAIT, F("Wait launch authorization..."));
 
     rcs.sendLogs();
 
@@ -121,7 +121,7 @@ void setup() {
     }
 
     if(launchAuth == LAUNCH_AUTHORIZED) {
-        logging.log(S_AUTH, LOG_INFO, "Launch authorized. Countdown.");
+        logging.log(S_AUTH, LOG_INFO, F("Launch authorized. Countdown."));
 
         // rocket action sequence
         launchCountdown();
