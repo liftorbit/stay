@@ -45,8 +45,8 @@ void IMU::updatePosition() {
 float IMU::convertRaw(int rawData) {
     // scale 8g
     float scale = 1 / 2048.0;
-    float g = (rawData * scale) / 32768.0;
-    return g;
+    float accel = (float)(rawData) * scale;
+    return accel;
 };
 
 int IMU::convertAxesToServoTuning(float axis) {
