@@ -1,5 +1,9 @@
 # STAY Beginner
 
+![BADGE](https://img.shields.io/static/v1?label=status&message=desenvolvimento&color=green)
+![BADGE](https://img.shields.io/static/v1?label=previsão%20lançamento&message=2023&color=red)
+![BADGE](https://img.shields.io/static/v1?label=licença&message=GNU%20AGPL&color=red)
+
 **STAY Beginner** é um foguete de propulsão com combustível sólido desenvolvido pela [Firlast](https://github.com/firlast) feito para dar o passo inicial no desenvolvimento de outros projetos. O STAY B conta com um computador de bordo responsável por coletar dados de diversos sensores e controlar o TVC (controle vetorial de empuxo).
 
 ## Missão
