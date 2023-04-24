@@ -43,8 +43,9 @@ void IMU::updatePosition() {
 };
 
 float IMU::convertRaw(int rawData) {
-    // -45 and 45 = 90°
-    float g = (rawData * 45.0) / 32768.0;
+    // scale 8g
+    float scale = 1 / 2048.0;
+    float g = (rawData * scale) / 32768.0;
     return g;
 };
 
