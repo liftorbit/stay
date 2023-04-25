@@ -35,6 +35,13 @@ Esses dados serão utilizados no desenvolvimento de **outros projetos**, melhora
 
 - Endereço MAC do computador: `24:D7:EB:11:C8:76`
 - Placa utilizada: ESP32
+- Componentes:
+  - 2x Servo Motor 9g
+  - BMI160 (acelerômetro e giroscópio)
+  - BMP280 (barômetro)
+  - Sensor infravermelho
+  - Módulo cartão microSD
+  - Booster DC-DC (MT3608)
 
 ## Licença
 
