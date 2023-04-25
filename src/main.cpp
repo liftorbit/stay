@@ -65,13 +65,20 @@ void setup() {
     logging.log(S_SETUP, LOG_WAIT, F("Starting sensors..."));
 
     if(imu.begin()) {
+        imu.updatePosition();
+        String imuX = String(imu.getAccelerometerX());
+        String imuY = String(imu.getAccelerometerY());
         logging.log(S_SETUP, LOG_SUCCESS, F("IMU Started"));
+        logging.log(S_SETUP, LOG_INFO, "IMU x(" + imuX + ") y(" + imuY + ")");
     } else {
         logging.log(S_SETUP, LOG_ERROR, F("Failed to start IMU"));
     }
 
     if(barometer.begin()) {
+        String alt = String(barometer.getAltitude());
+        String temp = String(barometer.getTemperature());
         logging.log(S_SETUP, LOG_SUCCESS, F("Barometer Started"));
+        logging.log(S_SETUP, LOG_INFO, "BAROMETER alt(" + alt + ") temp(" + temp + ")");
     } else {
         logging.log(S_SETUP, LOG_ERROR, F("Failed to start Barometer"));
     }
@@ -84,20 +91,8 @@ void setup() {
 
     logging.log(S_SETUP, LOG_INFO, F("Sensors started"));
 
-    imu.updatePosition();
-    String x = String(imu.getAccelerometerX());
-    String y = String(imu.getAccelerometerY());
-    logging.log(S_SETUP, LOG_INFO, "IMU x(" + x + ") y(" + y + ")");
-
-    String alt = String(barometer.getAltitude());
-    String temp = String(barometer.getTemperature());
-    logging.log(S_SETUP, LOG_INFO, "BAROMETER alt(" + alt + ") temp(" + temp + ")");
-    logging.log(S_SETUP, LOG_SUCCESS, F("All sensors started"));
-
     servoX.attach(servoXPin);
     servoY.attach(servoYPin);
-
-    // default position
     servoX.write(90);
     servoY.write(90);
 
