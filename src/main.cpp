@@ -155,14 +155,16 @@ void mainEngineIgnition() {
 }
 
 void launch() {
-    int maxAltitude = 0;
+    int maxAltitude = 0, currentAltitude = 0;
+    float rawX, rawY;
+
     barometer.saveGroundAltitude();
 
     logging.log(S_LAUNCH, LOG_INFO, F("Main engine ignite"));
     mainEngineIgnition();
-    logging.log(S_LAUNCH, LOG_INFO, F("Liftoff"));
 
-    float rawX, rawY;
+    while (static_cast<int>(barometer.getGroundDistance()) < 1);
+    logging.log(S_LAUNCH, LOG_INFO, F("Liftoff"));
 
     // wait engine cut off
     while(engineIsOn()) {
@@ -177,7 +179,7 @@ void launch() {
     logging.log(S_LAUNCH, LOG_INFO, F("Main engine cut off"));
 
     while(true) {
-        int currentAltitude = static_cast<int>(barometer.getGroundDistance());
+        currentAltitude = barometer.getGroundDistance();
         if(currentAltitude >= maxAltitude) {
             maxAltitude = currentAltitude;
         } else {
