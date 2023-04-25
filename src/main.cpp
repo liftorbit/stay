@@ -156,7 +156,7 @@ void mainEngineIgnition() {
 
 void launch() {
     int maxAltitude = 0, currentAltitude = 0;
-    float rawX, rawY;
+    float rawX, rawY, maxSpeed, temperature;
 
     barometer.saveGroundAltitude();
 
@@ -176,6 +176,10 @@ void launch() {
         servoY.write(imu.convertAxesToServoTuning(rawY));
     }
 
+    // colecting data
+    maxSpeed = barometer.getAverageSpeed(500);
+    temperature = barometer.getTemperature();
+
     logging.log(S_LAUNCH, LOG_INFO, F("Main engine cut off"));
 
     while(true) {
@@ -187,10 +191,9 @@ void launch() {
         }
     }
 
-    float temperature = barometer.getTemperature();
-
     logging.log(S_LAUNCH, LOG_INFO, "Temperature: " + String(temperature) + " °C");
     logging.log(S_LAUNCH, LOG_INFO, "Max altitude: " + String(maxAltitude) + " m");
+    logging.log(S_LAUNCH, LOG_INFO, "Max speed: " + String(maxSpeed) + " m/s");
 }
 
 void loop() {
