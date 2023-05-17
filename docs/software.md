@@ -29,3 +29,5 @@ A telemetria de dados e a manipulação do controle vetorial de empuxo devem oco
 
 1. Após a ignição do motor, uma thread é criada para enviar dados 10 vezes por segundos de telemetria do foguete e a thread principal é utilizada para manipular o controle vetorial de empuxo.
 2. Após o desligamento do motor principal, o controle vetorial de empuxo é desligado e a telemetria passa a trabalhar na thread principal enviando dados (incluindo localização) 2 vezes por segundo.
+
+> Caso o sensor infravermelho que detecta o funcionamento do motor falhe, os dados de localização serão enviados se for detectado uma queda de altitude.
