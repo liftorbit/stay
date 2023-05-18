@@ -8,6 +8,7 @@ A telemetria de dados é feita utilizando um módulo de rádio frequência de 43
 
 - Localização via GPS
 - Status do motor
+- Temperatura
 - Aceleração
 - Altitude
 - Pressão
