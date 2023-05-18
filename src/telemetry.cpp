@@ -18,3 +18,7 @@ void Telemetry::send(String message) {
 bool Telemetry::dataAvailable() {
     return ConnSerial.available() > 0;
 };
+
+String Telemetry::receive() {
+    return ConnSerial.readString();
+};
