@@ -24,6 +24,10 @@ As etapas de lançamento são as ações que o foguete realiza antes do lançame
 4. `LAUNCH`: Inicialização do motor, controle vetorial de empuxo e telemetria.
 5. `MECO`: Desligamento do Motor Principal (Main Engine Cut Off).
 
+### Etapa `SETUP`
+
+Sendo a primeira etapa após a inicialização do foguete, ela é responsável por preparar e obter dados de teste dos sensores instalados, como barômetro, acelerômetro e infravermelho. Os testes e registros obtidos são enviados para a base e o computador de bordo aguarda a autorização de lançamento.
+
 ### Etapa `LAUNCH`
 
 Todas as etapas são simples até a decolagem, onde é requerido um bom gerenciamento de tempo e de ordem na coleta de dados e controle do foguete. Nesta etapa, 03 coisas devem acontecer:
