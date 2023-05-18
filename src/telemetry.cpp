@@ -10,3 +10,7 @@ HardwareSerial ConnSerial(1);
 void Telemetry::begin() {
     ConnSerial.begin(9600);
 };
+
+void Telemetry::send(String message) {
+    ConnSerial.println(message);
+};
