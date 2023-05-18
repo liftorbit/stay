@@ -22,10 +22,10 @@
 class Telemetry {
     public:
         /**
-         * @brief Connect to base.
+         * @brief Start serial communication
          * 
          */
-        void connect();
+        void begin();
 
         /**
          * @brief Send messages to base via RF.
