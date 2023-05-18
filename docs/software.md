@@ -2,6 +2,18 @@
 
 Esta documentação explica em detalhes o funcionamento do código que será utilizado no computador de bordo do foguete.
 
+## Telemetria
+
+A telemetria de dados é feita utilizando um módulo de rádio frequência de 433mhz, alcançando no máximo 1km em área aberta. Os dados transmitidos serão:
+
+- Localização via GPS
+- Status do motor
+- Aceleração
+- Altitude
+- Pressão
+
+A base que recebe esses dados pode calcular a **velocidade média** do foguete utilizando a altitude.
+
 ## Etapas de lançamento
 
 As etapas de lançamento são as ações que o foguete realiza antes do lançamento, durante o voo e pouso. Essas etapas incluem verificações, autorizações, e coleta de dados.
@@ -17,11 +29,6 @@ As etapas de lançamento são as ações que o foguete realiza antes do lançame
 Todas as etapas são simples até a decolagem, onde é requerido um bom gerenciamento de tempo e de ordem na coleta de dados e controle do foguete. Nesta etapa, 03 coisas devem acontecer:
 
 - Telemetria de dados
-  - Localização via GPS (começa a ser enviado após o desligamento do motor principal)
-  - Status do motor
-  - Aceleração
-  - Altitude
-  - Pressão
 - Registro de ações realizadas pelo foguete (logging)
 - Manipular o controle vetorial de empuxo enquanto o motor está ligado
 
