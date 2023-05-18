@@ -25,8 +25,9 @@ class Barometer {
         bool begin();
 
         float getAltitude();
-        float getGroundDistance();
+        float getPressure();
         float getTemperature();
+        float getGroundDistance();
         float getAverageSpeed(int periodOfTime);
 
         void saveGroundAltitude();

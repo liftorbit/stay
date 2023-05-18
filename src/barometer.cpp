@@ -36,6 +36,10 @@ float Barometer::getAltitude() {
     return bmp280.readAltitude(1013.25);
 };
 
+float Barometer::getPressure() {
+    return bmp280.readPressure();
+};
+
 float Barometer::getTemperature() {
     return bmp280.readTemperature();
 };
