@@ -14,3 +14,7 @@ void Telemetry::begin() {
 void Telemetry::send(String message) {
     ConnSerial.println(message);
 };
+
+bool Telemetry::dataAvailable() {
+    return ConnSerial.available() > 0;
+};
