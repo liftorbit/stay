@@ -136,7 +136,6 @@ void setup() {
         launch();
     } else if(launchAuth == "RLU") {
         logging.log(S_SETUP, LOG_INFO, F("Launch not authorized, restarting"));
-        delay(1000);
         ESP.restart();
     }
 };
