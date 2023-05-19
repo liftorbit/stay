@@ -16,10 +16,11 @@
 
 #include <Arduino.h>
 #include <Servo.h>
-#include "logging.h"
+
+#include "telemetry.h"
 #include "barometer.h"
+#include "logging.h"
 #include "imu.h"
-#include "rcs.h"
 
 const int statusLedPin = 25;
 const int flameSensorPin = 35;
@@ -28,9 +29,9 @@ const int mainEngineIgnitionPin = 26;
 const int servoXPin = 2;
 const int servoYPin = 32;
 
-RCS rcs;
 IMU imu;
 Logging logging;
+Telemetry telemetry;
 Barometer barometer;
 
 Servo servoX;
@@ -57,11 +58,12 @@ void setup() {
     pinMode(flameSensorPin, INPUT);
 
     logging.log(S_SETUP, LOG_INFO, F("Pin mode defined"));
-    logging.log(S_SETUP, LOG_WAIT, F("Wait RCS connection..."));
+    logging.log(S_SETUP, LOG_WAIT, F("Wait base connection..."));
 
-    String logDate = rcs.begin();
+    telemetry.begin();
+    String logDate = telemetry.receive();
+
     logging.log(S_SETUP, LOG_INFO, "Computer startup in " + logDate);
-
     logging.log(S_SETUP, LOG_WAIT, F("Starting sensors..."));
 
     if(imu.begin()) {
@@ -99,11 +101,9 @@ void setup() {
     logging.log(S_SETUP, LOG_INFO, F("Servos attached"));
     logging.log(S_AUTH, LOG_WAIT, F("Wait launch authorization..."));
 
-    rcs.sendLogs();
+    telemetry.send(logging.getLog());
 
-    int launchAuth = rcs.waitAuthorization();
-
-    while(launchAuth == RCS_WITHOUT_DATA) {
+    while(!telemetry.dataAvailable()) {
         digitalWrite(statusLedPin, HIGH);
         delay(100);
         digitalWrite(statusLedPin, LOW);
@@ -112,16 +112,17 @@ void setup() {
         delay(100);
         digitalWrite(statusLedPin, LOW);
         delay(500);
-        launchAuth = rcs.waitAuthorization();
     }
 
-    if(launchAuth == LAUNCH_AUTHORIZED) {
+    String launchAuth = telemetry.receive();
+
+    if(launchAuth == "RLA") {
         logging.log(S_AUTH, LOG_INFO, F("Launch authorized. Countdown."));
 
         // rocket action sequence
         launchCountdown();
         launch();
-    } else if(launchAuth == RCS_DISCONNECTED || launchAuth == NO_AUTHORIZED) {
+    } else if(launchAuth == "RLU") {
         logging.log(S_SETUP, LOG_INFO, F("Launch not authorized, restarting"));
         delay(1000);
         ESP.restart();
