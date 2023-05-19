@@ -182,7 +182,7 @@ void launch() {
     servoY.detach();
 
     // colecting data
-    speed = barometer.getAverageSpeed(500);
+    speed = barometer.getAverageSpeed(100);
     temperature = barometer.getTemperature();
 
     while(true) {
