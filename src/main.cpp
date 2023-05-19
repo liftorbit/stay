@@ -37,7 +37,6 @@ Barometer barometer;
 Servo servoX;
 Servo servoY;
 
-void launchCountdown();
 bool engineIsOn();
 void mainEngineIgnition();
 void launch();
@@ -119,8 +118,21 @@ void setup() {
     if(launchAuth == "RLA") {
         logging.log(S_AUTH, LOG_INFO, F("Launch authorized. Countdown."));
 
-        // rocket action sequence
-        launchCountdown();
+        // 10 seconds countdown
+        for(int i = 0; i < 10; i++) {
+            if(!telemetry.dataAvailable()) {
+                digitalWrite(statusLedPin, HIGH);
+                delay(500);
+                digitalWrite(statusLedPin, LOW);
+                delay(500);
+            } else {
+                if(telemetry.receive() == "SLC") {
+                    logging.log(S_SETUP, LOG_INFO, F("Stop launch countdown (SLC). Restarting"));
+                    ESP.restart();
+                }
+            }
+        }
+
         launch();
     } else if(launchAuth == "RLU") {
         logging.log(S_SETUP, LOG_INFO, F("Launch not authorized, restarting"));
@@ -128,16 +140,6 @@ void setup() {
         ESP.restart();
     }
 };
-
-void launchCountdown() {
-    // 10 seconds countdown
-    for(int i = 0; i < 10; i++) {
-        digitalWrite(statusLedPin, HIGH);
-        delay(500);
-        digitalWrite(statusLedPin, LOW);
-        delay(500);
-    }
-}
 
 bool engineIsOn() {
     return !digitalRead(flameSensorPin);
