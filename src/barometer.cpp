@@ -21,10 +21,10 @@
 
 #include "barometer.h"
 
-const int BMP_SCL = 13;
-const int BMP_SDO = 12;
-const int BMP_SDA = 14;
-const int BMP_CSB = 27;
+const int BMP_SCL = 13; // SCK
+const int BMP_SDO = 12; // MISO
+const int BMP_SDA = 14; // MOSI
+const int BMP_CSB = 27; // CS
 
 Adafruit_BMP280 bmp280(BMP_CSB, BMP_SDA, BMP_SDO, BMP_SCL);
 
