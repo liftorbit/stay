@@ -173,6 +173,12 @@ void launch() {
         servoY.write(imu.convertAxesToServoTuning(rawY));
     }
 
+    // detach TVC servos
+    servoX.write(90);
+    servoY.write(90);
+    servoX.detach();
+    servoY.detach();
+
     // colecting data
     maxSpeed = barometer.getAverageSpeed(500);
     temperature = barometer.getTemperature();
