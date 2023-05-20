@@ -29,6 +29,8 @@ const int mainEngineIgnitionPin = 26;
 const int servoXPin = 2;
 const int servoYPin = 32;
 
+float imuAcce = 0;
+
 IMU imu;
 Logging logging;
 Telemetry telemetry;
@@ -163,10 +165,12 @@ void launch() {
 
     // wait main engine cut off
     while(engineIsOn()) {
-        // control TVC
         imu.updatePosition();
+        imuAcce = imu.getAccelerometerZ();
         rawX = imu.getAccelerometerX();
         rawY = imu.getAccelerometerY();
+
+        // control TVC
         servoX.write(imu.convertAxesToServoTuning(rawX));
         servoY.write(imu.convertAxesToServoTuning(rawY));
     }
