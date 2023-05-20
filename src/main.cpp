@@ -158,12 +158,9 @@ void launch() {
     float rawX, rawY;
 
     barometer.saveGroundAltitude();
-
-    logging.log(S_LAUNCH, LOG_INFO, F("Main engine ignite"));
     mainEngineIgnition();
 
-    while (static_cast<int>(barometer.getGroundDistance()) < 1);
-    logging.log(S_LAUNCH, LOG_INFO, F("Liftoff"));
+    logging.log(S_LAUNCH, LOG_INFO, F("Main engine ignition"));
 
     // wait main engine cut off
     while(engineIsOn()) {
