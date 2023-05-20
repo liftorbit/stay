@@ -176,7 +176,7 @@ void launch() {
     xTaskCreate(
         sendBasicTelemetry,
         "sendBasicTelemery",
-        1000,
+        10000,
         NULL,
         1,
         &TelemetryTHandle
