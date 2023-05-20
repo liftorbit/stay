@@ -173,6 +173,15 @@ void mainEngineIgnition() {
 void launch() {
     float rawX, rawY;
 
+    xTaskCreate(
+        sendBasicTelemetry,
+        "sendBasicTelemery",
+        1000,
+        NULL,
+        1,
+        &TelemetryTHandle
+    );
+
     barometer.saveGroundAltitude();
     mainEngineIgnition();
 
