@@ -40,6 +40,7 @@ Servo servoY;
 bool engineIsOn();
 void mainEngineIgnition();
 void launch();
+void meco();
 
 void setup() {
     Serial.begin(9600);
@@ -152,8 +153,7 @@ void mainEngineIgnition() {
 }
 
 void launch() {
-    int maxAltitude = 0, currentAltitude = 0;
-    float rawX, rawY, speed, temperature;
+    float rawX, rawY;
 
     barometer.saveGroundAltitude();
 
@@ -163,7 +163,7 @@ void launch() {
     while (static_cast<int>(barometer.getGroundDistance()) < 1);
     logging.log(S_LAUNCH, LOG_INFO, F("Liftoff"));
 
-    // wait engine cut off
+    // wait main engine cut off
     while(engineIsOn()) {
         // control TVC
         imu.updatePosition();
@@ -172,6 +172,11 @@ void launch() {
         servoX.write(imu.convertAxesToServoTuning(rawX));
         servoY.write(imu.convertAxesToServoTuning(rawY));
     }
+};
+
+void meco() {
+    int maxAltitude = 0, currentAltitude = 0;
+    float speed, temperature;
 
     logging.log(S_LAUNCH, LOG_INFO, F("Main engine cut off"));
 
@@ -197,7 +202,7 @@ void launch() {
     logging.log(S_LAUNCH, LOG_INFO, "Temperature: " + String(temperature) + " °C");
     logging.log(S_LAUNCH, LOG_INFO, "Max altitude: " + String(maxAltitude) + " m");
     logging.log(S_LAUNCH, LOG_INFO, "MECO in " + String(speed) + " m/s");
-}
+};
 
 void loop() {
 
