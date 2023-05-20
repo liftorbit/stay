@@ -39,6 +39,9 @@ Barometer barometer;
 Servo servoX;
 Servo servoY;
 
+TaskHandle_t TelemetryTHandle;
+
+void sendTelemetry();
 bool engineIsOn();
 void mainEngineIgnition();
 void launch();
@@ -144,6 +147,18 @@ void setup() {
         ESP.restart();
     }
 };
+
+void sendBasicTelemetry(void * pvParameters) {
+    float pressure, alt, temp;
+
+    for(;;) {
+        pressure = barometer.getPressure();
+        temp = barometer.getTemperature();
+        alt = barometer.getAltitude();
+        telemetry.telemetry(engineIsOn(), temp, alt, pressure, imuAcce);
+        delay(100);
+    }
+}
 
 bool engineIsOn() {
     return !digitalRead(flameSensorPin);
