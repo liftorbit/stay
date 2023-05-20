@@ -56,7 +56,7 @@ void setup() {
     }
 
     // setup status
-    logging.log(S_SETUP, LOG_INFO, F("STAY B Startup"));
+    logging.log(S_SETUP, LOG_INFO, F("STAY Startup"));
 
     pinMode(statusLedPin, OUTPUT);
     pinMode(mainEngineIgnitionPin, OUTPUT);
