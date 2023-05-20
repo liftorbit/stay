@@ -148,7 +148,6 @@ bool engineIsOn() {
 }
 
 void mainEngineIgnition() {
-    // waits for ignition and then disconnects the ignition pin
     digitalWrite(mainEngineIgnitionPin, HIGH);
     while(!engineIsOn());
     digitalWrite(mainEngineIgnitionPin, LOW);
