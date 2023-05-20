@@ -134,7 +134,9 @@ void setup() {
             }
         }
 
+        // launch steps
         launch();
+        meco();
     } else if(launchAuth == "RLU") {
         logging.log(S_SETUP, LOG_INFO, F("Launch not authorized, restarting"));
         ESP.restart();
