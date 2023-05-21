@@ -44,3 +44,12 @@ O módulo adaptador para cartão MicroSD é necessário para salvar registros im
 - MOSI **->** G23
 - SCK **->** G18
 - CS **->** G5
+
+### Servos motores 9g
+
+Os servos motores são responsáveis por controlar o empuxo vetorial do foguete (TVC). Para isso, dois servos motores são utilizados.
+
+- VCC **->** 5v (alimentação externa)
+- GND **->** GND externo e GND ESP32
+- Servo 01 (eixo X) **->** G2
+- Servo 02 (eixo Y) **->** G32
