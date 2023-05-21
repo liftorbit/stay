@@ -53,3 +53,10 @@ Os servos motores são responsáveis por controlar o empuxo vetorial do foguete 
 - GND **->** GND externo e GND ESP32
 - Servo 01 (eixo X) **->** G2
 - Servo 02 (eixo Y) **->** G32
+
+### Sensor infravermelho
+
+O sensor infravermelho é responsável por informar ao computador de bordo se o motor está ligado ou desligado.
+
+- VCC **->** 5v
+- D0 **->** G35
