@@ -13,6 +13,8 @@ Esta documentação explica em detalhes o funcionamento e as conexões de sensor
 
 Atualmente, todos esses componentes resulta no valor de aproximadamente R$ 163 em sites estrangeiros.
 
+Além de sensores e servos motores, o pino `G26` do ESP32 é reservado para realizar a **ignição do motor principal**. Já o pino `G25` irá alimentar um LED para indicação dos status do computador.
+
 ## Manual de conexão dos componentes
 
 Para que o manual funcione corretamente, todos os componentes devem ser iguais aos listados na lista, evitando problemas de comunicação ou até danos ao componente.
