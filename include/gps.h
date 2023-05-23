@@ -23,8 +23,26 @@ class GPS {
         float lat, lon;
     
     public:
+        /**
+         * @brief Starts connection with GPS module.
+         */
         void begin();
+
+        /**
+         * @brief Update latitude and longitude.
+         * 
+         */
         void update();
+
+        /**
+         * @brief Get the latitiude.
+         * @return float 
+         */
         float getLat();
+        
+        /**
+         * @brief Get the longitude.
+         * @return float 
+         */
         float getLon();
 };
