@@ -16,6 +16,7 @@
 
 #ifndef TELEMETRY_h
 #define TELEMETRY_h
+#endif
 
 #include <Arduino.h>
 
@@ -73,5 +74,3 @@ class Telemetry {
          */
         String receive();
 };
-
-#endif TELEMETRY_h
