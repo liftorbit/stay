@@ -20,7 +20,10 @@ bool Telemetry::dataAvailable() {
 };
 
 String Telemetry::receive() {
-    return ConnSerial.readString();
+    String data = ConnSerial.readString();
+    data.trim();
+
+    return data;
 };
 
 void Telemetry::telemetry(bool engine, float temp, float alt, float ps, float acce, float lat, float lon) {
