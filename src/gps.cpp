@@ -22,3 +22,11 @@ void GPS::update() {
         }
     }
 };
+
+double GPS::getLat() {
+    return this->lat;
+};
+
+double GPS::getLon() {
+    return this->lon;
+};
