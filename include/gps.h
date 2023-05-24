@@ -20,7 +20,7 @@
 
 class GPS {
     private:
-        float lat, lon;
+        double lat, lon;
     
     public:
         /**
