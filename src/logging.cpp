@@ -37,7 +37,6 @@ void Logging::log(int status, int type, String message) {
     File log = SD.open(filename, FILE_APPEND);
 
     String rawLogMsg = String(status) + "," + type + "," + message;
-    Serial.println(rawLogMsg);
     log.println(rawLogMsg);
     log.close();
 };
