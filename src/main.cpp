@@ -133,6 +133,9 @@ void setup() {
                 delay(500);
             } else {
                 if(telemetry.receive() == "SLC") {
+                    digitalWrite(statusLedPin, HIGH);
+                    delay(1000);
+                    digitalWrite(statusLedPin, LOW);
                     logging.log(S_SETUP, LOG_INFO, F("Stop launch countdown (SLC). Restarting"));
                     ESP.restart();
                 }
