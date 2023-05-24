@@ -5,7 +5,7 @@
 const int serialRX = 16;
 const int serialTX = 17;
 
-HardwareSerial ConnSerial(1);
+HardwareSerial ConnSerial(0);
 
 void Telemetry::begin() {
     ConnSerial.begin(9600);
@@ -16,7 +16,7 @@ void Telemetry::send(String message) {
 };
 
 bool Telemetry::dataAvailable() {
-    return ConnSerial.available() > 0;
+    return ConnSerial.available() != 0;
 };
 
 String Telemetry::receive() {
