@@ -36,13 +36,13 @@ class GPS {
 
         /**
          * @brief Get the latitiude.
-         * @return float 
+         * @return double 
          */
-        float getLat();
+        double getLat();
         
         /**
          * @brief Get the longitude.
-         * @return float 
+         * @return double 
          */
-        float getLon();
+        double getLon();
 };
