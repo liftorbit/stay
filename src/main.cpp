@@ -229,6 +229,8 @@ void meco() {
         } else {
             break;
         }
+
+        delay(100);
     }
 
     logging.log(S_LAUNCH, LOG_INFO, "Temperature: " + String(temperature) + " °C");
