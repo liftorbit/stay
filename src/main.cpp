@@ -29,8 +29,6 @@ const int mainEngineIgnitionPin = 26;
 const int servoXPin = 2;
 const int servoYPin = 32;
 
-float imuAcce = 0;
-
 IMU imu;
 Logging logging;
 Telemetry telemetry;
@@ -152,13 +150,15 @@ void setup() {
 };
 
 void sendBasicTelemetry(void * pvParameters) {
-    float pressure, alt, temp;
+    float pressure, alt, temp, accel;
 
     for(;;) {
+        imu.updatePosition();
         pressure = barometer.getPressure();
+        accel = imu.getAccelerometerZ();
         temp = barometer.getTemperature();
         alt = barometer.getAltitude();
-        telemetry.telemetry(engineIsOn(), temp, alt, pressure, imuAcce);
+        telemetry.telemetry(engineIsOn(), temp, alt, pressure, accel);
         delay(100);
     }
 }
@@ -193,7 +193,6 @@ void launch() {
     // wait main engine cut off
     while(engineIsOn()) {
         imu.updatePosition();
-        imuAcce = imu.getAccelerometerZ();
         rawX = imu.getAccelerometerX();
         rawY = imu.getAccelerometerY();
 
