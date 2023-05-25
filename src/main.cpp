@@ -209,6 +209,9 @@ void meco() {
 
     logging.log(S_LAUNCH, LOG_INFO, F("Main engine cut off"));
 
+    // delete basic telemetry task
+    vTaskDelete(TelemetryTHandle);
+
     // detach TVC servos
     servoX.write(90);
     servoY.write(90);
@@ -231,9 +234,6 @@ void meco() {
     logging.log(S_LAUNCH, LOG_INFO, "Temperature: " + String(temperature) + " °C");
     logging.log(S_LAUNCH, LOG_INFO, "Max altitude: " + String(maxAltitude) + " m");
     logging.log(S_LAUNCH, LOG_INFO, "MECO in " + String(speed) + " m/s");
-
-    // delete basic telemetry task
-    vTaskDelete(TelemetryTHandle);
 };
 
 void loop() {
