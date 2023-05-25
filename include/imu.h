@@ -22,14 +22,50 @@ class IMU {
         float ax, ay, az;
 
     public:
+        /**
+         * @brief Begin BMI160 IMU.
+         * @return true 
+         * @return false 
+         */
         bool begin();
+
+        /**
+         * @brief Update X, Y and Z position.
+         */
         void updatePosition();
 
+        /**
+         * @brief Get the accelerometer X axis.
+         * @return float 
+         */
         float getAccelerometerX();
+
+        /**
+         * @brief Get the accelerometer Y axis.
+         * @return float 
+         */
         float getAccelerometerY();
+
+        /**
+         * @brief Get the accelerometer Z axis.
+         * @return float 
+         */
         float getAccelerometerZ();
+
+        /**
+         * @brief Convert IMU raw data to acceleration in m/s.
+         * 
+         * @param rawData Sensor raw data
+         * @return float 
+         */
         float convertRaw(int rawData);
 
+        /**
+         * @brief Convert axis to servo angle.
+         * 
+         * @param axis X, Y or Z angle
+         * @return int 
+         */
         int convertAxesToServoTuning(float axis);
 };
 

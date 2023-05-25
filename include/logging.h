@@ -35,9 +35,26 @@ class Logging {
         String fileLog;
 
     public:
+        /**
+         * @brief Begin SD card module and log file.
+         * @return true 
+         * @return false 
+         */
         bool begin();
+
+        /**
+         * @brief Log a information.
+         * 
+         * @param status Rocket status
+         * @param type Log type
+         * @param message Log message
+         */
         void log(int status, int type, String message);
 
+        /**
+         * @brief Get the log file.
+         * @return String 
+         */
         String getLog();
 };
 

@@ -22,14 +22,49 @@ class Barometer {
         float groundAltitude;
 
     public:
+        /**
+         * @brief Begin BMP280 barometer.
+         * @return true 
+         * @return false 
+         */
         bool begin();
 
+        /**
+         * @brief Get the altitude from barometer.
+         * @return float 
+         */
         float getAltitude();
+
+        /**
+         * @brief Get the pressure from barometer.
+         * @return float 
+         */
         float getPressure();
+
+        /**
+         * @brief Get the temperature from barometer.
+         * @return float 
+         */
         float getTemperature();
+
+        /**
+         * @brief Get the ground distance.
+         * @return float 
+         */
         float getGroundDistance();
+
+        /**
+         * @brief Get the average speed.
+         * 
+         * @param periodOfTime Time to perform the measurement.
+         * @return float 
+         */
         float getAverageSpeed(int periodOfTime);
 
+        /**
+         * @brief Save ground altitude. This data is
+         * used to get ground distance.
+         */
         void saveGroundAltitude();
 };
 
