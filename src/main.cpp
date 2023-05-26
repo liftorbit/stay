@@ -21,6 +21,7 @@
 #include "barometer.h"
 #include "logging.h"
 #include "imu.h"
+#include "gps.h"
 
 const int statusLedPin = 25;
 const int flameSensorPin = 35;
@@ -30,6 +31,7 @@ const int servoXPin = 2;
 const int servoYPin = 32;
 
 IMU imu;
+GPS gps;
 Logging logging;
 Telemetry telemetry;
 Barometer barometer;
@@ -39,7 +41,8 @@ Servo servoY;
 
 TaskHandle_t TelemetryTHandle;
 
-void sendTelemetry();
+void sendBasicTelemetry();
+void sendAdvancedTelemetry();
 bool engineIsOn();
 void mainEngineIgnition();
 void launch();
@@ -160,6 +163,26 @@ void sendBasicTelemetry(void * pvParameters) {
         temp = barometer.getTemperature();
         alt = barometer.getAltitude();
         telemetry.telemetry(engineIsOn(), temp, alt, pressure, accel);
+        delay(100);
+    }
+}
+
+void sendAdvancedTelemetry(void * pvParameters) {
+    float pressure, alt, temp, accel;
+    float lat, lon;
+
+    for(;;) {
+        gps.update()
+        imu.updatePosition();
+
+        pressure = barometer.getPressure();
+        accel = imu.getAccelerometerZ();
+        temp = barometer.getTemperature();
+        alt = barometer.getAltitude();
+        lat = gps.getLat();
+        lon = gps.getLon();
+
+        telemetry.telemetry(engineIsOn(), temp, alt, pressure, accel, lat, lon);
         delay(100);
     }
 }
