@@ -30,6 +30,11 @@ bool Logging::begin(String filename) {
     }
 
     this->fileLog = "/" + filename + ".log";
+
+    if(SD.exists(this->getFilename())) {
+        SD.remove(this->getFilename());
+    }
+
     return true;
 };
 
