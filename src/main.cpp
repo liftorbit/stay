@@ -46,11 +46,18 @@ void launch();
 void meco();
 
 void setup() {
+    pinMode(statusLedPin, OUTPUT);
+    pinMode(mainEngineIgnitionPin, OUTPUT);
+    pinMode(flameSensorPin, INPUT);
+
     telemetry.begin();
     telemetry.send("STAY Startup");
 
     while(!telemetry.dataAvailable()) {
-        delay(500);
+        digitalWrite(statusLedPin, HIGH);
+        delay(250);
+        digitalWrite(statusLedPin, LOW);
+        delay(250);
     }
 
     String logDate = telemetry.receive();
@@ -61,13 +68,6 @@ void setup() {
     }
 
     logging.log(S_SETUP, LOG_INFO, F("STAY Startup"));
-    logging.log(S_SETUP, LOG_INFO, "Computer startup in " + logDate);
-
-    pinMode(statusLedPin, OUTPUT);
-    pinMode(mainEngineIgnitionPin, OUTPUT);
-    pinMode(flameSensorPin, INPUT);
-
-    logging.log(S_SETUP, LOG_INFO, F("Pin mode defined"));
     logging.log(S_SETUP, LOG_WAIT, F("Starting sensors..."));
 
     if(imu.begin()) {
