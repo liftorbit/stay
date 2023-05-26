@@ -55,18 +55,22 @@ void setup() {
 
     // setup status
     logging.log(S_SETUP, LOG_INFO, F("STAY Startup"));
+    logging.log(S_SETUP, LOG_WAIT, F("Wait startup date..."));
+
+    telemetry.begin();
+
+    while(!telemetry.dataAvailable()) {
+        delay(500);
+    }
+
+    String logDate = telemetry.receive();
+    logging.log(S_SETUP, LOG_INFO, "Computer startup in " + logDate);
 
     pinMode(statusLedPin, OUTPUT);
     pinMode(mainEngineIgnitionPin, OUTPUT);
     pinMode(flameSensorPin, INPUT);
 
     logging.log(S_SETUP, LOG_INFO, F("Pin mode defined"));
-    logging.log(S_SETUP, LOG_WAIT, F("Wait base connection..."));
-
-    telemetry.begin();
-    String logDate = telemetry.receive();
-
-    logging.log(S_SETUP, LOG_INFO, "Computer startup in " + logDate);
     logging.log(S_SETUP, LOG_WAIT, F("Starting sensors..."));
 
     if(imu.begin()) {
