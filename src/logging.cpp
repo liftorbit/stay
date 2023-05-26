@@ -20,6 +20,8 @@
 #include <FS.h>
 #include "logging.h"
 
+char filename[12];
+
 bool Logging::begin(String filename) {
     if(!SD.begin(5)) {
         return false;
@@ -32,20 +34,21 @@ bool Logging::begin(String filename) {
 };
 
 void Logging::log(int status, int type, String message) {
-    char filename[this->fileLog.length()];
-    this->fileLog.toCharArray(filename, this->fileLog.length());
-    File log = SD.open(filename, FILE_APPEND);
-
+    File log = SD.open(this->getFilename(), FILE_APPEND);
     String rawLogMsg = String(status) + "," + type + "," + message;
+
     log.println(rawLogMsg);
     log.close();
 };
 
 String Logging::getLog() {
-    char filename[this->fileLog.length()];
-    this->fileLog.toCharArray(filename, this->fileLog.length());
-    File log = SD.open(filename, FILE_READ);
+    File log = SD.open(this->getFilename(), FILE_READ);
     String logs = log.readString();
     log.close();
     return logs;
 };
+
+char* Logging::getFilename() {
+    this->fileLog.toCharArray(filename, 12);
+    return filename;
+}

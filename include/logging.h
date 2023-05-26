@@ -34,6 +34,12 @@ class Logging {
     private:
         String fileLog;
 
+        /**
+         * @brief Get the log file name.
+         * @return char 
+         */
+        char* getFilename();
+
     public:
         /**
          * @brief Begin SD card module and log file.
