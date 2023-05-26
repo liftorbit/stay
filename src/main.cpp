@@ -46,24 +46,21 @@ void launch();
 void meco();
 
 void setup() {
-    Serial.begin(9600);
-
-    if(!logging.begin()) {
-        Serial.println(F("Logging not started"));
-        while(true);
-    }
-
-    // setup status
-    logging.log(S_SETUP, LOG_INFO, F("STAY Startup"));
-    logging.log(S_SETUP, LOG_WAIT, F("Wait startup date..."));
-
     telemetry.begin();
+    telemetry.send("STAY Startup");
 
     while(!telemetry.dataAvailable()) {
         delay(500);
     }
 
     String logDate = telemetry.receive();
+
+    if(!logging.begin(logDate)) {
+        telemetry.send("Error to start logging");        
+        while(true);
+    }
+
+    logging.log(S_SETUP, LOG_INFO, F("STAY Startup"));
     logging.log(S_SETUP, LOG_INFO, "Computer startup in " + logDate);
 
     pinMode(statusLedPin, OUTPUT);
