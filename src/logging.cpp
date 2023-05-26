@@ -20,14 +20,14 @@
 #include <FS.h>
 #include "logging.h"
 
-bool Logging::begin() {
+bool Logging::begin(String filename) {
     if(!SD.begin(5)) {
         return false;
     } else if(SD.cardType() == CARD_NONE) {
         return false;
     }
 
-    this->fileLog = "/" + String(random(10000, 99999)) + ".log";
+    this->fileLog = "/" + filename + ".log";
     return true;
 };
 

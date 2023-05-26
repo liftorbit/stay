@@ -40,7 +40,7 @@ class Logging {
          * @return true 
          * @return false 
          */
-        bool begin();
+        bool begin(String filename);
 
         /**
          * @brief Log a information.
