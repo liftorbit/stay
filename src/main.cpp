@@ -99,6 +99,11 @@ void setup() {
     }
 
     logging.log(S_SETUP, LOG_INFO, F("Sensors started"));
+    logging.log(S_SETUP, LOG_WAIT, F("Starting GPS..."));
+
+    gps.begin();
+
+    logging.log(S_SETUP, LOG_INFO, F("GPS started"));
 
     servoX.attach(servoXPin);
     servoY.attach(servoYPin);
