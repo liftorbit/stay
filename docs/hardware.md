@@ -6,6 +6,7 @@ Esta documentação explica em detalhes o funcionamento e as conexões de sensor
 - BMP280 (barômetro)
 - BMI180 (acelerômetro/giroscópio)
 - HC-12 SI4463 (transmissão wireless)
+- NEO6M (módulo GPS)
 - Módulo cartão MicroSD
 - Sensor infravermelho
 - Booster DC-DC (MT3608)
@@ -62,3 +63,11 @@ O sensor infravermelho é responsável por informar ao computador de bordo se o 
 
 - VCC **->** 5v
 - D0 **->** G35
+
+### GPS (neo-6m)
+
+O módulo de GPS NEO6M fornece dados da localização do foguete após o desligamento do motor principal. O protocolo de comunicação utilizado é UART.
+
+- VCC **->** 5v
+- RX  **->** G15 ESP
+- TX  **->** G04 ESP
