@@ -177,7 +177,7 @@ void sendAdvancedTelemetry(void * pvParameters) {
     float lat, lon;
 
     for(;;) {
-        gps.update()
+        gps.update();
         imu.updatePosition();
 
         pressure = barometer.getPressure();
