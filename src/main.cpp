@@ -163,10 +163,12 @@ void sendBasicTelemetry(void * pvParameters) {
 
     for(;;) {
         imu.updatePosition();
-        pressure = barometer.getPressure();
         accel = imu.getAccelerometerZ();
+
+        pressure = barometer.getPressure();
         temp = barometer.getTemperature();
-        alt = barometer.getAltitude();
+        alt = barometer.getGroundDistance();
+
         telemetry.telemetry(engineIsOn(), temp, alt, pressure, accel);
         delay(100);
     }
