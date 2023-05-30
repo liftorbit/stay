@@ -204,6 +204,7 @@ void mainEngineIgnition() {
 
 void launch() {
     float rawX, rawY;
+    barometer.saveGroundAltitude();
 
     xTaskCreate(
         sendBasicTelemetry,
@@ -214,7 +215,6 @@ void launch() {
         &TelemetryTHandle
     );
 
-    barometer.saveGroundAltitude();
     mainEngineIgnition();
 
     logging.log(S_LAUNCH, LOG_INFO, F("Main engine ignition"));
