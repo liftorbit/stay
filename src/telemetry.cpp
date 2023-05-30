@@ -32,8 +32,8 @@ void Telemetry::telemetry(bool engine, float temp, float alt, float ps, float ac
     String sAlt = String(alt);
     String sPs = String(ps);
     String sAcce = String(acce);
-    String sLat = String(lat);
-    String sLon = String(lon);
+    String sLat = String(lat, 5);
+    String sLon = String(lon, 5);
 
     String dataList[7] = {sEng, sTemp, sAlt, sPs, sAcce, sLat, sLon};
     String fullData = "";
