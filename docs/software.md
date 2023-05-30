@@ -12,7 +12,7 @@ A telemetria de dados é feita utilizando um módulo de rádio frequência de 43
 - Status do motor
 - Temperatura
 - Aceleração
-- Altitude
+- Altitude (em relação ao chão)
 - Pressão
 
 A base que recebe esses dados pode calcular a **velocidade média** do foguete utilizando a altitude.
