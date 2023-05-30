@@ -178,21 +178,18 @@ void sendAdvancedTelemetry(void * pvParameters) {
     float pressure, alt, temp, accel;
     float lat, lon;
 
-    for(;;) {
-        gps.update();
-        lat = gps.getLat();
-        lon = gps.getLon();
+    gps.update();
+    lat = gps.getLat();
+    lon = gps.getLon();
 
-        imu.updatePosition();
-        accel = imu.getAccelerometerZ();
+    imu.updatePosition();
+    accel = imu.getAccelerometerZ();
 
-        pressure = barometer.getPressure();
-        temp = barometer.getTemperature();
-        alt = barometer.getGroundDistance();
+    pressure = barometer.getPressure();
+    temp = barometer.getTemperature();
+    alt = barometer.getGroundDistance();
 
-        telemetry.telemetry(engineIsOn(), temp, alt, pressure, accel, lat, lon);
-        delay(100);
-    }
+    telemetry.telemetry(engineIsOn(), temp, alt, pressure, accel, lat, lon);
 }
 
 bool engineIsOn() {
