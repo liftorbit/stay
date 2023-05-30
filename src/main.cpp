@@ -54,7 +54,6 @@ void setup() {
     pinMode(flameSensorPin, INPUT);
 
     telemetry.begin();
-    telemetry.send("STAY Startup");
 
     while(!telemetry.dataAvailable()) {
         digitalWrite(statusLedPin, HIGH);
