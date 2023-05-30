@@ -175,7 +175,7 @@ void sendBasicTelemetry(void * pvParameters) {
 
 void sendAdvancedTelemetry(void * pvParameters) {
     float pressure, alt, temp, accel;
-    float lat, lon;
+    double lat, lon;
 
     gps.update();
     lat = gps.getLat();
