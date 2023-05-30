@@ -180,14 +180,15 @@ void sendAdvancedTelemetry(void * pvParameters) {
 
     for(;;) {
         gps.update();
-        imu.updatePosition();
-
-        pressure = barometer.getPressure();
-        accel = imu.getAccelerometerZ();
-        temp = barometer.getTemperature();
-        alt = barometer.getAltitude();
         lat = gps.getLat();
         lon = gps.getLon();
+
+        imu.updatePosition();
+        accel = imu.getAccelerometerZ();
+
+        pressure = barometer.getPressure();
+        temp = barometer.getTemperature();
+        alt = barometer.getGroundDistance();
 
         telemetry.telemetry(engineIsOn(), temp, alt, pressure, accel, lat, lon);
         delay(100);
