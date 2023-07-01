@@ -173,7 +173,7 @@ void sendBasicTelemetry(void * pvParameters) {
     }
 }
 
-void sendAdvancedTelemetry(void * pvParameters) {
+void sendAdvancedTelemetry() {
     float pressure, alt, temp, accel;
     double lat, lon;
 
