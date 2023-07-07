@@ -56,9 +56,9 @@ void setup() {
     telemetry.begin();
 
     while(true) {
-        if(!telemetry.dataAvailable()) {
-            telemetry.send("SCS");
+        telemetry.send("SCS");
 
+        if(!telemetry.dataAvailable()) {
             digitalWrite(statusLedPin, HIGH);
             delay(250);
             digitalWrite(statusLedPin, LOW);
@@ -66,6 +66,8 @@ void setup() {
         } else if(telemetry.receive() == "BCS") {
             break;
         }
+
+        delay(1000);
     }
 
     String logDate = telemetry.receive();
