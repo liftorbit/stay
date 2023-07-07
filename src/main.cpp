@@ -64,6 +64,9 @@ void setup() {
             digitalWrite(statusLedPin, LOW);
             delay(250);
         } else if(telemetry.receive() == "BCS") {
+            digitalWrite(statusLedPin, HIGH);
+            delay(500);
+            digitalWrite(statusLedPin, LOW);
             break;
         }
 
