@@ -57,13 +57,13 @@ void setup() {
 
     while(true) {
         if(!telemetry.dataAvailable()) {
-            telemetry.send('SCS');
+            telemetry.send("SCS");
 
             digitalWrite(statusLedPin, HIGH);
             delay(250);
             digitalWrite(statusLedPin, LOW);
             delay(250);
-        } else if(telemetry.receive() == 'BCS') {
+        } else if(telemetry.receive() == "BCS") {
             break;
         }
     }
