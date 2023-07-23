@@ -2,10 +2,8 @@
 #include <HardwareSerial.h>
 #include "telemetry.h"
 
-const int serialRX = 16;
-const int serialTX = 17;
-
-HardwareSerial ConnSerial(0);
+// RX16, TX17
+HardwareSerial ConnSerial(2);
 
 void Telemetry::begin() {
     ConnSerial.begin(9600);
