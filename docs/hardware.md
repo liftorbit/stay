@@ -14,7 +14,7 @@ Esta documentação explica em detalhes o funcionamento e as conexões de sensor
 
 Atualmente, todos esses componentes resulta no valor de aproximadamente R$ 163 em sites estrangeiros.
 
-Além de sensores e servos motores, o pino `G26` do ESP32 é reservado para realizar a **ignição do motor principal**. Já o pino `G25` irá alimentar um LED para indicação dos status do computador.
+Além de sensores e servos motores, o pino `G26` do ESP32 é reservado para realizar a **ignição do motor principal**. Já o pino `G25` irá alimentar um LED para indicação dos status do computador. Todos os componentes do projeto consomem, se usados ao máximo, 504.5 mA. Uma bateria de 9v com o dobro do necessário (1000mAh) é o suficiente para suprir todos os sistemas do foguete por mais ou menos 2 horas.
 
 ## Manual de conexão dos componentes
 
