@@ -191,22 +191,25 @@ void sendBasicTelemetry(void * pvParameters) {
     }
 }
 
-void sendAdvancedTelemetry() {
+void sendAdvancedTelemetry(void * pvParameters) {
     float pressure, alt, temp, accel;
     double lat, lon;
 
-    gps.update();
-    lat = gps.getLat();
-    lon = gps.getLon();
+    for(;;) {
+        gps.update();
+        lat = gps.getLat();
+        lon = gps.getLon();
 
-    imu.updatePosition();
-    accel = imu.getAccelerometerZ();
+        imu.updatePosition();
+        accel = imu.getAccelerometerZ();
 
-    pressure = barometer.getPressure();
-    temp = barometer.getTemperature();
-    alt = barometer.getGroundDistance();
+        pressure = barometer.getPressure();
+        temp = barometer.getTemperature();
+        alt = barometer.getGroundDistance();
 
-    telemetry.telemetry(engineIsOn(), temp, alt, pressure, accel, lat, lon);
+        telemetry.telemetry(engineIsOn(), temp, alt, pressure, accel, lat, lon);
+        delay(500);
+    }
 }
 
 bool engineIsOn() {
