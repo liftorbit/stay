@@ -2,8 +2,6 @@
 
 Esta documentação explica em detalhes o funcionamento do código que será utilizado no computador de bordo do foguete.
 
-TODO: Salvar status do foguete em caso de reiniciio
-
 ## Telemetria
 
 A telemetria de dados é feita utilizando um módulo de rádio frequência de 433mhz, alcançando no máximo 1km em área aberta. Os dados transmitidos serão:
