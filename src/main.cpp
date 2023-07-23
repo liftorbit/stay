@@ -260,6 +260,16 @@ void meco() {
     // delete basic telemetry task
     vTaskDelete(TelemetryTHandle);
 
+    // create advanced telemetry task
+    xTaskCreate(
+        sendAdvancedTelemetry,
+        "sendAdvancedTelemetry",
+        10000,
+        NULL,
+        1,
+        &TelemetryTHandle
+    );
+
     // detach TVC servos
     servoX.write(90);
     servoY.write(90);
@@ -284,11 +294,6 @@ void meco() {
     logging.log(S_LAUNCH, LOG_INFO, "Temperature: " + String(temperature) + " C");
     logging.log(S_LAUNCH, LOG_INFO, "Max altitude: " + String(maxAltitude) + " m");
     logging.log(S_LAUNCH, LOG_INFO, "MECO in " + String(speed) + " m/s");
-
-    while(true) {
-        sendAdvancedTelemetry();
-        delay(500);
-    }
 };
 
 void loop() {
