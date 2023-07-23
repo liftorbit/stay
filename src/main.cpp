@@ -49,6 +49,7 @@ void launch();
 void meco();
 
 void setup() {
+    Serial.begin(9600);
     pinMode(statusLedPin, OUTPUT);
     pinMode(mainEngineIgnitionPin, OUTPUT);
     pinMode(flameSensorPin, INPUT);
@@ -58,19 +59,25 @@ void setup() {
     while(true) {
         telemetry.send("SCS");
 
-        if(!telemetry.dataAvailable()) {
-            digitalWrite(statusLedPin, HIGH);
-            delay(250);
-            digitalWrite(statusLedPin, LOW);
-            delay(250);
-        } else if(telemetry.receive() == "BCS") {
+        for(int i = 0; i < 5; i++) {
+            if(!telemetry.dataAvailable()) {
+                digitalWrite(statusLedPin, HIGH);
+                delay(250);
+                digitalWrite(statusLedPin, LOW);
+                delay(250);
+            } else {
+                break;
+            }
+
+            delay(1000);
+        }
+
+        if(telemetry.dataAvailable() && telemetry.receive() == "BCS") {
             digitalWrite(statusLedPin, HIGH);
             delay(500);
             digitalWrite(statusLedPin, LOW);
             break;
         }
-
-        delay(1000);
     }
 
     String logDate = telemetry.receive();
