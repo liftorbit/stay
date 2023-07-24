@@ -11,6 +11,7 @@ Esta documentação explica em detalhes o funcionamento e as conexões de sensor
 - Sensor infravermelho
 - Booster DC-DC (MT3608)
 - 02 Servos motores 9g
+- Transceptor RF (HC12)
 
 Atualmente, todos esses componentes resulta no valor de aproximadamente R$ 163 em sites estrangeiros.
 
@@ -71,3 +72,11 @@ O módulo de GPS NEO6M fornece dados da localização do foguete após o desliga
 - VCC **->** 5v
 - RX  **->** G15 ESP
 - TX  **->** G04 ESP
+
+### Módulo RF (HC12)
+
+O módulo de Rádio Frequência HC12 transmite dados de telemetria do foguete durante o vôo, além de receber comandos para autorizações. O protocolo de comunicação utilizado é UART.
+
+- VCC **->** 5v
+- RX  **->** G17 ESP (UART 2 TX)
+- TX  **->** G16 ESP (UART 2 RX)
