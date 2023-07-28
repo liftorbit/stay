@@ -248,6 +248,7 @@ void launch() {
         // control TVC
         servoX.write(imu.convertAxesToServoTuning(rawX));
         servoY.write(imu.convertAxesToServoTuning(rawY));
+        delay(50);
     }
 };
 
