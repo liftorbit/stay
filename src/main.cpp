@@ -246,8 +246,8 @@ void launch() {
         rawY = imu.getAccelerometerY();
 
         // control TVC
-        servoX.write(imu.convertAxesToServoTuning(rawX));
-        servoY.write(imu.convertAxesToServoTuning(rawY));
+        servoX.write(imu.rawToServoAngle(rawX));
+        servoY.write(imu.rawToServoAngle(rawY));
         delay(50);
     }
 };
