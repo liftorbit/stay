@@ -57,7 +57,7 @@ void setup() {
     telemetry.begin();
 
     while(true) {
-        telemetry.send("SCS");
+        telemetry.send(F("SCS"));
 
         for(int i = 0; i < 5; i++) {
             if(!telemetry.dataAvailable()) {
@@ -72,7 +72,7 @@ void setup() {
             delay(1000);
         }
 
-        if(telemetry.dataAvailable() && telemetry.receive() == "BCS") {
+        if(telemetry.dataAvailable() && telemetry.receive() == F("BCS")) {
             digitalWrite(statusLedPin, HIGH);
             delay(500);
             digitalWrite(statusLedPin, LOW);
@@ -83,7 +83,7 @@ void setup() {
     String logDate = telemetry.receive();
 
     if(!logging.begin(logDate)) {
-        telemetry.send("Error to start logging");        
+        telemetry.send(F("Error to start logging"));        
         while(true);
     }
 
