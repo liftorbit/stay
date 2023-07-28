@@ -66,7 +66,7 @@ class IMU {
          * @param axis X, Y or Z angle
          * @return int 
          */
-        int convertAxesToServoTuning(float axis);
+        int rawToServoAngle(float axis);
 };
 
 #endif

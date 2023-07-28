@@ -49,7 +49,7 @@ float IMU::convertRaw(int rawData) {
     return accel;
 };
 
-int IMU::convertAxesToServoTuning(float axis) {
+int IMU::rawToServoAngle(float axis) {
     // degree angle
     float angle = asin(axis / 9.81) * 180 / PI;
     int servoAngle = map(angle, -90, 90, 0, 180);  
