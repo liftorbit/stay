@@ -13,6 +13,21 @@
 
 A missão do **STAY** é voar para testar o *Controle Vetorial de Empuxo* e coletar dados importantes durante o voo, utilizando diversos sensores localizados no foguete. Esses dados serão utilizados no desenvolvimento de **outros projetos**, melhorando a aerodinâmica e resistência durante o voo do foguete.
 
+## Detalhes técnicos
+
+O foguete STAY possui alguns detalhes técnicos relevantes sobre hardware e software. Outras informações sobre desempenho do foguete serão adicionadas após o primeiro lançamento.
+
+- Utilização de ESP32 como computador de bordo
+- Possui três sensores:
+  - Barômetro
+  - Acelerômetro/Giroscópio
+  - Sensor de chamas (para detectar de ignição)
+- Telemetria em tempo real
+- Localização do foguete durante o vôo
+- Possui controle vetorial de empuxo (TVC)
+
+Saiba mais sobre os detalhes técnicos do STAY acessando a [documentação do software](https://github.com/liftorbit/stay-rocket/blob/master/docs/software.md) ou a [documentação do hardware](https://github.com/liftorbit/stay-rocket/blob/master/docs/hardware.md).
+
 ## Licença
 
 ```
