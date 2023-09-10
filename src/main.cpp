@@ -254,7 +254,7 @@ void launch() {
 
 void meco() {
     int maxAltitude = 0, currentAltitude = 0;
-    float speed, temperature;
+    float speed, temperature, pressure;
 
     logging.info(S_LAUNCH, F("Main engine cut off"));
 
@@ -280,6 +280,7 @@ void meco() {
     // colecting data
     speed = barometer.getAverageSpeed(100);
     temperature = barometer.getTemperature();
+    pressure = barometer.getPressure();
 
     while(true) {
         currentAltitude = barometer.getGroundDistance();
@@ -292,9 +293,10 @@ void meco() {
         delay(100);
     }
 
+    logging.info(S_LAUNCH, "Rocket speed in MECO: " + String(speed));
     logging.info(S_LAUNCH, "Temperature: " + String(temperature));
+    logging.info(S_LAUNCH, "Pressure: " + String(pressure));
     logging.info(S_LAUNCH, "Max altitude: " + String(maxAltitude));
-    logging.info(S_LAUNCH, "MECO in " + String(speed));
 };
 
 void loop() {
