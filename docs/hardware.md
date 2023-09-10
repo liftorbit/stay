@@ -44,58 +44,71 @@ Para que o manual funcione corretamente, todos os componentes devem ser iguais a
 
 O barômetro realiza medições de pressão, altitude e temperatura. O protocolo de comunicação utilizado é o SPI.
 
-- VCC **->** 3.3v
-- SCL **->** G13
-- SDA **->** G14
-- CSB **->** G27
-- SDO **->** G12
+| BMP280 | ESP32 |
+|--------|-------|
+| VCC    | 3.3v  |
+| SCL    | G13   |
+| SDA    | G14   |
+| CSB    | G27   |
+| SDO    | G12   |
 
 ### BMI160 (acelerômetro/giroscópio)
 
 O sensor BMI160 é uma unidade de medida inercial que fornece dados sobre orientação do foguete, usado principalmente para a manipulação do controle vetorial de empuxo. O protocolo de comunicação é I2C.
 
-- VCC **->** 3.3v
-- SCL **->** G22
-- SDA **->** G21
+| BMI160 | ESP32 |
+|--------|-------|
+| VCC    | 3.3v  |
+| SCL    | G22   |
+| SDA    | G21   |
 
 ### Módulo cartão MicroSD
 
 O módulo adaptador para cartão MicroSD é necessário para salvar registros importantes do foguete. O módulo utiliza o protocolo SPI.
 
-- VCC **->** 5v
-- MISO **->** G19
-- MOSI **->** G23
-- SCK **->** G18
-- CS **->** G5
+| MicroSD | ESP32 |
+|---------|-------|
+| VCC     | 5.0v  |
+| MISO    | G19   |
+| MOSI    | G23   |
+| SCK     | G18   |
+| CS      | G5    |
 
 ### Servos motores 9g
 
 Os servos motores são responsáveis por controlar o empuxo vetorial do foguete (TVC). Para isso, dois servos motores são utilizados.
 
-- VCC **->** 5v (alimentação externa)
-- GND **->** GND externo e GND ESP32
-- Servo 01 (eixo X) **->** G2
-- Servo 02 (eixo Y) **->** G32
+| Servos (02) | ESP32 |
+|-------------|-------|
+| VCC         | 5.0v  |
+| Servo 01 (X)| G2    |
+| Servo 02 (Y)| G32   |
 
 ### Sensor infravermelho
 
 O sensor infravermelho é responsável por informar ao computador de bordo se o motor está ligado ou desligado.
 
-- VCC **->** 5v
-- D0 **->** G35
+| Sensor infravermelho | ESP32 |
+|----------------------|-------|
+| VCC                  | 5.0v  |
+| D0                   | G35   |
 
 ### GPS (neo-6m)
 
 O módulo de GPS NEO6M fornece dados da localização do foguete após o desligamento do motor principal. O protocolo de comunicação utilizado é UART.
 
-- VCC **->** 5v
-- RX  **->** G15 ESP
-- TX  **->** G04 ESP
+| GPS     | ESP32 |
+|---------|-------|
+| VCC     | 5.0v  |
+| RX      | G15   |
+| TX      | G04   |
 
 ### Módulo RF (HC12)
 
-O módulo de Rádio Frequência HC12 transmite dados de telemetria do foguete durante o vôo, além de receber comandos para autorizações.Este módulo deve estar configurado para sua potência máxima de transmissão de dados e taxa de dados de 9600bps. O protocolo de comunicação utilizado é UART.
+O módulo de Rádio Frequência HC12 transmite dados de telemetria do foguete durante o vôo, além de receber comandos para autorizações. Este módulo deve estar configurado para sua potência máxima de transmissão de dados e taxa de dados de 9600bps. O protocolo de comunicação utilizado é UART.
 
-- VCC **->** 5v
-- RX  **->** G17 ESP (UART 2 TX)
-- TX  **->** G16 ESP (UART 2 RX)
+| HC12    | ESP32           |
+|---------|-----------------|
+| VCC     | 5.0v            |
+| RX      | G17 (UART 2 TX) |
+| TX      | G16 (UART 2 RX) |
