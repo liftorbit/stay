@@ -3,6 +3,9 @@
 #include "signals.h"
 
 Signals::Signals(int buzzerPin, int ledPin) {
+    pinMode(buzzerPin, OUTPUT);
+    pinMode(ledPin, OUTPUT);
+
     ledcSetup(0, 2000, 8);
     ledcAttachPin(buzzerPin, 0);
 
