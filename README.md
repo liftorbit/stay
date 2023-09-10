@@ -28,6 +28,18 @@ O foguete STAY possui alguns detalhes técnicos relevantes sobre hardware e soft
 
 Saiba mais sobre os detalhes técnicos do STAY acessando a [documentação do software](https://github.com/liftorbit/stay-rocket/blob/master/docs/software.md) ou a [documentação do hardware](https://github.com/liftorbit/stay-rocket/blob/master/docs/hardware.md).
 
+## Bibliotecas utilizadas
+
+O software deste projeto utiliza algumas **bibliotecas desenvolvidas por terceiros**, você pode realizar o download ou saber mais sobre cada uma dela consultando o repositório oficial de cada uma. Veja a lista:
+
+- [Adafruit_BMP280](https://github.com/adafruit/Adafruit_BMP280_Library)
+- [Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO)
+- [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor)
+- [BMI160](https://github.com/hanyazou/BMI160-Arduino)
+- [ESP32-SD](https://github.com/espressif/arduino-esp32/tree/master/libraries/SD)
+- [ServoESP32](https://github.com/RoboticsBrno/ServoESP32)
+- [TinyGPSPlus](https://github.com/mikalhart/TinyGPSPlus)
+
 ## Licença
 
 ```
