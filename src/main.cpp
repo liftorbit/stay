@@ -87,48 +87,48 @@ void setup() {
         while(true);
     }
 
-    logging.log(S_SETUP, LOG_INFO, F("STAY Startup"));
-    logging.log(S_SETUP, LOG_WAIT, F("Starting sensors..."));
+    logging.info(S_SETUP, F("STAY Startup"));
+    logging.info(S_SETUP, F("Starting sensors..."));
 
     if(imu.begin()) {
         imu.updatePosition();
         String imuX = String(imu.getAccelerometerX());
         String imuY = String(imu.getAccelerometerY());
-        logging.log(S_SETUP, LOG_SUCCESS, F("IMU Started"));
-        logging.log(S_SETUP, LOG_INFO, "IMU x(" + imuX + ") y(" + imuY + ")");
+        logging.info(S_SETUP, F("IMU Started"));
+        logging.info(S_SETUP, "IMU x(" + imuX + ") y(" + imuY + ")");
     } else {
-        logging.log(S_SETUP, LOG_ERROR, F("Failed to start IMU"));
+        logging.error(S_SETUP, F("Failed to start IMU"));
     }
 
     if(barometer.begin()) {
         String alt = String(barometer.getAltitude());
         String temp = String(barometer.getTemperature());
-        logging.log(S_SETUP, LOG_SUCCESS, F("Barometer Started"));
-        logging.log(S_SETUP, LOG_INFO, "BAROMETER alt(" + alt + ") temp(" + temp + ")");
+        logging.info(S_SETUP, F("Barometer Started"));
+        logging.info(S_SETUP, "BAROMETER alt(" + alt + ") temp(" + temp + ")");
     } else {
-        logging.log(S_SETUP, LOG_ERROR, F("Failed to start Barometer"));
+        logging.error(S_SETUP, F("Failed to start Barometer"));
     }
 
     if(engineIsOn()) {
-        logging.log(S_SETUP, LOG_ERROR, F("Flame detected before launch"));
+        logging.error(S_SETUP, F("Flame detected before launch"));
     } else {
-        logging.log(S_SETUP, LOG_SUCCESS, F("Flame sensor in operation"));
+        logging.info(S_SETUP, F("Flame sensor in operation"));
     }
 
-    logging.log(S_SETUP, LOG_INFO, F("Sensors started"));
-    logging.log(S_SETUP, LOG_WAIT, F("Starting GPS..."));
+    logging.info(S_SETUP, F("Sensors started"));
+    logging.info(S_SETUP, F("Starting GPS..."));
 
     gps.begin();
 
-    logging.log(S_SETUP, LOG_INFO, F("GPS started"));
+    logging.info(S_SETUP, F("GPS started"));
 
     servoX.attach(servoXPin);
     servoY.attach(servoYPin);
     servoX.write(90);
     servoY.write(90);
 
-    logging.log(S_SETUP, LOG_INFO, F("Servos attached"));
-    logging.log(S_AUTH, LOG_WAIT, F("Wait launch authorization..."));
+    logging.info(S_SETUP, F("Servos attached"));
+    logging.info(S_AUTH, F("Wait launch authorization..."));
 
     telemetry.send(logging.getLog());
 
@@ -146,7 +146,7 @@ void setup() {
     String launchAuth = telemetry.receive();
 
     if(launchAuth == "RLA") {
-        logging.log(S_AUTH, LOG_INFO, F("Launch authorized. Countdown."));
+        logging.info(S_AUTH, F("Launch authorized. Countdown."));
 
         // 10 seconds countdown
         for(int i = 0; i < 10; i++) {
@@ -160,7 +160,7 @@ void setup() {
                     digitalWrite(statusLedPin, HIGH);
                     delay(1000);
                     digitalWrite(statusLedPin, LOW);
-                    logging.log(S_SETUP, LOG_INFO, F("Stop launch countdown (SLC). Restarting"));
+                    logging.info(S_SETUP, F("Stop launch countdown (SLC). Restarting"));
                     ESP.restart();
                 }
             }
@@ -170,7 +170,7 @@ void setup() {
         launch();
         meco();
     } else if(launchAuth == "RLU") {
-        logging.log(S_SETUP, LOG_INFO, F("Launch not authorized, restarting"));
+        logging.info(S_SETUP, F("Launch not authorized, restarting"));
         ESP.restart();
     }
 };
@@ -237,7 +237,7 @@ void launch() {
 
     mainEngineIgnition();
 
-    logging.log(S_LAUNCH, LOG_INFO, F("Main engine ignition"));
+    logging.info(S_LAUNCH, F("Main engine ignition"));
 
     // wait main engine cut off
     while(engineIsOn()) {
@@ -256,7 +256,7 @@ void meco() {
     int maxAltitude = 0, currentAltitude = 0;
     float speed, temperature;
 
-    logging.log(S_LAUNCH, LOG_INFO, F("Main engine cut off"));
+    logging.info(S_LAUNCH, F("Main engine cut off"));
 
     // delete basic telemetry task
     vTaskDelete(TelemetryTHandle);
@@ -292,9 +292,9 @@ void meco() {
         delay(100);
     }
 
-    logging.log(S_LAUNCH, LOG_INFO, "Temperature: " + String(temperature) + " C");
-    logging.log(S_LAUNCH, LOG_INFO, "Max altitude: " + String(maxAltitude) + " m");
-    logging.log(S_LAUNCH, LOG_INFO, "MECO in " + String(speed) + " m/s");
+    logging.info(S_LAUNCH, "Temperature: " + String(temperature) + " C");
+    logging.info(S_LAUNCH, "Max altitude: " + String(maxAltitude) + " m");
+    logging.info(S_LAUNCH, "MECO in " + String(speed) + " m/s");
 };
 
 void loop() {
