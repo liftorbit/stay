@@ -18,9 +18,7 @@
 #define LOGGING_h
 
 #define LOG_INFO 1
-#define LOG_WAIT 2
-#define LOG_SUCCESS 3
-#define LOG_ERROR 4
+#define LOG_ERROR 2
 
 #define S_SETUP 1
 #define S_AUTH 2
@@ -40,6 +38,8 @@ class Logging {
          */
         char* getFilename();
 
+        void log(int type, int rocketStep, String message);
+
     public:
         /**
          * @brief Begin SD card module and log file.
@@ -48,14 +48,8 @@ class Logging {
          */
         bool begin(String filename);
 
-        /**
-         * @brief Log a information.
-         * 
-         * @param status Rocket status
-         * @param type Log type
-         * @param message Log message
-         */
-        void log(int status, int type, String message);
+        void info(int rocketStep, String message);
+        void error(int rocketStep, String message);
 
         /**
          * @brief Get the log file.

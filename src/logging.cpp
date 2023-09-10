@@ -22,6 +22,11 @@
 
 char filename[12];
 
+char* Logging::getFilename() {
+    this->fileLog.toCharArray(filename, 12);
+    return filename;
+}
+
 bool Logging::begin(String filename) {
     if(!SD.begin(5)) {
         return false;
@@ -38,12 +43,20 @@ bool Logging::begin(String filename) {
     return true;
 };
 
-void Logging::log(int status, int type, String message) {
+void Logging::log(int type, int rocketStep, String message) {
     File log = SD.open(this->getFilename(), FILE_APPEND);
-    String rawLogMsg = String(status) + "," + type + "," + message;
+    String rawLogMsg = String(type) + "," + String(rocketStep) + "," + message;
 
     log.println(rawLogMsg);
     log.close();
+};
+
+void Logging::info(int rocketStep, String message) {
+    this->log(LOG_INFO, rocketStep, message);
+};
+
+void Logging::error(int rocketStep, String message) {
+    this->log(LOG_ERROR, rocketStep, message);
 };
 
 String Logging::getLog() {
@@ -52,8 +65,3 @@ String Logging::getLog() {
     log.close();
     return logs;
 };
-
-char* Logging::getFilename() {
-    this->fileLog.toCharArray(filename, 12);
-    return filename;
-}
