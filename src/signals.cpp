@@ -26,3 +26,14 @@ void Signals::waitBCS() {
         delay(200);
     }
 }
+
+void Signals::receivedBCS() {
+    for(int i = 0; i < 3; i++) {
+        ledcWriteTone(0, 900);
+        digitalWrite(this->ledPin, HIGH);
+        delay(100);
+        ledcWrite(0, 0);
+        digitalWrite(this->ledPin, LOW);
+        delay(100);
+    }
+}
