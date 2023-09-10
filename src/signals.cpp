@@ -48,3 +48,11 @@ void Signals::errorToStartLOG() {
         delay(100);
     }
 }
+
+void Signals::waitLaunchAuthorization() {
+    ledcWriteTone(0, 1200);
+    digitalWrite(this->ledPin, HIGH);
+    delay(500);
+    ledcWrite(0, 0);
+    digitalWrite(this->ledPin, LOW);
+}
