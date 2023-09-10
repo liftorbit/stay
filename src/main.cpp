@@ -256,7 +256,7 @@ void meco() {
     int maxAltitude = 0, currentAltitude = 0;
     float speed, temperature, pressure;
 
-    logging.info(S_LAUNCH, F("Main engine cut off"));
+    logging.info(S_MECO, F("Main engine cut off"));
 
     // delete basic telemetry task
     vTaskDelete(TelemetryTHandle);
@@ -293,10 +293,10 @@ void meco() {
         delay(100);
     }
 
-    logging.info(S_LAUNCH, "Rocket speed in MECO: " + String(speed));
-    logging.info(S_LAUNCH, "Temperature: " + String(temperature));
-    logging.info(S_LAUNCH, "Pressure: " + String(pressure));
-    logging.info(S_LAUNCH, "Max altitude: " + String(maxAltitude));
+    logging.info(S_MECO, "Rocket speed in MECO: " + String(speed));
+    logging.info(S_MECO, "Temperature: " + String(temperature));
+    logging.info(S_MECO, "Pressure: " + String(pressure));
+    logging.info(S_MECO, "Max altitude: " + String(maxAltitude));
 };
 
 void loop() {
