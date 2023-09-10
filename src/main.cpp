@@ -292,9 +292,9 @@ void meco() {
         delay(100);
     }
 
-    logging.info(S_LAUNCH, "Temperature: " + String(temperature) + " C");
-    logging.info(S_LAUNCH, "Max altitude: " + String(maxAltitude) + " m");
-    logging.info(S_LAUNCH, "MECO in " + String(speed) + " m/s");
+    logging.info(S_LAUNCH, "Temperature: " + String(temperature));
+    logging.info(S_LAUNCH, "Max altitude: " + String(maxAltitude));
+    logging.info(S_LAUNCH, "MECO in " + String(speed));
 };
 
 void loop() {
