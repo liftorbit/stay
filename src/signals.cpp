@@ -37,3 +37,14 @@ void Signals::receivedBCS() {
         delay(100);
     }
 }
+
+void Signals::errorToStartLOG() {
+    for(int i = 0; i < 3; i++) {
+        ledcWriteTone(0, 1200);
+        digitalWrite(this->ledPin, HIGH);
+        delay(50);
+        ledcWrite(0, 0);
+        digitalWrite(this->ledPin, LOW);
+        delay(100);
+    }
+}
