@@ -11,11 +11,30 @@ Esta documentação explica em detalhes o funcionamento e as conexões de sensor
 - Sensor infravermelho
 - Booster DC-DC (MT3608)
 - 02 Servos motores 9g
-- Transceptor RF (HC12)
 
 Atualmente, todos esses componentes resulta no valor de aproximadamente R$ 163 em sites estrangeiros.
 
-Além de sensores e servos motores, o pino `G26` do ESP32 é reservado para realizar a **ignição do motor principal**. Já o pino `G25` irá alimentar um LED para indicação dos status do computador. Todos os componentes do projeto consomem, se usados ao máximo, 504.5 mA. Uma bateria de 9v com o dobro do necessário (1000mAh) é o suficiente para suprir todos os sistemas do foguete por mais ou menos 2 horas.
+Além de sensores e servos motores, o pino `G26` do ESP32 é reservado para realizar a **ignição do motor principal**. Já o pino `G25` irá alimentar um LED para indicação dos status do computador.
+
+## Consumo energético
+
+Todos os componentes do projeto consomem, se usados ao máximo, 1587.25 mA. Veja o **consumo máximo** de cada um dos componente utilizados no foguete:
+
+| Dispositivo               | Consumo de Corrente (mA) |
+|---------------------------|--------------------------|
+| ESP32                     | 240                      |
+| BMP280                    | 1                        |
+| BMI180                    | 1,25                     |
+| HC-12 SI4463              | 40                       |
+| NEO6M (módulo GPS)        | 100                      |
+| Módulo cartão MicroSD     | 200                      |
+| Sensor infravermelho      | 5                        |
+| 02 Servos motores 9g      | 1000 (1 A)               |
+| **Total**                 | **1587,25 mA**           |
+
+Para suprir todo esse consumo, uma bateria de 3,7 volts com 2000mah é necessária, dando uma margem de segurança de 400mah.
+
+O ESP32 necessita de 5,0 volts para funcionar normalmente, para isso, um **impulsionador de tensão** DC-DC MT3608 será utilizado para aumentar a corrente de 3,7 para 5,0.
 
 ## Manual de conexão dos componentes
 
