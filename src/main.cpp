@@ -82,7 +82,10 @@ void setup() {
 
     if(!logging.begin(logDate)) {
         telemetry.send(F("Error to start logging"));        
-        while(true);
+        while(true) {
+            signals.errorToStartLOG();
+            delay(1000);
+        };
     }
 
     logging.info(S_SETUP, F("STAY Startup"));
