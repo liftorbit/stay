@@ -12,7 +12,7 @@ Esta documentação explica em detalhes o funcionamento e as conexões de sensor
 - Booster DC-DC (MT3608)
 - 02 Servos motores 9g
 
-Atualmente, todos esses componentes  resulta no valor de aproximadamente R$ 163 em sites estrangeiros.
+Atualmente, todos os componentes listados acima resultam no valor de aproximadamente R$ 183 em sites estrangeiros (compras realizadas de 2022 a 2023).
 
 Além de sensores e servos motores, o pino `G26` do ESP32 é reservado para realizar a **ignição do motor principal**.
 
