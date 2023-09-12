@@ -53,7 +53,7 @@ void meco();
 
 void setup() {
     Serial.begin(9600);
-    pinMode(statusLedPin, OUTPUT);
+
     pinMode(mainEngineIgnitionPin, OUTPUT);
     pinMode(flameSensorPin, INPUT);
 
