@@ -13,6 +13,12 @@
 
 A missão do **STAY** é voar para testar o *Controle Vetorial de Empuxo* e coletar dados importantes durante o voo, utilizando diversos sensores localizados no foguete. Esses dados serão utilizados no desenvolvimento de **outros projetos**, melhorando a aerodinâmica e resistência durante o voo do foguete.
 
+## Quer contribuir?
+
+Se você deseja contribuir de algum forma para o projeto STAY, fique a vontade para enviar [**Pull Requests**](https://github.com/liftorbit/stay-rocket/pulls) ou usar a seção [**Issues**](https://github.com/liftorbit/stay-rocket/pulls) para fazer sugestões ou questionar.
+
+Caso precise de mais detalhes antes de realizar sua contribuição, [visite o arquivo CONTRIBUTING.md](https://github.com/liftorbit/stay-rocket/blob/master/CONTRIBUTING.md) para obter mais informações sobre como você pode fazer isso.
+
 ## Detalhes técnicos
 
 O foguete STAY possui alguns detalhes técnicos relevantes sobre hardware e software. Outras informações sobre desempenho do foguete serão adicionadas após o primeiro lançamento.
