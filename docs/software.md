@@ -4,7 +4,7 @@ Esta documentação explica em detalhes o funcionamento do código que será uti
 
 ## Telemetria
 
-A telemetria de dados é feita utilizando um módulo de rádio frequência de 433mhz, alcançando no máximo 1km em área aberta. Os dados transmitidos serão:
+A telemetria de dados é feita utilizando um módulo de rádio frequência de 433mhz, alcançando no máximo 1 quilômetro e 800 metros em área aberta. Os dados transmitidos serão:
 
 - Localização via GPS
 - Status do motor
