@@ -24,6 +24,7 @@
 #include "gps.h"
 #include "signals.h"
 
+const int buzzerPin = 33;
 const int statusLedPin = 25;
 const int flameSensorPin = 35;
 const int mainEngineIgnitionPin = 26;
@@ -37,7 +38,7 @@ Logging logging;
 Telemetry telemetry;
 Barometer barometer;
 
-Signals signals(statusLedPin, statusLedPin);
+Signals signals(buzzerPin, statusLedPin);
 
 Servo servoX;
 Servo servoY;
