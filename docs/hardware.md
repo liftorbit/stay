@@ -12,9 +12,9 @@ Esta documentação explica em detalhes o funcionamento e as conexões de sensor
 - Booster DC-DC (MT3608)
 - 02 Servos motores 9g
 
-Atualmente, todos esses componentes resulta no valor de aproximadamente R$ 163 em sites estrangeiros.
+Atualmente, todos esses componentes  resulta no valor de aproximadamente R$ 163 em sites estrangeiros.
 
-Além de sensores e servos motores, o pino `G26` do ESP32 é reservado para realizar a **ignição do motor principal**. Já o pino `G25` irá alimentar um LED para indicação dos status do computador.
+Além de sensores e servos motores, o pino `G26` do ESP32 é reservado para realizar a **ignição do motor principal**.
 
 ## Consumo energético
 
@@ -39,6 +39,10 @@ O ESP32 necessita de 5,0 volts para funcionar normalmente, para isso, um **impul
 ## Manual de conexão dos componentes
 
 Para que o manual funcione corretamente, todos os componentes devem ser iguais aos listados na lista, evitando problemas de comunicação ou até danos ao componente.
+
+### Componentes de alerta visual e sonoro
+
+Um LED e ou buzzer são responsáveis por emitir alertas visuais e sonoros enquanto o foguete ainda estão no solo, permitindo acompanhar a sequência de status do foguete e monitorar erros. O pino `G25` será usado para um LED vermelho, enquanto o pino `G33` será conectado a um buzzer.
 
 ### BMP280 (barômetro)
 
