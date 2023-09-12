@@ -52,11 +52,10 @@ void launch();
 void meco();
 
 void setup() {
-    Serial.begin(9600);
-
     pinMode(mainEngineIgnitionPin, OUTPUT);
     pinMode(flameSensorPin, INPUT);
 
+    Serial.begin(9600);
     telemetry.begin();
 
     while(true) {
