@@ -22,6 +22,7 @@
 #include "logging.h"
 #include "imu.h"
 #include "gps.h"
+#include "signals.h"
 
 const int statusLedPin = 25;
 const int flameSensorPin = 35;
@@ -35,6 +36,8 @@ GPS gps;
 Logging logging;
 Telemetry telemetry;
 Barometer barometer;
+
+Signals signals(statusLedPin, statusLedPin);
 
 Servo servoX;
 Servo servoY;
@@ -61,10 +64,7 @@ void setup() {
 
         for(int i = 0; i < 5; i++) {
             if(!telemetry.dataAvailable()) {
-                digitalWrite(statusLedPin, HIGH);
-                delay(250);
-                digitalWrite(statusLedPin, LOW);
-                delay(250);
+                signals.waitBCS();
             } else {
                 break;
             }
@@ -73,9 +73,7 @@ void setup() {
         }
 
         if(telemetry.dataAvailable() && telemetry.receive() == F("BCS")) {
-            digitalWrite(statusLedPin, HIGH);
-            delay(500);
-            digitalWrite(statusLedPin, LOW);
+            signals.receivedBCS();
             break;
         }
     }
@@ -133,13 +131,7 @@ void setup() {
     telemetry.send(logging.getLog());
 
     while(!telemetry.dataAvailable()) {
-        digitalWrite(statusLedPin, HIGH);
-        delay(100);
-        digitalWrite(statusLedPin, LOW);
-        delay(100);
-        digitalWrite(statusLedPin, HIGH);
-        delay(100);
-        digitalWrite(statusLedPin, LOW);
+        signals.waitLaunchAuthorization();
         delay(500);
     }
 
