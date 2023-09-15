@@ -109,7 +109,7 @@ O módulo de GPS NEO6M fornece dados da localização do foguete após o desliga
 
 ### Módulo RF (HC12)
 
-O módulo de Rádio Frequência HC12 transmite dados de telemetria do foguete durante o vôo, além de receber comandos para autorizações. Este módulo deve estar configurado para sua potência máxima de transmissão de dados e taxa de dados de 9600bps. O protocolo de comunicação utilizado é UART.
+O módulo de Rádio Frequência HC12 transmite dados de telemetria do foguete durante o vôo, além de receber comandos para autorizações. O protocolo de comunicação utilizado é UART.
 
 | HC12    | ESP32           |
 |---------|-----------------|
