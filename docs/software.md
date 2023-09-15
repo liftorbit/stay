@@ -4,16 +4,15 @@ Esta documentação explica em detalhes o funcionamento do código que será uti
 
 ## Telemetria
 
-A telemetria de dados é feita utilizando um módulo de rádio frequência de 433mhz, alcançando no máximo 1 quilômetro e 800 metros em área aberta. Os dados transmitidos serão:
+A telemetria de dados é feita utilizando um módulo de rádio frequência de 433mhz, alcançando no máximo 1 quilômetro e 800 metros em área aberta. Existem duas etapas na telemetria do foguete, elas mudam de acordo com a etapa de lançamento:
 
-- Localização via GPS
-- Status do motor
-- Temperatura (Grau Celsius)
-- Aceleração (m/s²)
-- Altitude em relação ao chão (metros)
-- Pressão (Pa)
-
-A base que recebe esses dados pode calcular a **velocidade média** do foguete utilizando a altitude.
+- **Telemetria básica:** essa etapa da telemetria é iniciada após a *ignição do motor principal*, onde apenas dados básicos são enviados *10 vezes por segundo*, como:
+  - Status do motor
+  - Temperatura (Grau Celsius)
+  - Aceleração (m/s²)
+  - Altitude em relação ao chão (metros)
+  - Pressão (Pa)
+- **Telemetria avançada:** após o desligamento do motor principal (MECO), a telemetria avançada passa a ser transmitida a *1 vez por segundo*. Todos os dados básicos são enviados, porém com *dados de localização*, ou seja, latitude e longitude.
 
 ## Etapas de lançamento
 
