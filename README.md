@@ -1,4 +1,4 @@
-<h1 align="center">STAY</h1>
+<h1 align="center">🚀 STAY</h1>
 <p align="center">Um foguete de propulsão a combustível sólido.<br><i>Passo inicial para foguetes da <a href="https://github.com/liftorbit">Liftorbit</a></i></p>
 
 <p align="center" style="margin-bottom: 15px">
