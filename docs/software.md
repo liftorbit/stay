@@ -14,6 +14,20 @@ A telemetria de dados é feita utilizando um módulo de rádio frequência de 43
   - Pressão (Pa)
 - **Telemetria avançada:** após o desligamento do motor principal (MECO), a telemetria avançada passa a ser transmitida a *1 vez por segundo*. Todos os dados básicos são enviados, porém com *dados de localização*, ou seja, latitude e longitude.
 
+### Configuração do transceptor
+
+Configurar o transceptor HC12 é necessário para aumentar a distância em que o sinal pode percorrer, garantido a telemetria do foguete em área aberta. As configurações são:
+
+- Taxa de transmissão: Os BPS (bits por segundo) devem ser de `2400bps`, na telemetria avançada, são transmitidos **2000 bits por segundo**, já na telemetria básica, apenas **137 bits por segundo** são enviados.
+- Potência do modo: A potência do módulo deve ser de `20dBm` (ou P8 no HC12).
+
+Execute cada um dos comandos abaixo no módulo utilizando uma conexão USB to TTL para configurar o transceptor:
+
+```at
+AT+B2400
+AT+P8
+```
+
 ## Etapas de lançamento
 
 As etapas de lançamento são as ações que o foguete realiza antes do lançamento, durante o voo e pouso. Essas etapas incluem verificações, autorizações, e coleta de dados.
