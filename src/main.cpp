@@ -45,8 +45,8 @@ Servo servoY;
 
 TaskHandle_t TelemetryTHandle;
 
-void sendBasicTelemetry();
-void sendAdvancedTelemetry();
+void sendBasicTelemetry(void * pvParameters);
+void sendAdvancedTelemetry(void * pvParameters);
 bool engineIsOn();
 void mainEngineIgnition();
 void launch();
