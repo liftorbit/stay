@@ -35,6 +35,6 @@ Se você possui conhecimento em hardware e deseja melhorar o hardware do foguete
 
 ## Contribuindo com Ideias e Feedback
 
-Se você tem ideias ou sugestões, mas não tem a experiência técnica para contribuir diretamente com código ou hardware, ainda gostaríamos de ouvir você! Sinta-se à vontade para abrir uma [Issue](https://github.com/liftorbit/stay-rocket/issues) no repositório para compartilhar suas ideias ou feedback.
+Se você tem ideias ou sugestões, mas não tem a experiência técnica para contribuir diretamente com código ou hardware, ainda gostaríamos de ouvir você! Sinta-se à vontade para abrir uma [Issue](https://github.com/liftorbit/stay-rocket/issues) no repositório para compartilhar suas ideias ou feedback. Você também pode ver as necessidades atuais no projeto no [GitHub Milestones](https://github.com/liftorbit/stay-rocket/milestones)
 
 Agradecemos seu interesse em contribuir para o projeto STAY e aguardamos sua participação na melhoria do nosso foguete de propulsão a combustível sólido!
