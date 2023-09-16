@@ -3,22 +3,22 @@
 #include "telemetry.h"
 
 // RX16, TX17
-HardwareSerial ConnSerial(2);
+HardwareSerial Transceiver(2);
 
 void Telemetry::begin() {
-    ConnSerial.begin(9600);
+    Transceiver.begin(9600);
 };
 
 void Telemetry::send(String message) {
-    ConnSerial.println(message);
+    Transceiver.println(message);
 };
 
 bool Telemetry::dataAvailable() {
-    return ConnSerial.available() != 0;
+    return Transceiver.available() != 0;
 };
 
 String Telemetry::receive() {
-    String data = ConnSerial.readString();
+    String data = Transceiver.readString();
     data.trim();
 
     return data;
@@ -42,13 +42,13 @@ void Telemetry::telemetry(bool engine, float temp, float alt, float ps, float ac
     memcpy(latitude, &lat, sizeof(float));
     memcpy(longitude, &lon, sizeof(float));
 
-    ConnSerial.write(motorStatus, sizeof(motorStatus));
-    ConnSerial.write(temperature, sizeof(temperature));
-    ConnSerial.write(altitude, sizeof(altitude));
-    ConnSerial.write(pressure, sizeof(pressure));
-    ConnSerial.write(acceleration, sizeof(acceleration));
-    ConnSerial.write(latitude, sizeof(latitude));
-    ConnSerial.write(longitude, sizeof(longitude));
+    Transceiver.write(motorStatus, sizeof(motorStatus));
+    Transceiver.write(temperature, sizeof(temperature));
+    Transceiver.write(altitude, sizeof(altitude));
+    Transceiver.write(pressure, sizeof(pressure));
+    Transceiver.write(acceleration, sizeof(acceleration));
+    Transceiver.write(latitude, sizeof(latitude));
+    Transceiver.write(longitude, sizeof(longitude));
 };
 
 void Telemetry::telemetry(bool engine, float temp, float alt, float ps, float acce) {
@@ -65,9 +65,9 @@ void Telemetry::telemetry(bool engine, float temp, float alt, float ps, float ac
     memcpy(pressure, &ps, sizeof(float));
     memcpy(acceleration, &acce, sizeof(float));
 
-    ConnSerial.write(motorStatus, sizeof(motorStatus));
-    ConnSerial.write(temperature, sizeof(temperature));
-    ConnSerial.write(altitude, sizeof(altitude));
-    ConnSerial.write(pressure, sizeof(pressure));
-    ConnSerial.write(acceleration, sizeof(acceleration));
+    Transceiver.write(motorStatus, sizeof(motorStatus));
+    Transceiver.write(temperature, sizeof(temperature));
+    Transceiver.write(altitude, sizeof(altitude));
+    Transceiver.write(pressure, sizeof(pressure));
+    Transceiver.write(acceleration, sizeof(acceleration));
 };
