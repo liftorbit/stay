@@ -18,7 +18,7 @@ A telemetria de dados é feita utilizando um módulo de rádio frequência de 43
 
 Configurar o transceptor HC12 é necessário para aumentar a distância em que o sinal pode percorrer, garantido a telemetria do foguete em área aberta. As configurações são:
 
-- Taxa de transmissão: Os BPS (bits por segundo) devem ser de `2400bps`, na telemetria avançada, são transmitidos **2000 bits por segundo**, já na telemetria básica, apenas **137 bits por segundo** são enviados.
+- Taxa de transmissão: Os BPS (bits por segundo) devem ser de `2400bps`. Na telemetria avançada, são transmitidos **200 bits por segundo**, já na telemetria básica, são **1360 bits por segundo**.
 - Potência do modo: A potência do módulo deve ser de `20dBm` (ou P8 no HC12).
 
 Execute cada um dos comandos abaixo no módulo utilizando uma conexão USB to TTL para configurar o transceptor:

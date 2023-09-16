@@ -2,62 +2,74 @@
 #include <HardwareSerial.h>
 #include "telemetry.h"
 
-// RX16, TX17
-HardwareSerial ConnSerial(2);
+#define TRANSCEIVER_UART 2
+#define TRANSCEIVER_BAUD_RATE 2400
+
+HardwareSerial Transceiver(TRANSCEIVER_UART);
 
 void Telemetry::begin() {
-    ConnSerial.begin(9600);
+    Transceiver.begin(TRANSCEIVER_BAUD_RATE);
 };
 
 void Telemetry::send(String message) {
-    ConnSerial.println(message);
+    Transceiver.println(message);
 };
 
 bool Telemetry::dataAvailable() {
-    return ConnSerial.available() != 0;
+    return Transceiver.available() != 0;
 };
 
 String Telemetry::receive() {
-    String data = ConnSerial.readString();
+    String data = Transceiver.readString();
     data.trim();
 
     return data;
 };
 
 void Telemetry::telemetry(bool engine, float temp, float alt, float ps, float acce, float lat, float lon) {
-    String sEng = String(engine);
-    String sTemp = String(temp);
-    String sAlt = String(alt);
-    String sPs = String(ps);
-    String sAcce = String(acce);
-    String sLat = String(lat, 5);
-    String sLon = String(lon, 5);
+    // advanced telemetry 
+    byte motorStatus[sizeof(bool)];
+    byte temperature[sizeof(float)];
+    byte altitude[sizeof(float)];
+    byte pressure[sizeof(float)];
+    byte acceleration[sizeof(float)];
+    byte latitude[sizeof(float)];
+    byte longitude[sizeof(float)];
 
-    String dataList[7] = {sEng, sTemp, sAlt, sPs, sAcce, sLat, sLon};
-    String fullData = "";
+    memcpy(motorStatus, &engine, sizeof(bool));
+    memcpy(temperature, &temp, sizeof(float));
+    memcpy(altitude, &alt, sizeof(float));
+    memcpy(pressure, &ps, sizeof(float));
+    memcpy(acceleration, &acce, sizeof(float));
+    memcpy(latitude, &lat, sizeof(float));
+    memcpy(longitude, &lon, sizeof(float));
 
-    for(int i = 0; i < 7; i++) {
-        fullData.concat(dataList[i]);
-        fullData.concat(',');
-    }
-
-    ConnSerial.println(fullData);
+    Transceiver.write(motorStatus, sizeof(motorStatus));
+    Transceiver.write(temperature, sizeof(temperature));
+    Transceiver.write(altitude, sizeof(altitude));
+    Transceiver.write(pressure, sizeof(pressure));
+    Transceiver.write(acceleration, sizeof(acceleration));
+    Transceiver.write(latitude, sizeof(latitude));
+    Transceiver.write(longitude, sizeof(longitude));
 };
 
 void Telemetry::telemetry(bool engine, float temp, float alt, float ps, float acce) {
-    String sEng = String(engine);
-    String sTemp = String(temp);
-    String sAlt = String(alt);
-    String sPs = String(ps);
-    String sAcce = String(acce);
+    // basic telemetry
+    byte motorStatus[sizeof(bool)];
+    byte temperature[sizeof(float)];
+    byte altitude[sizeof(float)];
+    byte pressure[sizeof(float)];
+    byte acceleration[sizeof(float)];
 
-    String dataList[5] = {sEng, sTemp, sAlt, sPs, sAcce};
-    String fullData = "";
+    memcpy(motorStatus, &engine, sizeof(bool));
+    memcpy(temperature, &temp, sizeof(float));
+    memcpy(altitude, &alt, sizeof(float));
+    memcpy(pressure, &ps, sizeof(float));
+    memcpy(acceleration, &acce, sizeof(float));
 
-    for(int i = 0; i < 5; i++) {
-        fullData.concat(dataList[i]);
-        fullData.concat(',');
-    }
-
-    ConnSerial.println(fullData);
+    Transceiver.write(motorStatus, sizeof(motorStatus));
+    Transceiver.write(temperature, sizeof(temperature));
+    Transceiver.write(altitude, sizeof(altitude));
+    Transceiver.write(pressure, sizeof(pressure));
+    Transceiver.write(acceleration, sizeof(acceleration));
 };
