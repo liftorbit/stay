@@ -2,11 +2,13 @@
 #include <HardwareSerial.h>
 #include "telemetry.h"
 
-// RX16, TX17
-HardwareSerial Transceiver(2);
+#define TRANSCEIVER_UART 2
+#define TRANSCEIVER_BAUD_RATE 2400
+
+HardwareSerial Transceiver(TRANSCEIVER_UART);
 
 void Telemetry::begin() {
-    Transceiver.begin(9600);
+    Transceiver.begin(TRANSCEIVER_BAUD_RATE);
 };
 
 void Telemetry::send(String message) {
