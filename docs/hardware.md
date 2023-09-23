@@ -1,20 +1,8 @@
 # Documentação de hardware do foguete STAY
 
-Esta documentação explica em detalhes o funcionamento e as conexões de sensores e servo motores do foguete. Os componentes utilizados são:
+Esta documentação explica em detalhes o funcionamento e as conexões de sensores e servo motores do foguete. Para que o foguete consiga se conectar aos componentes, é necessário que todas as ligações estejam corretas.
 
-- ESP32 (38 pinos)
-- BMP280 (barômetro)
-- BMI180 (acelerômetro/giroscópio)
-- HC-12 SI4463 (transmissão wireless)
-- NEO6M (módulo GPS)
-- Módulo cartão MicroSD
-- Sensor infravermelho
-- Booster DC-DC (MT3608)
-- 02 Servos motores 9g
-- 31 jumpers Fêmea/Fêmea
-- Placa de extensão para ESP32 (38 pinos)
-
-Atualmente, todos os componentes listados acima resultam no valor de aproximadamente R$ 183 em sites estrangeiros (compras realizadas de 2022 a 2023).
+Caso queira fazer uma sugestão de hardware, acesse o [arquivo CONTRIBUTING.md](https://github.com/liftorbit/stay-rocket/blob/master/CONTRIBUTING.md) para obter informações de como contribuir para o foguete STAY.
 
 ## Consumo energético
 
