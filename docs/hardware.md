@@ -4,6 +4,32 @@ Esta documentação explica em detalhes o funcionamento e as conexões de sensor
 
 Caso queira fazer uma sugestão de hardware, acesse o [arquivo CONTRIBUTING.md](https://github.com/liftorbit/stay-rocket/blob/master/CONTRIBUTING.md) para obter informações de como contribuir para o foguete STAY.
 
+## Componentes
+
+Os componentes utilizados no ESP32 estão totalmente de acordo com o software, ou seja, qualquer alteração no hardware afetará o funcionamento do foguete. Veja a lista dos componentes utilizados no STAY:
+
+| Produto                   | Preço                    |
+|---------------------------|--------------------------|
+| ESP32                     | R$ 19,18                 |
+| BMP280                    | R$ 2,12                  |
+| BMI180                    | R$ 6,63                  |
+| HC-12 SI4463              | R$ 11,68                 |
+| USB-TO-TTL                | R$ 7,40                  |
+| NEO6M (módulo GPS)        | R$ 13,57                 |
+| Módulo cartão MicroSD     | R$ 2,40                  |
+| Sensor infravermelho      | R$ 1,90                  |
+| 02 Servos motores 9g      | R$ 11,30                 |
+| Booster DC-DC MT3608      | R$ 2,18                  |
+| Bateria 18650 6800mAh     | R$ 10,50                 |
+| Suporte bateria 18650     | R$ 10,99                 |
+| Placa de extensão ESP32   | R$ 19,13                 |
+| 31 Jumpers Fêmea/Fêmea    | R$ --.--                 |
+| **Sub-Total**             | **R$ 100,35**            |
+| **Frete**                 | **R$ 100,23**            |
+| **Total**                 | **R$ 200,58**            |
+
+A maioria dos produtos listados abaixo foram comprados em sites estrangeiros. Além disso, nem todos os produtos foram adquiridos em **apenas um pedido**, por isso o valor do frete se torna um pouco alto, quase atingido o valor total dos produtos.
+
 ## Consumo energético
 
 Todos os componentes do projeto consomem, se usados ao máximo, 1587.25 mA. Veja o **consumo máximo** de cada um dos componente utilizados no foguete:
