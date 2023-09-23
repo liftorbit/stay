@@ -11,6 +11,8 @@ Esta documentação explica em detalhes o funcionamento e as conexões de sensor
 - Sensor infravermelho
 - Booster DC-DC (MT3608)
 - 02 Servos motores 9g
+- 31 jumpers Fêmea/Fêmea
+- Placa de extensão para ESP32 (38 pinos)
 
 Atualmente, todos os componentes listados acima resultam no valor de aproximadamente R$ 183 em sites estrangeiros (compras realizadas de 2022 a 2023).
 
