@@ -16,8 +16,6 @@ Esta documentação explica em detalhes o funcionamento e as conexões de sensor
 
 Atualmente, todos os componentes listados acima resultam no valor de aproximadamente R$ 183 em sites estrangeiros (compras realizadas de 2022 a 2023).
 
-Além de sensores e servos motores, o pino `G26` do ESP32 é reservado para realizar a **ignição do motor principal**.
-
 ## Consumo energético
 
 Todos os componentes do projeto consomem, se usados ao máximo, 1587.25 mA. Veja o **consumo máximo** de cada um dos componente utilizados no foguete:
@@ -41,6 +39,8 @@ O ESP32 necessita de 5,0 volts para funcionar normalmente, para isso, um **impul
 ## Manual de conexão dos componentes
 
 Para que o manual funcione corretamente, todos os componentes devem ser iguais aos listados na lista, evitando problemas de comunicação ou até danos ao componente.
+
+> O pino `G26` do ESP32 é reservado para realizar a **ignição do motor principal**. A ignição deve ser feita usando um transistor.
 
 ### Componentes de alerta visual e sonoro
 
