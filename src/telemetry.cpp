@@ -44,6 +44,7 @@ void Telemetry::telemetry(bool engine, float temp, float alt, float ps, float ac
     memcpy(latitude, &lat, sizeof(float));
     memcpy(longitude, &lon, sizeof(float));
 
+    Transceiver.write('\x02');
     Transceiver.write(motorStatus, sizeof(motorStatus));
     Transceiver.write(temperature, sizeof(temperature));
     Transceiver.write(altitude, sizeof(altitude));
@@ -67,6 +68,7 @@ void Telemetry::telemetry(bool engine, float temp, float alt, float ps, float ac
     memcpy(pressure, &ps, sizeof(float));
     memcpy(acceleration, &acce, sizeof(float));
 
+    Transceiver.write('\x02');
     Transceiver.write(motorStatus, sizeof(motorStatus));
     Transceiver.write(temperature, sizeof(temperature));
     Transceiver.write(altitude, sizeof(altitude));
