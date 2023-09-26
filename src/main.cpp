@@ -78,6 +78,10 @@ void setup() {
         }
     }
 
+    while(!telemetry.dataAvailable()) {
+        delay(500);
+    }
+
     String logDate = telemetry.receive();
 
     if(!logging.begin(logDate)) {
