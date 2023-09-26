@@ -47,6 +47,7 @@ void Logging::log(int type, int rocketStep, String message) {
     File log = SD.open(this->getFilename(), FILE_APPEND);
     String rawLogMsg = String(type) + "," + String(rocketStep) + "," + message;
 
+    Serial.println(rawLogMsg);
     log.println(rawLogMsg);
     log.close();
 };
