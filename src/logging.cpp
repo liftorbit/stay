@@ -45,7 +45,15 @@ bool Logging::begin(String filename) {
 
 void Logging::log(int type, int rocketStep, String message) {
     File log = SD.open(this->getFilename(), FILE_APPEND);
-    String rawLogMsg = String(type) + "," + String(rocketStep) + "," + message;
+    String rawLogMsg;
+
+    rawLogMsg.concat(millis());
+    rawLogMsg.concat(',');
+    rawLogMsg.concat(type);
+    rawLogMsg.concat(',');
+    rawLogMsg.concat(rocketStep);
+    rawLogMsg.concat(',');
+    rawLogMsg.concat(message);
 
     Serial.println(rawLogMsg);
     log.println(rawLogMsg);
