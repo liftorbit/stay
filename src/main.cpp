@@ -46,6 +46,7 @@ Servo servoY;
 TaskHandle_t TelemetryTHandle;
 
 void testSensors();
+void handleCommands();
 void sendBasicTelemetry(void * pvParameters);
 void sendAdvancedTelemetry(void * pvParameters);
 bool engineIsOn();
@@ -126,43 +127,10 @@ void setup() {
     servoY.write(90);
 
     logging.info(S_SETUP, F("Servos attached"));
-    logging.info(S_AUTH, F("Wait launch authorization..."));
-
+    logging.info(S_SETUP, "Starting Command Mode ");
     telemetry.send(logging.getLog());
 
-    while(!telemetry.dataAvailable()) {
-        signals.waitLaunchAuthorization();
-        delay(500);
-    }
-
-    String launchAuth = telemetry.receive();
-
-    if(launchAuth == "RLA") {
-        logging.info(S_AUTH, F("Launch authorized. Countdown."));
-
-        // 10 seconds countdown
-        for(int i = 0; i < 10; i++) {
-            if(!telemetry.dataAvailable()) {
-                digitalWrite(statusLedPin, HIGH);
-                delay(500);
-                digitalWrite(statusLedPin, LOW);
-                delay(500);
-            } else if(telemetry.receive() == "SLC") {
-                    digitalWrite(statusLedPin, HIGH);
-                    delay(1000);
-                    digitalWrite(statusLedPin, LOW);
-                    logging.info(S_SETUP, F("Stop launch countdown (SLC). Restarting"));
-                    ESP.restart();
-            }
-        }
-
-        // launch steps
-        launch();
-        meco();
-    } else if(launchAuth == "RLU") {
-        logging.info(S_SETUP, F("Launch not authorized, restarting"));
-        ESP.restart();
-    }
+    handleCommands();
 };
 
 void testSensors() {
@@ -191,6 +159,47 @@ void testSensors() {
     }
 
     logging.info(S_SETUP, "Rocket Sensor Test finished");
+}
+
+void handleCommands() {
+    while (true) {
+        while(!telemetry.dataAvailable()) {
+            signals.simpleSignal();
+            delay(1500);
+        }
+
+        String command = telemetry.receive();
+
+        if(command == "RLA") {
+            logging.info(S_AUTH, F("Launch authorized. Countdown."));
+
+            // 10 seconds countdown
+            for(int i = 0; i < 10; i++) {
+                if(!telemetry.dataAvailable()) {
+                    digitalWrite(statusLedPin, HIGH);
+                    delay(500);
+                    digitalWrite(statusLedPin, LOW);
+                    delay(500);
+                } else if(telemetry.receive() == "SLC") {
+                        digitalWrite(statusLedPin, HIGH);
+                        delay(1000);
+                        digitalWrite(statusLedPin, LOW);
+                        logging.info(S_SETUP, F("Stop launch countdown (SLC). Restarting"));
+                        ESP.restart();
+                }
+            }
+
+            // launch steps
+            launch();
+            meco();
+        } else if(command == "RLU") {
+            logging.info(S_SETUP, F("Launch not authorized, restarting"));
+            ESP.restart();
+        } else if(command == "TEST") {
+            testSensors();
+            telemetry.send(logging.getLog());
+        }
+    }
 }
 
 void sendBasicTelemetry(void * pvParameters) {
