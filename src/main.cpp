@@ -45,6 +45,7 @@ Servo servoY;
 
 TaskHandle_t TelemetryTHandle;
 
+void testSensors();
 void sendBasicTelemetry(void * pvParameters);
 void sendAdvancedTelemetry(void * pvParameters);
 bool engineIsOn();
@@ -97,20 +98,13 @@ void setup() {
     logging.info(S_SETUP, F("Starting sensors..."));
 
     if(imu.begin()) {
-        imu.updatePosition();
-        String imuX = String(imu.getAccelerometerX());
-        String imuY = String(imu.getAccelerometerY());
         logging.info(S_SETUP, F("IMU Started"));
-        logging.info(S_SETUP, "IMU x(" + imuX + ") y(" + imuY + ")");
     } else {
         logging.error(S_SETUP, F("Failed to start IMU"));
     }
 
     if(barometer.begin()) {
-        String alt = String(barometer.getAltitude());
-        String temp = String(barometer.getTemperature());
         logging.info(S_SETUP, F("Barometer Started"));
-        logging.info(S_SETUP, "BAROMETER alt(" + alt + ") temp(" + temp + ")");
     } else {
         logging.error(S_SETUP, F("Failed to start Barometer"));
     }
@@ -172,6 +166,34 @@ void setup() {
         ESP.restart();
     }
 };
+
+void testSensors() {
+    logging.info(S_SETUP, "Start Rocket Sensor Test");
+
+    // Testing IMU
+    logging.info(S_SETUP, "Testing IMU...");
+
+    imu.updatePosition();
+    String imuX = String(imu.getAccelerometerX());
+    String imuY = String(imu.getAccelerometerY());
+    logging.info(S_SETUP, "IMU [ x(" + imuX + ") y(" + imuY + ") ]");
+    
+    // Testing Barometer
+    logging.info(S_SETUP, "Testing Barometer...");
+    String alt = String(barometer.getAltitude());
+    String temp = String(barometer.getTemperature());
+    logging.info(S_SETUP, "BAROMETER [ alt(" + alt + ") temp(" + temp + ") ]");
+
+    // Test Flame Detector
+    logging.info(S_SETUP, "Testing Flame Sensor...");
+    if(engineIsOn()) {
+        logging.error(S_SETUP, F("Flame detected before launch"));
+    } else {
+        logging.info(S_SETUP, F("Flame sensor in operation"));
+    }
+
+    logging.info(S_SETUP, "Rocket Sensor Test finished");
+}
 
 void sendBasicTelemetry(void * pvParameters) {
     float pressure, alt, temp, accel;
