@@ -134,7 +134,7 @@ void setup() {
 };
 
 void testSensors() {
-    logging.info(S_SETUP, "Start Rocket Sensor Test");
+    logging.info(S_SETUP, "Start Rocket Sensors Test");
 
     // Testing IMU
     logging.info(S_SETUP, "Testing IMU...");
@@ -146,19 +146,31 @@ void testSensors() {
     
     // Testing Barometer
     logging.info(S_SETUP, "Testing Barometer...");
+
     String alt = String(barometer.getAltitude());
     String temp = String(barometer.getTemperature());
     logging.info(S_SETUP, "BAROMETER [ alt(" + alt + ") temp(" + temp + ") ]");
 
     // Test Flame Detector
     logging.info(S_SETUP, "Testing Flame Sensor...");
+
     if(engineIsOn()) {
         logging.error(S_SETUP, F("Flame detected before launch"));
     } else {
         logging.info(S_SETUP, F("Flame sensor in operation"));
     }
 
-    logging.info(S_SETUP, "Rocket Sensor Test finished");
+    // Test GPS
+    logging.info(S_SETUP, "Testing GPS...");
+    bool isReady = gps.isReady();
+    
+    if(isReady) {
+        logging.error(S_SETUP, "GPS is not ready");
+    } else {
+        logging.info(S_SETUP, "GPS is ready");
+    }
+
+    logging.info(S_SETUP, "Rocket Sensors Test finished");
 }
 
 void handleCommands() {
