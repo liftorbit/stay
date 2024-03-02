@@ -204,6 +204,9 @@ void handleCommands() {
 }
 
 void sendBasicTelemetry(void * pvParameters) {
+    // 0x01 used as telemetry data start indicator
+    telemetry.send("\x01");
+
     float pressure, alt, temp, accel;
 
     for(;;) {
@@ -220,6 +223,9 @@ void sendBasicTelemetry(void * pvParameters) {
 }
 
 void sendAdvancedTelemetry(void * pvParameters) {
+    // 0x01 used as telemetry data start indicator
+    telemetry.send("\x01");
+
     float pressure, alt, temp, accel;
     double lat, lon;
 
