@@ -128,8 +128,6 @@ void setup() {
 
     logging.info(S_SETUP, F("Servos attached"));
     logging.info(S_SETUP, "Starting Command Mode ");
-    telemetry.send(logging.getLog());
-
     handleCommands();
 };
 
@@ -197,6 +195,8 @@ void handleCommands() {
             ESP.restart();
         } else if(command == "TEST") {
             testSensors();
+            telemetry.send("OK");
+        } else if(command == "GETLOG") {
             telemetry.send(logging.getLog());
         }
     }
