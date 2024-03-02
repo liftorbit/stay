@@ -30,7 +30,7 @@ O foguete STAY possui alguns detalhes técnicos relevantes sobre hardware e soft
   - Sensor de chamas (para detectar de ignição)
 - Telemetria em tempo real
 - Localização do foguete durante o vôo
-- Possui controle vetorial de empuxo (TVC)
+- Controle vetorial de empuxo (TVC)
 
 Saiba mais sobre os detalhes técnicos do STAY acessando a [documentação do software](https://github.com/liftorbit/stay-rocket/blob/master/docs/software.md) ou a [documentação do hardware](https://github.com/liftorbit/stay-rocket/blob/master/docs/hardware.md).
 
@@ -50,7 +50,7 @@ O software deste projeto utiliza algumas **bibliotecas desenvolvidas por terceir
 
 ```
 GNU Affero General Public License
-Copyright (c) 2023  Liftorbit
+Copyright (c) 2024  Liftorbit
 ```
 
 Este projeto utiliza a licença **GNU Affero General Public License**, visite o [arquivo LICENSE](https://github.com/liftorbit/stay-rocket/blob/master/LICENSE) para obter mais informações sobre como você deve utilizar o código-fonte do projeto.
