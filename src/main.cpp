@@ -122,10 +122,8 @@ void setup() {
     }
 
     logging.info(S_SETUP, F("Sensors started"));
-    logging.info(S_SETUP, F("Starting GPS..."));
-
+    
     gps.begin();
-
     logging.info(S_SETUP, F("GPS started"));
 
     servoX.attach(servoXPin);

@@ -8,10 +8,10 @@ TinyGPSPlus tinyGPS;
 
 void GPS::begin() {
     GPSSerial.begin(9600, SERIAL_8N1, 4, 15);
+};
 
-    while(!GPSSerial.available()) {
-        delay(100);
-    }
+bool GPS::isReady() {
+    return GPSSerial.available();
 };
 
 void GPS::update() {

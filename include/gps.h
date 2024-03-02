@@ -29,6 +29,11 @@ class GPS {
         void begin();
 
         /**
+         * @brief Check if GPS module is ready to get location.
+         */
+        bool isReady();
+
+        /**
          * @brief Update latitude and longitude.
          * 
          */
