@@ -179,13 +179,15 @@ void handleCommands() {
                     digitalWrite(statusLedPin, LOW);
                     delay(500);
                 } else if(telemetry.receive() == "SLC") {
-                        digitalWrite(statusLedPin, HIGH);
-                        delay(1000);
-                        digitalWrite(statusLedPin, LOW);
-                        logging.info(S_SETUP, F("Stop launch countdown (SLC). Restarting"));
-                        ESP.restart();
+                    digitalWrite(statusLedPin, HIGH);
+                    delay(1000);
+                    digitalWrite(statusLedPin, LOW);
+                    logging.info(S_SETUP, F("Stop launch countdown (SLC). Restarting"));
+                    ESP.restart();
                 }
             }
+
+            logging.info(S_AUTH, F("Start rocket launch steps"));
 
             // launch steps
             launch();
