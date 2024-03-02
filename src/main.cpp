@@ -61,6 +61,7 @@ void setup() {
     Serial.begin(9600);
     telemetry.begin();
 
+    // wait connection
     while(true) {
         telemetry.send(F("SCS"));
 
@@ -80,6 +81,7 @@ void setup() {
         }
     }
 
+    // wait date to use in log file
     while(!telemetry.dataAvailable()) {
         signals.simpleSignal();
         delay(500);
@@ -117,7 +119,7 @@ void setup() {
     }
 
     logging.info(S_SETUP, F("Sensors started"));
-    
+
     gps.begin();
     logging.info(S_SETUP, F("GPS started"));
 
@@ -126,7 +128,7 @@ void setup() {
     servoX.write(90);
     servoY.write(90);
 
-    logging.info(S_SETUP, F("Servos attached"));
+    logging.info(S_SETUP, F("TVC pins attached"));
     logging.info(S_SETUP, "Starting Command Mode ");
     handleCommands();
 };
