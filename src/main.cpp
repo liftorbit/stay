@@ -24,6 +24,10 @@
 #include "gps.h"
 #include "signals.h"
 
+#define WAIT_DATE "\x30"
+#define LOG_ERROR "\x31"
+#define TEST_SENSORS "\x32"
+
 const int buzzerPin = 33;
 const int statusLedPin = 25;
 const int flameSensorPin = 35;
@@ -81,6 +85,8 @@ void setup() {
         }
     }
 
+    telemetry.send(WAIT_DATE);
+
     // wait date to use in log file
     while(!telemetry.dataAvailable()) {
         signals.simpleSignal();
@@ -90,13 +96,14 @@ void setup() {
     String logDate = telemetry.receive();
 
     if(!logging.begin(logDate)) {
-        telemetry.send(F("Error to start logging"));        
+        telemetry.send(LOG_ERROR);        
         while(true) {
             signals.errorToStartLOG();
             delay(1000);
         };
     }
 
+    telemetry.send(TEST_SENSORS);
     logging.info(S_SETUP, F("STAY Startup"));
     logging.info(S_SETUP, F("Starting sensors..."));
 
