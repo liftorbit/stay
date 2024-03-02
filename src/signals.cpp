@@ -13,6 +13,14 @@ Signals::Signals(int buzzerPin, int ledPin) {
     this->ledPin = ledPin;
 }
 
+void Signals::simpleSignal() {
+    ledcWriteTone(0, 900);
+    digitalWrite(this->ledPin, HIGH);
+    delay(200);
+    digitalWrite(this->ledPin, LOW);
+    ledcWrite(0, 0);
+}
+
 void Signals::waitBCS() {
     ledcWriteTone(0, 500);
     delay(100);

@@ -9,6 +9,8 @@ class Signals {
     public:
         Signals(int buzzerPin, int ledPin);
 
+        void simpleSignal();
+
         void waitBCS();
         void receivedBCS();
         void errorToStartLOG();

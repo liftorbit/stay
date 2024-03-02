@@ -79,6 +79,7 @@ void setup() {
     }
 
     while(!telemetry.dataAvailable()) {
+        signals.simpleSignal();
         delay(500);
     }
 
