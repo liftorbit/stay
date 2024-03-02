@@ -190,8 +190,9 @@ void handleCommands() {
             // launch steps
             launch();
             meco();
-        } else if(command == "RLU") {
-            logging.info(S_SETUP, F("Launch not authorized, restarting"));
+        } else if(command == "RESTART") {
+            telemetry.send("OK");
+            logging.info(S_SETUP, F("Restarting"));
             ESP.restart();
         } else if(command == "TEST") {
             testSensors();
