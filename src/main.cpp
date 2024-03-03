@@ -25,7 +25,7 @@
 #include "signals.h"
 
 #define WAIT_DATE "\x30"
-#define LOG_ERROR "\x31"
+#define LOG_SETUP_ERROR "\x31"
 #define TEST_SENSORS "\x32"
 
 const int buzzerPin = 33;
@@ -96,7 +96,7 @@ void setup() {
     String logDate = telemetry.receive();
 
     if(!logging.begin(logDate)) {
-        telemetry.send(LOG_ERROR);        
+        telemetry.send(LOG_SETUP_ERROR);        
         while(true) {
             signals.errorToStartLOG();
             delay(1000);
