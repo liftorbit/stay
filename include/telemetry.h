@@ -36,6 +36,13 @@ class Telemetry {
         void send(String message);
 
         /**
+         * @brief Send a signal to base via RF.
+         * 
+         * @param code Signal code
+         */
+        void send(char code);
+
+        /**
          * @brief Send telemetry data via RF with location.
          * 
          * @param engine Engine status

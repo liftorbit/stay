@@ -31,6 +31,10 @@ void Telemetry::send(String message) {
     Transceiver.println(message);
 };
 
+void Telemetry::send(char code) {
+    Transceiver.write(code);
+};
+
 bool Telemetry::dataAvailable() {
     return Transceiver.available() != 0;
 };

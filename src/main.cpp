@@ -24,9 +24,11 @@
 #include "gps.h"
 #include "signals.h"
 
-#define WAIT_DATE "\x30"
-#define LOG_SETUP_ERROR "\x31"
-#define TEST_SENSORS "\x32"
+#define WAIT_DATE '\x30'
+#define LOG_SETUP_ERROR '\x31'
+#define TEST_SENSORS '\x32'
+#define CMD_OK '\x33'
+#define CMD_OK_RET '\x34'
 
 const int buzzerPin = 33;
 const int statusLedPin = 25;
@@ -214,13 +216,15 @@ void handleCommands() {
             launch();
             meco();
         } else if(command == "RESTART") {
-            telemetry.send("OK");
+            telemetry.send(CMD_OK);
             logging.info(S_SETUP, F("Restarting"));
             ESP.restart();
         } else if(command == "TEST") {
             testSensors();
-            telemetry.send("OK");
+            telemetry.send(CMD_OK);
         } else if(command == "GETLOG") {
+            telemetry.send(CMD_OK_RET);
+            delay(100);
             telemetry.send(logging.getLog());
         }
     }
