@@ -29,6 +29,7 @@
 #define TEST_SENSORS '\x32'
 #define CMD_OK '\x33'
 #define CMD_OK_RET '\x34'
+#define CMD_INVALID '\x35'
 
 const int buzzerPin = 33;
 const int statusLedPin = 25;
@@ -226,6 +227,8 @@ void handleCommands() {
             telemetry.send(CMD_OK_RET);
             delay(100);
             telemetry.send(logging.getLog());
+        } else {
+            telemetry.send(CMD_INVALID);
         }
     }
 }
