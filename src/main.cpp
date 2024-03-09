@@ -225,7 +225,6 @@ void handleCommands() {
             telemetry.send(CMD_OK);
         } else if(command == "GETLOG") {
             telemetry.send(CMD_OK_RET);
-            delay(100);
             telemetry.sendLog(logging.getLog());
         } else {
             telemetry.send(CMD_INVALID);
