@@ -27,6 +27,14 @@ void Telemetry::begin() {
     Transceiver.begin(TRANSCEIVER_BAUD_RATE);
 };
 
+void Telemetry::sendLog(String log) {
+    // 0x53 as log start
+    Transceiver.print('\x53');
+    Transceiver.print(log);
+    // 0x45 as log end
+    Transceiver.print('\x45');
+};
+
 void Telemetry::send(String message) {
     Transceiver.println(message);
 };

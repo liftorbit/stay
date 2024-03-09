@@ -29,6 +29,12 @@ class Telemetry {
         void begin();
 
         /**
+         * @brief Send computer logs
+         * @param log Computer log
+        */
+        void sendLog(String log);
+
+        /**
          * @brief Send messages to base via RF.
          * 
          * @param message String message
