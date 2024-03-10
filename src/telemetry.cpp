@@ -28,11 +28,11 @@ void Telemetry::begin() {
 };
 
 void Telemetry::sendLog(String log) {
-    // 0x53 as log start
-    Transceiver.print('\x53');
+    // 0x1C as log start
+    Transceiver.print('\x1C');
     Transceiver.print(log);
-    // 0x45 as log end
-    Transceiver.print('\x45');
+    // 0x1B as log end
+    Transceiver.print('\x1B');
 };
 
 void Telemetry::send(String message) {
