@@ -27,7 +27,7 @@ O foguete STAY possui alguns detalhes técnicos relevantes sobre hardware e soft
 - Possui três sensores:
   - Barômetro
   - Acelerômetro/Giroscópio
-  - Sensor de chamas (para detectar de ignição)
+  - Sensor de chamas (para detectar a ignição do motor)
 - Telemetria em tempo real
 - Localização do foguete durante o vôo
 - Controle vetorial de empuxo (TVC)
@@ -53,4 +53,4 @@ GNU Affero General Public License
 Copyright (c) 2024  Liftorbit
 ```
 
-Este projeto utiliza a licença **GNU Affero General Public License**, visite o [arquivo LICENSE](https://github.com/liftorbit/stay-rocket/blob/master/LICENSE) para obter mais informações sobre como você deve utilizar o código-fonte do projeto.
+Este projeto utiliza a licença **GNU Affero General Public License**, visite o [arquivo LICENSE](https://github.com/liftorbit/stay-rocket/blob/master/LICENSE) para obter mais informações sobre como você pode utilizar o código-fonte do projeto.
