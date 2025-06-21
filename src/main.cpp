@@ -358,11 +358,17 @@ void meco() {
 
         delay(100);
     }
+    
+    double lat = gps.getLat();
+    double lon = gps.getLon();
 
     logging.info(S_MECO, "Rocket speed in MECO: " + String(speed));
     logging.info(S_MECO, "Temperature: " + String(temperature));
     logging.info(S_MECO, "Pressure: " + String(pressure));
     logging.info(S_MECO, "Max altitude: " + String(maxAltitude));
+    logging.info(S_MECO, "Latitude: " + String(lat));
+    logging.info(S_MECO, "Longitude: " + String(lon));
+    logging.info(S_MECO, "MECO finished");
 };
 
 void loop() {
