@@ -68,6 +68,8 @@ void setup() {
     Serial.begin(9600);
     telemetry.begin();
 
+    signals.startupSignal();
+
     // wait connection
     while(true) {
         telemetry.send(F("SCS"));
