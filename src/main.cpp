@@ -142,6 +142,7 @@ void setup() {
 
     logging.info(S_SETUP, F("TVC pins attached"));
     logging.info(S_SETUP, "Starting Command Mode ");
+
     handleCommands();
 };
 
@@ -167,7 +168,7 @@ void testSensors() {
     logging.info(S_SETUP, "Testing Flame Sensor...");
 
     if(engineIsOn()) {
-        logging.error(S_SETUP, F("Flame detected before launch"));
+        logging.error(S_SETUP, F("Flame detected before startup"));
     } else {
         logging.info(S_SETUP, F("Flame sensor in operation"));
     }
