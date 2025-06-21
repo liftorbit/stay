@@ -358,6 +358,8 @@ void meco() {
 
         delay(100);
     }
+
+    logging.info(S_MECO, "Free fall started");
     
     double lat = gps.getLat();
     double lon = gps.getLon();
