@@ -348,14 +348,15 @@ void meco() {
     temperature = barometer.getTemperature();
     pressure = barometer.getPressure();
 
+    // detecting free fall
+    float acceZ = imu.getAccelerometerZ();
+
     while(true) {
-        currentAltitude = barometer.getGroundDistance();
-        if(currentAltitude >= maxAltitude) {
-            maxAltitude = currentAltitude;
-        } else {
+        if(acceZ <= 0) {
             break;
         }
 
+        acceZ = imu.getAccelerometerZ();
         delay(100);
     }
 
