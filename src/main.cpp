@@ -363,6 +363,7 @@ void meco() {
 
     logging.info(S_MECO, "Free fall started");
     
+    gps.update();
     double lat = gps.getLat();
     double lon = gps.getLon();
 
