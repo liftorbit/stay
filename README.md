@@ -1,4 +1,4 @@
-<h1 align="center">🚀 STAY</h1>
+<h1 align="center">🚀 STAY - Fênix</h1>
 <p align="center">Um foguete de propulsão a combustível sólido.<br><i>Passo inicial para foguetes da <a href="https://github.com/liftorbit">Liftorbit</a></i></p>
 
 <p align="center" style="margin-bottom: 15px">
@@ -6,7 +6,7 @@
     <a href="https://github.com/jaedsonpys/cookiedb/blob/master/LICENSE" style="margin-right: 5px; margin-left: 5px">
     <img alt="Licença GNU AGPL do STAY" src="https://img.shields.io/static/v1?label=licen%C3%A7a&message=GNU%20AGPL&color=red">
     </a>
-    <img alt="Previsão de lançamento para 2023" src="https://img.shields.io/static/v1?label=previs%C3%A3o%20de%20lan%C3%A7amento&message=2025&color=red">
+    <img alt="Previsão de lançamento" src="https://img.shields.io/static/v1?label=previs%C3%A3o%20de%20lan%C3%A7amento&message=2025-2026&color=red">
 </p>
 
 **STAY** é um foguete de propulsão com combustível sólido desenvolvido pela [Liftorbit](https://github.com/liftorbit), tendo o **início do projeto em 20/05/2022**, criado para dar o passo inicial no desenvolvimento de outros projetos. O foguete utiliza um computador de bordo responsável por coletar dados de diversos sensores e controlar empuxo vetorial.
