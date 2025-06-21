@@ -26,6 +26,7 @@ class Signals {
         Signals(int buzzerPin, int ledPin);
 
         void simpleSignal();
+        void startupSignal();
 
         void waitBCS();
         void receivedBCS();

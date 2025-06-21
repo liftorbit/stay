@@ -29,6 +29,12 @@ Signals::Signals(int buzzerPin, int ledPin) {
     this->ledPin = ledPin;
 }
 
+void Signals::startupSignal() {
+    for(int i = 0; i < 6; i++) {
+        this->simpleSignal();
+    }
+}
+
 void Signals::simpleSignal() {
     ledcWriteTone(0, 900);
     digitalWrite(this->ledPin, HIGH);
