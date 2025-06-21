@@ -319,7 +319,7 @@ void launch() {
 };
 
 void meco() {
-    int maxAltitude = 0, currentAltitude = 0;
+    int maxAltitude;
     float speed, temperature, pressure;
 
     logging.info(S_MECO, F("Main engine cut off"));
@@ -353,11 +353,12 @@ void meco() {
 
     while(true) {
         if(acceZ <= 0) {
+            maxAltitude = barometer.getGroundDistance();
             break;
         }
 
         acceZ = imu.getAccelerometerZ();
-        delay(100);
+        delay(50);
     }
 
     logging.info(S_MECO, "Free fall started");
