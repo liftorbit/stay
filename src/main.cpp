@@ -182,6 +182,11 @@ void testSensors() {
     } else {
         logging.info(S_SETUP, "GPS is ready");
     }
+    
+    gps.update();
+
+    logging.info(S_SETUP, "GPS Latitude:" + String(gps.getLat()));
+    logging.info(S_SETUP, "GPS Longitude:" + String(gps.getLon()));
 
     logging.info(S_SETUP, "Rocket Sensors Test finished");
 }
