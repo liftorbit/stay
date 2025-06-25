@@ -30,9 +30,16 @@ Signals::Signals(int buzzerPin, int ledPin) {
 }
 
 void Signals::startupSignal() {
-    for(int i = 0; i < 6; i++) {
-        this->simpleSignal();
-    }
+    digitalWrite(this->ledPin, HIGH);
+    ledcWriteTone(0, 600);
+    delay(500);
+    ledcWriteTone(0, 800);
+    delay(500);
+    ledcWriteTone(0, 1000);
+    delay(500);
+    ledcWrite(0, 0);
+    digitalWrite(this->ledPin, LOW);
+    delay(500);
 }
 
 void Signals::simpleSignal() {
