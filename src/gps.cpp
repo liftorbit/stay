@@ -27,7 +27,7 @@ void GPS::begin() {
 };
 
 bool GPS::isReady() {
-    return GPSSerial.available();
+    return GPSSerial.available() > 0 ? true : false;
 };
 
 void GPS::update() {
