@@ -220,6 +220,12 @@ void handleCommands() {
 
 void sendTelemetry(void * pvParameters) {
     // 0x01 used as telemetry data start indicator
+
+    /** O tamannho do pacote de dados de telemetria é de 33 bytes,
+     * logo, só é possível enviar dados 7 vezes por segundo, com um
+     * delay de 150ms. Para margem de segurança, usamos o delay de 200ms
+    */
+
     telemetry.send("\x01");
 
     float pressure, alt, temp, acZ, acY, acX;
@@ -240,7 +246,7 @@ void sendTelemetry(void * pvParameters) {
         alt = barometer.getGroundDistance();
 
         telemetry.send(engineIsOn(), temp, alt, pressure, lat, lon, acZ, acX, acY);
-        delay(50);
+        delay(200);
     }
 }
 
