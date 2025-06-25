@@ -54,7 +54,7 @@ String Telemetry::receive() {
     return data;
 };
 
-void Telemetry::mecoTelemetry(bool engine, float temp, float alt, float ps, float lat, float lon, float acZ, float acX, float acY) {
+void Telemetry::send(bool engine, float temp, float alt, float ps, float lat, float lon, float acZ, float acX, float acY) {
     byte motorStatus[sizeof(bool)];
     byte temperature[sizeof(float)];
     byte altitude[sizeof(float)];
@@ -73,7 +73,7 @@ void Telemetry::mecoTelemetry(bool engine, float temp, float alt, float ps, floa
     memcpy(longitude, &lon, sizeof(float));
     memcpy(accelerationZ, &acZ, sizeof(float));
     memcpy(accelerationY, &acY, sizeof(float));
-    memcpy(accelerationX, &acZ, sizeof(float));
+    memcpy(accelerationX, &acX, sizeof(float));
 
     Transceiver.write('\x02');
     Transceiver.write(motorStatus, sizeof(motorStatus));
@@ -85,26 +85,4 @@ void Telemetry::mecoTelemetry(bool engine, float temp, float alt, float ps, floa
     Transceiver.write(accelerationZ, sizeof(accelerationZ));
     Transceiver.write(accelerationY, sizeof(accelerationY));
     Transceiver.write(accelerationX, sizeof(accelerationX));
-};
-
-void Telemetry::telemetry(bool engine, float temp, float alt, float ps, float acce) {
-    // basic telemetry
-    byte motorStatus[sizeof(bool)];
-    byte temperature[sizeof(float)];
-    byte altitude[sizeof(float)];
-    byte pressure[sizeof(float)];
-    byte acceleration[sizeof(float)];
-
-    memcpy(motorStatus, &engine, sizeof(bool));
-    memcpy(temperature, &temp, sizeof(float));
-    memcpy(altitude, &alt, sizeof(float));
-    memcpy(pressure, &ps, sizeof(float));
-    memcpy(acceleration, &acce, sizeof(float));
-
-    Transceiver.write('\x02');
-    Transceiver.write(motorStatus, sizeof(motorStatus));
-    Transceiver.write(temperature, sizeof(temperature));
-    Transceiver.write(altitude, sizeof(altitude));
-    Transceiver.write(pressure, sizeof(pressure));
-    Transceiver.write(acceleration, sizeof(acceleration));
 };

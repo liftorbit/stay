@@ -49,28 +49,19 @@ class Telemetry {
         void send(char code);
 
         /**
-         * @brief Send telemetry data via RF with location.
+         * @brief Send telemetry data to base via RF
          * 
          * @param engine Engine status
          * @param temp Temperature
          * @param alt Altitude
          * @param ps Pressure
-         * @param acce Acceleration
          * @param lat Latitude
          * @param lon Longitude
+         * @param acZ Z-axis acceleration
+         * @param acX X-axis acceleration
+         * @param acY Y-axis acceleration
          */
-        void mecoTelemetry(bool engine, float temp, float alt, float ps, float lat, float lon, float acZ, float acX, float acY);
-
-        /**
-         * @brief Send telemetry data via RF without location.
-         * 
-         * @param engine Engine status
-         * @param temp Temperature
-         * @param alt Altitude
-         * @param ps Pressure
-         * @param acce Acceleration
-         */
-        void telemetry(bool engine, float temp, float alt, float ps, float acce);
+        void send(bool engine, float temp, float alt, float ps, float lat, float lon, float acZ, float acX, float acY);
 
         /**
          * @brief Check if data is available.
