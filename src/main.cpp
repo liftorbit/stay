@@ -54,8 +54,7 @@ TaskHandle_t TelemetryTHandle;
 
 void testSensors();
 void handleCommands();
-void sendBasicTelemetry(void * pvParameters);
-void sendAdvancedTelemetry(void * pvParameters);
+void sendTelemetry(void * pvParameters);
 bool engineIsOn();
 void mainEngineIgnition();
 void launch();
@@ -219,26 +218,7 @@ void handleCommands() {
     }
 }
 
-void sendBasicTelemetry(void * pvParameters) {
-    // 0x01 used as telemetry data start indicator
-    telemetry.send("\x01");
-
-    float pressure, alt, temp, accel;
-
-    for(;;) {
-        imu.updatePosition();
-        accel = imu.getAccelerometerZ();
-
-        pressure = barometer.getPressure();
-        temp = barometer.getTemperature();
-        alt = barometer.getGroundDistance();
-
-        telemetry.telemetry(engineIsOn(), temp, alt, pressure, accel);
-        delay(100);
-    }
-}
-
-void sendAdvancedTelemetry(void * pvParameters) {
+void sendTelemetry(void * pvParameters) {
     // 0x01 used as telemetry data start indicator
     telemetry.send("\x01");
 
@@ -259,8 +239,8 @@ void sendAdvancedTelemetry(void * pvParameters) {
         temp = barometer.getTemperature();
         alt = barometer.getGroundDistance();
 
-        telemetry.mecoTelemetry(engineIsOn(), temp, alt, pressure, lat, lon, acZ, acX, acY);
-        delay(500);
+        telemetry.send(engineIsOn(), temp, alt, pressure, lat, lon, acZ, acX, acY);
+        delay(50);
     }
 }
 
@@ -293,15 +273,15 @@ void launch() {
     logging.info(S_LAUNCH, F("Saved ground altitude"));
 
     xTaskCreate(
-        sendBasicTelemetry,
-        "sendBasicTelemery",
+        sendTelemetry,
+        "sendTelemetry",
         10000,
         NULL,
         1,
         &TelemetryTHandle
     );
 
-    logging.info(S_LAUNCH, F("Basic telemetry started"));
+    logging.info(S_LAUNCH, F("Telemetry started"));
 
     mainEngineIgnition();
 
@@ -330,22 +310,6 @@ void meco() {
     float speed, temperature, pressure;
 
     logging.info(S_MECO, F("MECO startup"));
-
-    // delete basic telemetry task
-    vTaskDelete(TelemetryTHandle);
-    logging.info(S_MECO, F("Basic telemetry stopped"));
-
-    // create advanced telemetry task
-    xTaskCreate(
-        sendAdvancedTelemetry,
-        "sendAdvancedTelemetry",
-        10000,
-        NULL,
-        1,
-        &TelemetryTHandle
-    );
-
-    logging.info(S_MECO, F("Advanced telemetry started"));
 
     // detach TVC servos
     servoX.write(90);
