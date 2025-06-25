@@ -27,7 +27,9 @@ void GPS::begin() {
 };
 
 bool GPS::isReady() {
-    return GPSSerial.available() > 0 ? true : false;
+    this->update();
+    double lat = this->getLat();
+    return lat <= 0 ? false : true;
 };
 
 void GPS::update() {

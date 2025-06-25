@@ -178,9 +178,9 @@ void testSensors() {
     bool isReady = gps.isReady();
     
     if(isReady) {
-        logging.error(S_SETUP, "GPS is not ready");
+        logging.error(S_SETUP, "GPS is ready");
     } else {
-        logging.info(S_SETUP, "GPS is ready");
+        logging.info(S_SETUP, "GPS is not ready");
     }
     
     gps.update();
