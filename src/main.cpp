@@ -201,25 +201,8 @@ void handleCommands() {
         String command = telemetry.receive();
 
         if(command == "RLA") {
-            logging.info(S_AUTH, F("Launch authorized. Countdown."));
-
-            // 10 seconds countdown
-            for(int i = 0; i < 10; i++) {
-                if(!telemetry.dataAvailable()) {
-                    signals.simpleSignal();
-                    delay(800);
-                } else if(telemetry.receive() == "SLC") {
-                    signals.simpleSignal();
-                    logging.info(S_SETUP, F("Stop launch countdown (SLC). Restarting"));
-                    ESP.restart();
-                }
-            }
-
-            logging.info(S_AUTH, F("Start rocket launch steps"));
-
-            // launch steps
+            logging.info(S_AUTH, F("Launch authorization received"));
             launch();
-            meco();
         } else if(command == "RESTART") {
             telemetry.send(CMD_OK);
             logging.info(S_SETUP, F("Restarting"));
@@ -290,8 +273,22 @@ void mainEngineIgnition() {
 }
 
 void launch() {
+    for(int i = 0; i < 10; i++) {
+        if(!telemetry.dataAvailable()) {
+            signals.simpleSignal();
+            delay(800);
+        } else if(telemetry.receive() == "SLC") {
+            signals.simpleSignal();
+            logging.info(S_LAUNCH, F("Stop launch countdown (SLC). Restarting"));
+            ESP.restart();
+        }
+    }
+
+    logging.info(S_LAUNCH, F("Rocket launched"));
+    
     float rawX, rawY;
     barometer.saveGroundAltitude();
+    logging.info(S_LAUNCH, F("Saved ground altitude"));
 
     xTaskCreate(
         sendBasicTelemetry,
@@ -301,6 +298,8 @@ void launch() {
         1,
         &TelemetryTHandle
     );
+
+    logging.info(S_LAUNCH, F("Basic telemetry started"));
 
     mainEngineIgnition();
 
@@ -317,16 +316,22 @@ void launch() {
         servoY.write(imu.rawToServoAngle(rawY));
         delay(50);
     }
+
+    logging.info(S_LAUNCH, F("Main engine cut off"));
+    logging.info(S_LAUNCH, F("Starting MECO operations"));
+
+    meco();
 };
 
 void meco() {
     int maxAltitude;
     float speed, temperature, pressure;
 
-    logging.info(S_MECO, F("Main engine cut off"));
+    logging.info(S_MECO, F("MECO startup"));
 
     // delete basic telemetry task
     vTaskDelete(TelemetryTHandle);
+    logging.info(S_MECO, F("Basic telemetry stopped"));
 
     // create advanced telemetry task
     xTaskCreate(
@@ -338,11 +343,15 @@ void meco() {
         &TelemetryTHandle
     );
 
+    logging.info(S_MECO, F("Advanced telemetry started"));
+
     // detach TVC servos
     servoX.write(90);
     servoY.write(90);
     servoX.detach();
     servoY.detach();
+
+    logging.info(S_MECO, F("TVC detached"));
 
     // colecting data
     speed = barometer.getAverageSpeed(100);
@@ -362,7 +371,7 @@ void meco() {
         delay(50);
     }
 
-    logging.info(S_MECO, "Free fall started");
+    logging.info(S_MECO, F("Free fall started"));
     
     gps.update();
     double lat = gps.getLat();
