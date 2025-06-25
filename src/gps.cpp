@@ -29,7 +29,7 @@ void GPS::begin() {
 bool GPS::isReady() {
     this->update();
     double lat = this->getLat();
-    return lat <= 0 ? false : true;
+    return lat == 0 ? false : true;
 };
 
 void GPS::update() {
