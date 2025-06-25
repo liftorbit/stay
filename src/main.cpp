@@ -195,7 +195,7 @@ void handleCommands() {
     while (true) {
         while(!telemetry.dataAvailable()) {
             signals.simpleSignal();
-            delay(1500);
+            delay(5000);
         }
 
         String command = telemetry.receive();
@@ -206,14 +206,10 @@ void handleCommands() {
             // 10 seconds countdown
             for(int i = 0; i < 10; i++) {
                 if(!telemetry.dataAvailable()) {
-                    digitalWrite(statusLedPin, HIGH);
-                    delay(500);
-                    digitalWrite(statusLedPin, LOW);
-                    delay(500);
+                    signals.simpleSignal();
+                    delay(800);
                 } else if(telemetry.receive() == "SLC") {
-                    digitalWrite(statusLedPin, HIGH);
-                    delay(1000);
-                    digitalWrite(statusLedPin, LOW);
+                    signals.simpleSignal();
                     logging.info(S_SETUP, F("Stop launch countdown (SLC). Restarting"));
                     ESP.restart();
                 }
