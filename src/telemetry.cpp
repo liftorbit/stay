@@ -54,32 +54,37 @@ String Telemetry::receive() {
     return data;
 };
 
-void Telemetry::telemetry(bool engine, float temp, float alt, float ps, float acce, float lat, float lon) {
-    // advanced telemetry 
+void Telemetry::mecoTelemetry(bool engine, float temp, float alt, float ps, float lat, float lon, float acZ, float acX, float acY) {
     byte motorStatus[sizeof(bool)];
     byte temperature[sizeof(float)];
     byte altitude[sizeof(float)];
     byte pressure[sizeof(float)];
-    byte acceleration[sizeof(float)];
     byte latitude[sizeof(float)];
     byte longitude[sizeof(float)];
+    byte accelerationZ[sizeof(float)];
+    byte accelerationY[sizeof(float)];
+    byte accelerationX[sizeof(float)];
 
     memcpy(motorStatus, &engine, sizeof(bool));
     memcpy(temperature, &temp, sizeof(float));
     memcpy(altitude, &alt, sizeof(float));
     memcpy(pressure, &ps, sizeof(float));
-    memcpy(acceleration, &acce, sizeof(float));
     memcpy(latitude, &lat, sizeof(float));
     memcpy(longitude, &lon, sizeof(float));
+    memcpy(accelerationZ, &acZ, sizeof(float));
+    memcpy(accelerationY, &acY, sizeof(float));
+    memcpy(accelerationX, &acZ, sizeof(float));
 
     Transceiver.write('\x02');
     Transceiver.write(motorStatus, sizeof(motorStatus));
     Transceiver.write(temperature, sizeof(temperature));
     Transceiver.write(altitude, sizeof(altitude));
     Transceiver.write(pressure, sizeof(pressure));
-    Transceiver.write(acceleration, sizeof(acceleration));
     Transceiver.write(latitude, sizeof(latitude));
     Transceiver.write(longitude, sizeof(longitude));
+    Transceiver.write(accelerationZ, sizeof(accelerationZ));
+    Transceiver.write(accelerationY, sizeof(accelerationY));
+    Transceiver.write(accelerationX, sizeof(accelerationX));
 };
 
 void Telemetry::telemetry(bool engine, float temp, float alt, float ps, float acce) {

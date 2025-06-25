@@ -242,7 +242,7 @@ void sendAdvancedTelemetry(void * pvParameters) {
     // 0x01 used as telemetry data start indicator
     telemetry.send("\x01");
 
-    float pressure, alt, temp, accel;
+    float pressure, alt, temp, acZ, acY, acX;
     double lat, lon;
 
     for(;;) {
@@ -251,13 +251,15 @@ void sendAdvancedTelemetry(void * pvParameters) {
         lon = gps.getLon();
 
         imu.updatePosition();
-        accel = imu.getAccelerometerZ();
+        acZ = imu.getAccelerometerZ();
+        acY = imu.getAccelerometerY();
+        acX = imu.getAccelerometerX();
 
         pressure = barometer.getPressure();
         temp = barometer.getTemperature();
         alt = barometer.getGroundDistance();
 
-        telemetry.telemetry(engineIsOn(), temp, alt, pressure, accel, lat, lon);
+        telemetry.mecoTelemetry(engineIsOn(), temp, alt, pressure, lat, lon, acZ, acX, acY);
         delay(500);
     }
 }

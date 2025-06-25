@@ -59,7 +59,7 @@ class Telemetry {
          * @param lat Latitude
          * @param lon Longitude
          */
-        void telemetry(bool engine, float temp, float alt, float ps, float acce, float lat, float lon);
+        void mecoTelemetry(bool engine, float temp, float alt, float ps, float lat, float lon, float acZ, float acX, float acY);
 
         /**
          * @brief Send telemetry data via RF without location.
