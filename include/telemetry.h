@@ -61,7 +61,7 @@ class Telemetry {
          * @param acX X-axis acceleration
          * @param acY Y-axis acceleration
          */
-        void send(bool engine, float temp, float alt, float ps, float lat, float lon, float acZ, float acX, float acY);
+        void send(bool engine, float temp, float alt, float ps, double lat, double lon, float acZ, float acX, float acY);
 
         /**
          * @brief Check if data is available.

@@ -54,13 +54,13 @@ String Telemetry::receive() {
     return data;
 };
 
-void Telemetry::send(bool engine, float temp, float alt, float ps, float lat, float lon, float acZ, float acX, float acY) {
+void Telemetry::send(bool engine, float temp, float alt, float ps, double lat, double lon, float acZ, float acX, float acY) {
     byte motorStatus[sizeof(bool)];
     byte temperature[sizeof(float)];
     byte altitude[sizeof(float)];
     byte pressure[sizeof(float)];
-    byte latitude[sizeof(float)];
-    byte longitude[sizeof(float)];
+    byte latitude[sizeof(double)];
+    byte longitude[sizeof(double)];
     byte accelerationZ[sizeof(float)];
     byte accelerationY[sizeof(float)];
     byte accelerationX[sizeof(float)];
@@ -69,8 +69,8 @@ void Telemetry::send(bool engine, float temp, float alt, float ps, float lat, fl
     memcpy(temperature, &temp, sizeof(float));
     memcpy(altitude, &alt, sizeof(float));
     memcpy(pressure, &ps, sizeof(float));
-    memcpy(latitude, &lat, sizeof(float));
-    memcpy(longitude, &lon, sizeof(float));
+    memcpy(latitude, &lat, sizeof(double));
+    memcpy(longitude, &lon, sizeof(double));
     memcpy(accelerationZ, &acZ, sizeof(float));
     memcpy(accelerationY, &acY, sizeof(float));
     memcpy(accelerationX, &acX, sizeof(float));
